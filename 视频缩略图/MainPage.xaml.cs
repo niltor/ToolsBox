@@ -1,11 +1,6 @@
 using System;
 using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using System.Threading.Tasks;
 using Windows.Foundation;
-using Windows.Foundation.Collections;
 using Windows.Graphics.Imaging;
 using Windows.Storage;
 using Windows.Storage.FileProperties;
@@ -15,12 +10,6 @@ using Windows.UI.Popups;
 using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
-using Windows.UI.Xaml.Media.Imaging;
-using Windows.UI.Xaml.Navigation;
 
 
 namespace 视频缩略图
@@ -79,15 +68,12 @@ namespace 视频缩略图
                 foreach (var file in files)
                 {
                     // 获取视频截图
-                    var objThumbnail = await file.GetScaledImageAsThumbnailAsync(ThumbnailMode.VideosView);
-                    // 创建buffer
-                    var buffer = new Windows.Storage.Streams.Buffer(Convert.ToUInt32(objThumbnail.Size));
-                    // 转为buffer
-                    var buffer1 = await objThumbnail.ReadAsync(buffer, buffer.Capacity, InputStreamOptions.None);
-
-                    SoftwareBitmap outputBitmap = SoftwareBitmap.CreateCopyFromBuffer(buffer1, BitmapPixelFormat.Bgra8, 400, 300);
+                    var objThumbnail = await file.GetThumbnailAsync(ThumbnailMode.VideosView, 800, ThumbnailOptions.ResizeThumbnail);
+                    BitmapDecoder decoder = await BitmapDecoder.CreateAsync(objThumbnail.CloneStream());
+                    var outputBitmap = await decoder.GetSoftwareBitmapAsync();
                     // 获取保存文件对象
-                    var saveFile = await storageFolder.CreateFileAsync(file.DisplayName + ".jpg");
+                    var saveFile = await storageFolder.CreateFileAsync(file.DisplayName + ".jpg", CreationCollisionOption.GenerateUniqueName);
+
                     // 写入文件
                     SaveSoftwareBitmapToFile(outputBitmap, saveFile);
                 }
@@ -105,10 +91,8 @@ namespace 视频缩略图
                 dialog.DefaultCommandIndex = 0;
                 //获取返回值
                 var result = await dialog.ShowAsync();
-
             }
         }
-
 
         /// <summary>
         /// 保存softwarebitmap到文件
@@ -121,15 +105,15 @@ namespace 视频缩略图
             {
                 // 设置Encoder属性,jpeg 质量
                 var propertySet = new BitmapPropertySet();
-                var qualityValue = new BitmapTypedValue(1.0, PropertyType.Single);
+                var qualityValue = new BitmapTypedValue(0.8, PropertyType.Single);
                 propertySet.Add("ImageQuality", qualityValue);
 
                 BitmapEncoder encoder = await BitmapEncoder.CreateAsync(BitmapEncoder.JpegEncoderId, stream, propertySet);
                 encoder.SetSoftwareBitmap(softwareBitmap);
 
                 // 设置输出文件属性
-                encoder.BitmapTransform.ScaledWidth = 320;
-                encoder.BitmapTransform.ScaledHeight = 240;
+                encoder.BitmapTransform.ScaledWidth = 400;
+                encoder.BitmapTransform.ScaledHeight = 300;
                 // encoder.BitmapTransform.Rotation = Windows.Graphics.Imaging.BitmapRotation.Clockwise90Degrees;
                 // 设置插值方式
                 encoder.BitmapTransform.InterpolationMode = BitmapInterpolationMode.Linear;
@@ -143,9 +127,7 @@ namespace 视频缩略图
                 {
                     switch (err.HResult)
                     {
-                        case unchecked((int)0x88982F81): //WINCODEC_ERR_UNSUPPORTEDOPERATION
-                                                         // If the encoder does not support writing a thumbnail, then try again
-                                                         // but disable thumbnail generation.
+                        case unchecked((int)0x88982F81): 
                             encoder.IsThumbnailGenerated = false;
                             break;
                         default:

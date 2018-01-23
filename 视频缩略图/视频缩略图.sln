@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.27130.2010
+VisualStudioVersion = 15.0.27130.2024
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "视频缩略图", "视频缩略图.csproj", "{A9CC5878-C1AB-495F-807B-DF21DD85B339}"
 EndProject
@@ -18,9 +18,9 @@ Global
 		{A9CC5878-C1AB-495F-807B-DF21DD85B339}.Debug|ARM.ActiveCfg = Debug|ARM
 		{A9CC5878-C1AB-495F-807B-DF21DD85B339}.Debug|ARM.Build.0 = Debug|ARM
 		{A9CC5878-C1AB-495F-807B-DF21DD85B339}.Debug|ARM.Deploy.0 = Debug|ARM
-		{A9CC5878-C1AB-495F-807B-DF21DD85B339}.Debug|x64.ActiveCfg = Debug|x64
-		{A9CC5878-C1AB-495F-807B-DF21DD85B339}.Debug|x64.Build.0 = Debug|x64
-		{A9CC5878-C1AB-495F-807B-DF21DD85B339}.Debug|x64.Deploy.0 = Debug|x64
+		{A9CC5878-C1AB-495F-807B-DF21DD85B339}.Debug|x64.ActiveCfg = Release|x64
+		{A9CC5878-C1AB-495F-807B-DF21DD85B339}.Debug|x64.Build.0 = Release|x64
+		{A9CC5878-C1AB-495F-807B-DF21DD85B339}.Debug|x64.Deploy.0 = Release|x64
 		{A9CC5878-C1AB-495F-807B-DF21DD85B339}.Debug|x86.ActiveCfg = Debug|x86
 		{A9CC5878-C1AB-495F-807B-DF21DD85B339}.Debug|x86.Build.0 = Debug|x86
 		{A9CC5878-C1AB-495F-807B-DF21DD85B339}.Debug|x86.Deploy.0 = Debug|x86

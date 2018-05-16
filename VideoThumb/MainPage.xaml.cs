@@ -12,7 +12,7 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
 
-namespace 视频缩略图
+namespace VideoThumb
 {
     /// <summary>
     /// 可用于自身或导航至 Frame 内部的空白页。

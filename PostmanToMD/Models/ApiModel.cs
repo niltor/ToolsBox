@@ -2,6 +2,7 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 
@@ -24,26 +25,82 @@ namespace PostmanToMD.Models
         /// 说明
         /// </summary>
         public string Introduction { get; set; }
-        public List<Items> Items { get; set; }
+        public List<ApiItem> Items { get; set; } = new List<ApiItem>();
 
         public Dictionary<string, string> Env { get; set; }
 
-        public void WriteToMarkdown(string path)
+        public ApiModel()
+        {
+        }
+
+        /// <summary>
+        /// 一组接口内容
+        /// </summary>
+        /// <param name="items"></param>
+        /// <returns></returns>
+        public String GetItemsContent(List<Item> items, string folder = null)
         {
             var content = "";
-            // base information
-            content = GetTitle(Name) + GetInfo("Author:" + Author) + GetInfo("Email:" + Email) + Introduction + Common
-                + GetNavgation(Items);
-
-            foreach (var item in Items)
+            foreach (var item in items)
             {
-                // every item information
-                content += GetItemTitle(item.Name)
-                    + GetRequestLine(item.Method, item.Url) + GetDescription(item.Description, item.Name)
-                    + GetHeader(item.Header) + GetQuery(item.Query)
-                    + GetParams(item.Params) + GetRequestRaw(item.RequestRaw)
-                    + GetResponseJson(item.ResponseJson);
+                if (item.Children != null)
+                {
+                    // 构造目录
+                    if (!string.IsNullOrEmpty(folder))
+                    {
+                        item.Name = folder + "-" + item.Name;
+                    }
+                    content += GetItemsContent(item.Children, item.Name);
+                }
+                else
+                {
+                    var apiItem = new ApiItem
+                    {
+                        Folder = folder,
+                        Name = item.Name,
+                        Description = item.Request.Description,
+                        Header = item.Request.Header,
+                        Method = item.Request.Method,
+                        Query = item.Request.Url.Query,
+                        RequestBodyType = item.Request.Body?.Mode,
+                        ResponseJson = item.Response?.FirstOrDefault()?.Body,
+                        Url = item.Request.Url.Raw
+                    };
+
+                    //不同请求类型
+                    switch (apiItem.RequestBodyType)
+                    {
+                        case "formdata":
+                            apiItem.Params = item.Request.Body.Formdata;
+                            break;
+                        case "raw":
+                            apiItem.RequestRaw = item.Request.Body.Raw;
+                            break;
+                        default:
+                            apiItem.Params = item.Request.Body.Urlencoded;
+                            break;
+                    }
+
+                    Items.Add(apiItem);
+                    content += GetItemTitle(apiItem.Name)
+                    + GetRequestLine(apiItem.Method, apiItem.Url) + GetDescription(apiItem.Description, apiItem.Name)
+                    + GetHeader(apiItem.Header) + GetQuery(apiItem.Query)
+                    + GetParams(apiItem.Params) + GetRequestRaw(apiItem.RequestRaw)
+                    + GetResponseJson(apiItem.ResponseJson);
+                }
+
             }
+            return content;
+        }
+
+        public void WriteToMarkdown(string path, List<Item> items)
+        {
+            // 获取接口内容
+            var content = GetItemsContent(items, null);
+
+            // 生成公共内容及导航
+            content = GetTitle(Name) + GetInfo("Author:" + Author) + GetInfo("Email:" + Email) + Introduction + Common
+                + GetNavgation(Items) + content;
 
             var file = new FileInfo(path);
             using (var writer = file.CreateText())
@@ -52,11 +109,12 @@ namespace PostmanToMD.Models
             }
         }
 
+        #region text block 
         private string GetQuery(List<Query> query)
         {
             if (query == null)
                 return "";
-            var result = "#### 请求参数\r\n|键|值|类型|说明|\r\n|-|-|-|-|\r\n";
+            var result = "#### 请求query参数\r\n|键|值|类型|说明|\r\n|-|-|-|-|\r\n";
             foreach (var item in query)
             {
                 var row = $"|{item.Key}|{item.Value}|{item.Value?.GetType().ToString()}|{item.Description}|\r\n";
@@ -65,7 +123,6 @@ namespace PostmanToMD.Models
             return result;
 
         }
-
         /// <summary>
         /// 获取接口描述内容
         /// </summary>
@@ -80,25 +137,26 @@ namespace PostmanToMD.Models
             }
             return string.Empty;
         }
-
         /// <summary>
         /// 获取构造的导航
         /// </summary>
         /// <param name="items"></param>
         /// <returns></returns>
-        public string GetNavgation(List<Items> items)
+        public string GetNavgation(List<ApiItem> items)
         {
             var result = "<a id='navigation'></a>\r\n# 导航\r\n";
             foreach (var item in items)
             {
+                if (!string.IsNullOrEmpty(item.Folder))
+                {
+                    result += $"- {item.Folder}\r\n\t";
+                }
                 var md5 = MD5.Create().ComputeHash(Encoding.UTF8.GetBytes(item.Name));
                 var linkName = BitConverter.ToString(md5).Replace("-", "").ToLower();
                 result += $"- [{item.Name}](#{linkName})\r\n";
             }
             return result;
         }
-
-
         public string GetTitle(string title)
         {
             return $"# {title}\r\n";
@@ -146,7 +204,7 @@ namespace PostmanToMD.Models
         {
             if (@params == null)
                 return "";
-            var result = "#### 请求参数\r\n|键|值|类型|说明|\r\n|-|-|-|-|\r\n";
+            var result = "#### 请求body参数 \r\n|键|值|类型|说明|\r\n|-|-|-|-|\r\n";
             foreach (var item in @params)
             {
                 var row = $"|{item.Key}|{item.Value}|{item.Value?.GetType().ToString()}|{item.Description}|\r\n";
@@ -154,7 +212,6 @@ namespace PostmanToMD.Models
             }
             return result;
         }
-
         public string GetResponseJson(string json)
         {
             var result = "#### 返回字符串\r\n";
@@ -168,7 +225,6 @@ namespace PostmanToMD.Models
 
             return result;
         }
-
         public string GetRequestRaw(string json)
         {
             var result = "";
@@ -185,10 +241,16 @@ namespace PostmanToMD.Models
             }
             return result;
         }
+        #endregion
 
     }
-    public class Items
+    public class ApiItem
     {
+        /// <summary>
+        /// 文件目录
+        /// </summary>
+        public string Folder { get; set; }
+
         public string Name { get; set; }
         public string Method { get; set; }
 

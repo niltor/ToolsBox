@@ -31,7 +31,6 @@ namespace PostmanToMD
         {
             var jsonFile = new FileInfo(filePath);
             var fileContent = jsonFile.OpenText().ReadToEnd();
-
             try
             {
                 var model = PostManJson.FromJson(fileContent);
@@ -42,37 +41,6 @@ namespace PostmanToMD
                     Author = author
                 };
 
-                var items = model.Item.Select(m =>
-                {
-                    var item = new Items
-                    {
-                        Name = m.Name,
-                        Description = m.Request.Description,
-                        Header = m.Request.Header,
-                        Method = m.Request.Method,
-                        Query = m.Request.Url.Query,
-                        RequestBodyType = m.Request.Body?.Mode,
-                        ResponseJson = m.Response?.FirstOrDefault()?.Body,
-                        //替换原测试地址
-                        Url = m.Request.Url.Raw.Replace(devDaemon, testDaemon)
-                    };
-
-                    //不同请求类型
-                    switch (item.RequestBodyType)
-                    {
-                        case "formdata":
-                            item.Params = m.Request.Body.Formdata;
-                            break;
-                        case "raw":
-                            item.RequestRaw = m.Request.Body.Raw;
-                            break;
-                        default:
-                            item.Params = m.Request.Body.Urlencoded;
-                            break;
-                    }
-                    return item;
-                }).ToList();
-                api.Items = items;
 
                 //设置返回对象
                 var successResult = new Result
@@ -110,7 +78,7 @@ namespace PostmanToMD
                 //" + JsonConvert.SerializeObject(errorResult, Formatting.Indented) + @"
                 //```
                 //";
-                api.WriteToMarkdown(outputPath);
+                api.WriteToMarkdown(outputPath, model.Item);
             }
             catch (Exception e)
             {

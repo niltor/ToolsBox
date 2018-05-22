@@ -40,6 +40,12 @@ namespace PostmanToMD.Models
 
         [JsonProperty("response")]
         public List<Response> Response { get; set; }
+
+        [JsonProperty("description")]
+        public string Description { get; set; }
+
+        [JsonProperty("item")]
+        public List<Item> Children { get; set; }
     }
 
     public partial class Request
@@ -72,7 +78,7 @@ namespace PostmanToMD.Models
         public List<Params> Formdata { get; set; }
 
         [JsonProperty("raw")]
-        public string Raw{ get; set; }
+        public string Raw { get; set; }
     }
 
     public partial class Params

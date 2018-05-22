@@ -11,6 +11,9 @@ namespace PostmanToMD
         public Form1()
         {
             InitializeComponent();
+            AuthorInput.Text = Properties.Settings.Default.Author;
+            LocalDaemon.Text = Properties.Settings.Default.LocalUrl;
+            DevDaemon.Text = Properties.Settings.Default.DevUrl;
         }
 
         private void Chose_Click(object sender, EventArgs e)
@@ -50,7 +53,7 @@ namespace PostmanToMD
                 if (!string.IsNullOrEmpty(jsonFilePath) && !string.IsNullOrEmpty(saveFile.FileName))
                 {
                     var task = new PostManToMarkDown(LocalDaemon.Text, DevDaemon.Text);
-                    task.Run(jsonFilePath, saveFile.FileName,AuthorInput.Text);
+                    task.Run(jsonFilePath, saveFile.FileName, AuthorInput.Text);
 
                     MessageBox.Show("保存成功");
                 }
@@ -59,6 +62,16 @@ namespace PostmanToMD
                     MessageBox.Show("请先选择json文件");
                 }
             }
+        }
+
+        private void SaveConfig_Click(object sender, EventArgs e)
+        {
+            Properties.Settings.Default.Author = AuthorInput.Text;
+            Properties.Settings.Default.LocalUrl = LocalDaemon.Text;
+            Properties.Settings.Default.DevUrl = DevDaemon.Text;
+            Properties.Settings.Default.Save();
+
+            MessageBox.Show("保存成功");
         }
     }
 }

@@ -70,6 +70,9 @@ namespace PostmanToMD.Models
 
         [JsonProperty("formdata")]
         public List<Params> Formdata { get; set; }
+
+        [JsonProperty("raw")]
+        public string Raw{ get; set; }
     }
 
     public partial class Params
@@ -136,6 +139,9 @@ namespace PostmanToMD.Models
 
         [JsonProperty("value")]
         public string Value { get; set; }
+
+        [JsonProperty("description")]
+        public string Description { get; set; }
     }
 
     public partial class Response

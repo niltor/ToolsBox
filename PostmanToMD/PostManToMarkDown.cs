@@ -50,6 +50,7 @@ namespace PostmanToMD
                         Description = m.Request.Description,
                         Header = m.Request.Header,
                         Method = m.Request.Method,
+                        Query = m.Request.Url.Query,
                         RequestBodyType = m.Request.Body?.Mode,
                         ResponseJson = m.Response?.FirstOrDefault()?.Body,
                         //替换原测试地址
@@ -61,6 +62,9 @@ namespace PostmanToMD
                     {
                         case "formdata":
                             item.Params = m.Request.Body.Formdata;
+                            break;
+                        case "raw":
+                            item.RequestRaw = m.Request.Body.Raw;
                             break;
                         default:
                             item.Params = m.Request.Body.Urlencoded;
@@ -92,10 +96,10 @@ namespace PostmanToMD
                 api.Introduction = @"";
                 //设置环境变量
                 api.Env = new Dictionary<string, string>
-            {
-                { "{{header_token}}", "Access-Token" },
-                { "{{header_uuid}}", "UUID" }
-            };
+                {
+                    { "{{header_token}}", "Access-Token" },
+                    { "{{header_uuid}}", "UUID" }
+                };
                 //            api.Common = @"成功返回:
                 //```json
                 //" + JsonConvert.SerializeObject(successResult, Formatting.Indented) + @"

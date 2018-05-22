@@ -38,6 +38,7 @@ namespace PostmanToMD
             this.label3 = new System.Windows.Forms.Label();
             this.DevDaemon = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
+            this.SaveConfig = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // Chose
@@ -58,7 +59,7 @@ namespace PostmanToMD
             this.Output.Location = new System.Drawing.Point(493, 59);
             this.Output.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Output.Name = "Output";
-            this.Output.Size = new System.Drawing.Size(145, 38);
+            this.Output.Size = new System.Drawing.Size(142, 38);
             this.Output.TabIndex = 1;
             this.Output.Text = "生成MD文档";
             this.Output.UseVisualStyleBackColor = true;
@@ -129,11 +130,22 @@ namespace PostmanToMD
             this.label4.Text = "本工具是将Postman导出的json文件(V2.1)，自动转化成Markdown文档，只支持一层目录的导出。本地域名，是本地测试配置的域名，开发地址是部署到线上" +
     "的地址或域名，不要包含http://或https://。";
             // 
+            // SaveConfig
+            // 
+            this.SaveConfig.Location = new System.Drawing.Point(337, 13);
+            this.SaveConfig.Name = "SaveConfig";
+            this.SaveConfig.Size = new System.Drawing.Size(75, 23);
+            this.SaveConfig.TabIndex = 11;
+            this.SaveConfig.Text = "保存设置";
+            this.SaveConfig.UseVisualStyleBackColor = true;
+            this.SaveConfig.Click += new System.EventHandler(this.SaveConfig_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(665, 187);
+            this.Controls.Add(this.SaveConfig);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.DevDaemon);
@@ -164,6 +176,7 @@ namespace PostmanToMD
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox DevDaemon;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Button SaveConfig;
     }
 }
 

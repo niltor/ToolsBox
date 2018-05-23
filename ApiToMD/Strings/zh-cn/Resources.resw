@@ -207,8 +207,8 @@
   <data name="Main_JsonAddress.PlaceholderText" xml:space="preserve">
     <value>选择Json文件或 输入http://，https://链接地址</value>
   </data>
-  <data name="Main_ShowJsonContentBtn.Content" xml:space="preserve">
-    <value>显示内容</value>
+  <data name="Main_LoadJsonContentBtn.Content" xml:space="preserve">
+    <value>加载</value>
     <comment>显示 json 内容</comment>
   </data>
 </root>

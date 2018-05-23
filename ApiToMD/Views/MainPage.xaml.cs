@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 
 using ApiToMD.ViewModels;
 
@@ -13,6 +13,11 @@ namespace ApiToMD.Views
         public MainPage()
         {
             InitializeComponent();
+        }
+
+        private void Button_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        {
+
         }
     }
 }

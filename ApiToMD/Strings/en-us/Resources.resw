@@ -208,8 +208,8 @@ Stability improvement</value>
   <data name="Main_JsonAddress.PlaceholderText" xml:space="preserve">
     <value>chose json file or input url with http:// or https://</value>
   </data>
-  <data name="Main_ShowJsonContentBtn.Content" xml:space="preserve">
-    <value>Show Content</value>
+  <data name="Main_LoadJsonContentBtn.Content" xml:space="preserve">
+    <value>Load</value>
     <comment>Show Json Content</comment>
   </data>
 </root>

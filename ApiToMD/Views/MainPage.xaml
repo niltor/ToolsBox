@@ -15,7 +15,7 @@
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
 
-            <StackPanel Grid.Column="0" Orientation="Vertical" HorizontalAlignment="Stretch">
+            <StackPanel Grid.Column="0" Orientation="Vertical"  HorizontalAlignment="Stretch">
                 <TextBlock x:Uid="Main_ChoseFile"
                             Style="{StaticResource SubtitleTextBlockStyle}" >
                 </TextBlock>
@@ -27,14 +27,30 @@
                     </Grid.ColumnDefinitions>
                     <TextBox x:Uid="Main_JsonAddress" Grid.Column="0"
                              Text="{x:Bind ViewModel.JsonPath,Mode=TwoWay}"/>
-                    <Button x:Uid="Main_ChoseFileBtn" Grid.Column="1"
+                    <Button x:Uid="Main_ChoseFileBtn"
+                            Grid.Column="1"
                             Click="{x:Bind ViewModel.OnChoseClickAsync}"
                             >
                     </Button>
-                    <Button x:Uid="Main_ShowJsonContentBtn" Grid.Column="2">
+                    <Button x:Uid="Main_LoadJsonContentBtn"
+                            Grid.Column="2"
+                            Click="{x:Bind ViewModel.OnLoadContentAsync}">
                     </Button>
                 </Grid>
-
+                <!--json content box-->
+                <TextBox Text="{x:Bind ViewModel.JsonContent,Mode=OneWay}"
+                         Height="auto"
+                         MinHeight="400"
+                         MaxHeight="800"
+                         Padding="2" InputScope="Default"
+                         HorizontalContentAlignment="Left"
+                         VerticalContentAlignment="Top"
+                         HorizontalAlignment="Stretch"
+                         VerticalAlignment="Stretch"
+                         TextWrapping="Wrap"
+                         AcceptsReturn="True"
+                         ScrollViewer.VerticalScrollBarVisibility="Auto"
+                         />
             </StackPanel>
             <StackPanel Grid.Column="1"></StackPanel>
         </Grid>

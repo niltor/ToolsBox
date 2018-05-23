@@ -1,13 +1,18 @@
 using System;
+using System.IO;
 using System.Windows.Input;
 using ApiToMD.Helpers;
 using ApiToMD.Models;
+using Windows.Storage;
 using Windows.UI.Popups;
 
 namespace ApiToMD.ViewModels
 {
     public class MainViewModel : Observable
     {
+
+        protected MessageDialog dialog;
+
         /// <summary>
         /// json内容
         /// </summary>
@@ -18,6 +23,7 @@ namespace ApiToMD.ViewModels
 
             set { Set(ref _jsonContent, value); }
         }
+        public StorageFile JsonFile { get; set; }
 
         private string _jsonPath;
         /// <summary>
@@ -56,6 +62,7 @@ namespace ApiToMD.ViewModels
 
         public MainViewModel()
         {
+            dialog = new MessageDialog("");
         }
         public void Initialize()
         {
@@ -75,13 +82,25 @@ namespace ApiToMD.ViewModels
             };
             picker.FileTypeFilter.Add(".json");
 
-            Windows.Storage.StorageFile file = await picker.PickSingleFileAsync();
+            StorageFile file = await picker.PickSingleFileAsync();
             if (file != null)
             {
-                // Application now has read/write access to the picked file
-                this.JsonPath = file.Path ;
+                JsonFile = file;
+                JsonPath = file.Path ;
             }
            
+        }
+
+
+        public async void OnLoadContentAsync()
+        {
+            if (JsonPath == null)
+            {
+                dialog.Content = "请先选择文件或输入url";
+                return;
+            }
+            var content = await FileIO.ReadTextAsync(JsonFile);
+            JsonContent = content;
         }
 
     }

@@ -215,7 +215,7 @@ Stability improvement</value>
   <data name="Main_GenerateMarkdownBtn.Content" xml:space="preserve">
     <value>Generate</value>
   </data>
-  <data name="Main_SaveMarkdownBtn" xml:space="preserve">
+  <data name="Main_SaveMarkdownBtn.Content" xml:space="preserve">
     <value>Save</value>
   </data>
   <data name="Shell_Config.Content" xml:space="preserve">

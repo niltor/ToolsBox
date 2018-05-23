@@ -211,4 +211,16 @@
     <value>加载</value>
     <comment>显示 json 内容</comment>
   </data>
+  <data name="Shell_Config.Content" xml:space="preserve">
+    <value>配置</value>
+  </data>
+  <data name="Shell_Help.Content" xml:space="preserve">
+    <value>使用说明</value>
+  </data>
+  <data name="Main_GenerateMarkdownBtn.Content" xml:space="preserve">
+    <value>生成</value>
+  </data>
+  <data name="Main_SaveMarkdownBtn" xml:space="preserve">
+    <value>保存</value>
+  </data>
 </root>

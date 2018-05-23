@@ -15,7 +15,9 @@
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
 
-            <StackPanel Grid.Column="0" Orientation="Vertical"  HorizontalAlignment="Stretch">
+            <StackPanel Grid.Column="0" Orientation="Vertical"
+                        HorizontalAlignment="Stretch"
+                        Margin="1">
                 <TextBlock x:Uid="Main_ChoseFile"
                             Style="{StaticResource SubtitleTextBlockStyle}" >
                 </TextBlock>
@@ -34,26 +36,59 @@
                     </Button>
                     <Button x:Uid="Main_LoadJsonContentBtn"
                             Grid.Column="2"
-                            Click="{x:Bind ViewModel.OnLoadContentAsync}">
+                            Click="{x:Bind ViewModel.OnLoadContentClickAsync}">
                     </Button>
                 </Grid>
                 <!--json content box-->
                 <TextBox Text="{x:Bind ViewModel.JsonContent,Mode=OneWay}"
                          Height="auto"
                          MinHeight="400"
-                         MaxHeight="800"
+                         MaxHeight="600"
                          Padding="2" InputScope="Default"
                          HorizontalContentAlignment="Left"
                          VerticalContentAlignment="Top"
                          HorizontalAlignment="Stretch"
                          VerticalAlignment="Stretch"
-                         TextWrapping="Wrap"
                          AcceptsReturn="True"
                          ScrollViewer.VerticalScrollBarVisibility="Auto"
+                         ScrollViewer.HorizontalScrollBarVisibility="Auto"
                          />
             </StackPanel>
-            <StackPanel Grid.Column="1"></StackPanel>
+            <StackPanel Grid.Column="1" Orientation="Vertical"
+                        Margin="1">
+                <TextBlock x:Uid="Main_ChoseFile"
+                            Style="{StaticResource SubtitleTextBlockStyle}" >
+                </TextBlock>
+                <Grid >
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto"></ColumnDefinition>
+                        <ColumnDefinition Width="auto"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Button x:Uid="Main_GenerateMarkdownBtn"
+                            Grid.Column="0"
+                            Click="{x:Bind ViewModel.OnGenerateClickAsync}"
+                            >
+                    </Button>
+                    <Button x:Uid="Main_SaveMarkdownBtn"
+                            Grid.Column="1"
+                            Click="{x:Bind ViewModel.OnSaveContentClickAsync}">
+                    </Button>
+                </Grid>
+                <!--json content box-->
+                <TextBox Text="{x:Bind ViewModel.JsonContent,Mode=OneWay}"
+                         Height="auto"
+                         MinHeight="400"
+                         MaxHeight="600"
+                         Padding="2" InputScope="Default"
+                         HorizontalContentAlignment="Left"
+                         VerticalContentAlignment="Top"
+                         HorizontalAlignment="Stretch"
+                         VerticalAlignment="Stretch"
+                         AcceptsReturn="True"
+                         ScrollViewer.VerticalScrollBarVisibility="Auto"
+                         ScrollViewer.HorizontalScrollBarVisibility="Auto"
+                         />
+            </StackPanel>
         </Grid>
-
     </Grid>
 </Page>

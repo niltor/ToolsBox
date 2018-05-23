@@ -68,7 +68,6 @@ namespace ApiToMD.ViewModels
         {
 
         }
-
         /// <summary>
         /// 选择按钮
         /// </summary>
@@ -86,13 +85,14 @@ namespace ApiToMD.ViewModels
             if (file != null)
             {
                 JsonFile = file;
-                JsonPath = file.Path ;
+                JsonPath = file.Path;
             }
-           
+
         }
-
-
-        public async void OnLoadContentAsync()
+        /// <summary>
+        /// load Json内容
+        /// </summary>
+        public async void OnLoadContentClickAsync()
         {
             if (JsonPath == null)
             {
@@ -103,5 +103,13 @@ namespace ApiToMD.ViewModels
             JsonContent = content;
         }
 
+
+        public void OnGenerateClickAsync()
+        {
+
+        }
+
+        public void OnSaveContentClickAsync()
+        { }
     }
 }

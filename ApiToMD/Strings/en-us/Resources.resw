@@ -126,7 +126,7 @@
     <comment>Application description</comment>
   </data>
   <data name="Shell_Main.Content" xml:space="preserve">
-    <value>Main</value>
+    <value>Home</value>
     <comment>Navigation view item name for Main</comment>
   </data>
   <data name="ExceptionSettingsStorageExtensionsFileNameIsNullOrEmpty" xml:space="preserve">
@@ -211,5 +211,17 @@ Stability improvement</value>
   <data name="Main_LoadJsonContentBtn.Content" xml:space="preserve">
     <value>Load</value>
     <comment>Show Json Content</comment>
+  </data>
+  <data name="Main_GenerateMarkdownBtn.Content" xml:space="preserve">
+    <value>Generate</value>
+  </data>
+  <data name="Main_SaveMarkdownBtn" xml:space="preserve">
+    <value>Save</value>
+  </data>
+  <data name="Shell_Config.Content" xml:space="preserve">
+    <value>Config</value>
+  </data>
+  <data name="Shell_Help.Content" xml:space="preserve">
+    <value>Help</value>
   </data>
 </root>

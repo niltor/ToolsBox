@@ -1,4 +1,4 @@
-﻿<Page
+<Page
     x:Class="ApiToMD.Views.MainPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -9,10 +9,35 @@
     <Grid
         x:Name="ContentArea"
         Margin="{StaticResource MediumLeftRightMargin}">
-        <Grid
-            Background="{ThemeResource SystemControlPageBackgroundChromeLowBrush}">
-            <!--The SystemControlPageBackgroundChromeLowBrush background represents where you should place your content. 
-                Place your content here.-->
+        <Grid Background="{ThemeResource SystemControlPageBackgroundChromeLowBrush}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <StackPanel Grid.Column="0" Orientation="Vertical" HorizontalAlignment="Stretch">
+                <TextBlock x:Uid="Main_ChoseFile"
+                            Style="{StaticResource SubtitleTextBlockStyle}" >
+                </TextBlock>
+                <Grid >
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                        <ColumnDefinition Width="auto"></ColumnDefinition>
+                        <ColumnDefinition Width="auto"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <TextBox x:Uid="Main_JsonAddress" Grid.Column="0"
+                             Text="{x:Bind ViewModel.JsonPath,Mode=TwoWay}"/>
+                    <Button x:Uid="Main_ChoseFileBtn" Grid.Column="1"
+                            Click="{x:Bind ViewModel.OnChoseClickAsync}"
+                            >
+                    </Button>
+                    <Button x:Uid="Main_ShowJsonContentBtn" Grid.Column="2">
+                    </Button>
+                </Grid>
+
+            </StackPanel>
+            <StackPanel Grid.Column="1"></StackPanel>
         </Grid>
+
     </Grid>
 </Page>

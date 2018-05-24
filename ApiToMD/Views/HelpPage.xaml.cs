@@ -1,8 +1,9 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using ApiToMD.ViewModels;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
@@ -22,6 +23,7 @@ namespace ApiToMD.Views
     /// </summary>
     public sealed partial class HelpPage : Page
     {
+        //public HelpViewModel ViewModel = new HelpViewModel();
         public HelpPage()
         {
             this.InitializeComponent();

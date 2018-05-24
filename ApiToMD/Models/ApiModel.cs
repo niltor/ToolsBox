@@ -110,15 +110,18 @@ namespace ApiToMD.Models
             return content;
         }
 
-        public async Task<string> WriteToMarkdownAsync(StorageFile file, List<Item> items)
+        /// <summary>
+        /// 完整文档
+        /// </summary>
+        /// <param name="items"></param>
+        /// <returns></returns>
+        public string ToMarkdown(List<Item> items)
         {
             // 获取接口内容
             var content = GetItemsContent(items, null);
-
             // 生成公共内容及导航
             content = GetTitle(Name) + GetInfo("Author:" + Author) + GetInfo("Email:" + Email) + Introduction + Common
                 + GetNavgation(Items) + content;
-            await FileIO.WriteTextAsync(file, content);
             return content;
         }
 

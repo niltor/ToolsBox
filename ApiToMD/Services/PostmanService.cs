@@ -27,7 +27,7 @@ namespace ApiToMD.Services
         /// <param name="fileStorage">源文件</param>
         /// <param name="outputFileStorage">目标保存文件</param>
         /// <param name="author">作者名</param>
-        public async Task<string> ToMarkdownAsync(StorageFile fileStorage, StorageFile outputFileStorage, string author = "niltor")
+        public async Task<string> ToMarkdownAsync(StorageFile fileStorage, string author = "niltor")
         {
             string result = null;
             var fileContent = await FileIO.ReadTextAsync(fileStorage);
@@ -48,7 +48,7 @@ namespace ApiToMD.Services
                     { "{{header_token}}", "Access-Token" },
                     { "{{header_uuid}}", "UUID" }
                 };
-                result = await api.WriteToMarkdownAsync(outputFileStorage, model.Item);
+                result = api.ToMarkdown(model.Item);
             }
             catch (Exception e)
             {

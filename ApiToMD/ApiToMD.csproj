@@ -150,6 +150,7 @@
     <Compile Include="Services\PostmanService.cs" />
     <Compile Include="Services\ThemeSelectorService.cs" />
     <Compile Include="Services\WhatsNewDisplayService.cs" />
+    <Compile Include="ViewModels\ConfigViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="Models\PostmanOption.cs" />
     <Compile Include="ViewModels\SettingsViewModel.cs" />
@@ -184,6 +185,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Page Include="Styles\TextBox.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Styles\Page.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

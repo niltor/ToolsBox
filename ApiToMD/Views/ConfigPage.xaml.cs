@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using ApiToMD.ViewModels;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
@@ -22,9 +23,10 @@ namespace ApiToMD.Views
     /// </summary>
     public sealed partial class ConfigPage : Page
     {
+        public ConfigViewModel ViewModel { get; } = new ConfigViewModel();
         public ConfigPage()
         {
-            this.InitializeComponent();
+            InitializeComponent();
         }
     }
 }

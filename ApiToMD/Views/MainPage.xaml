@@ -56,7 +56,7 @@
             </StackPanel>
             <StackPanel Grid.Column="1" Orientation="Vertical"
                         Margin="1">
-                <TextBlock x:Uid="Main_ChoseFile"
+                <TextBlock x:Uid="Main_Output"
                             Style="{StaticResource SubtitleTextBlockStyle}" >
                 </TextBlock>
                 <Grid >
@@ -75,7 +75,7 @@
                     </Button>
                 </Grid>
                 <!--json content box-->
-                <TextBox Text="{x:Bind ViewModel.JsonContent,Mode=OneWay}"
+                <TextBox Text="{x:Bind ViewModel.OutputContent,Mode=OneWay}"
                          Height="auto"
                          MinHeight="400"
                          MaxHeight="600"

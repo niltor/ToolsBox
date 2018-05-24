@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Windows.Input;
 using ApiToMD.Helpers;
@@ -100,10 +101,12 @@ namespace ApiToMD.ViewModels
             if (JsonPath == null)
             {
                 dialog.Content = "请先选择文件或输入url";
+                dialog.ShowAsync();
                 return;
             }
             var content = await FileIO.ReadTextAsync(JsonFile);
-            JsonContent = content;
+
+            JsonContent = content.Replace("\t", "  ");
         }
 
         /// <summary>
@@ -112,14 +115,14 @@ namespace ApiToMD.ViewModels
         public async void OnGenerateClickAsync()
         {
             var service = new PostmanService();
-            if (JsonFile == null || OutputPath == null)
+            if (JsonFile == null)
             {
-                dialog.Content = "请先选择来源和输出目录";
+                dialog.Content = "请先选择文件来源";
                 var re = dialog.ShowAsync();
             }
             else
             {
-                var content = await service.ToMarkdownAsync(JsonFile, OutputFile);
+                var content = await service.ToMarkdownAsync(JsonFile);
                 OutputContent = content;
             }
 
@@ -130,18 +133,25 @@ namespace ApiToMD.ViewModels
         /// </summary>
         public async void OnSaveContentClickAsync()
         {
-            var picker = new FileSavePicker
+            if (JsonContent == null)
             {
-                SuggestedStartLocation = PickerLocationId.ComputerFolder,
-                DefaultFileExtension = "md",
-                SuggestedFileName = JsonFile.DisplayName + ".md"
-            };
+                dialog.Content = "请先加载json文件";
+                dialog.ShowAsync();
+                return;
+            }
 
-            var file = await picker.PickSaveFileAsync();
+            var savePicker = new FileSavePicker
+            {
+                SuggestedStartLocation = PickerLocationId.DocumentsLibrary,
+                SuggestedFileName = JsonFile.DisplayName,
+                DefaultFileExtension = ".md"
+            };
+            savePicker.FileTypeChoices.Add("markdown file", new List<string>() { ".md", ".markdown" });
+
+            var file = await savePicker.PickSaveFileAsync();
             if (file != null)
             {
-                OutputFile = file;
-                OutputPath = file.Path;
+                await FileIO.WriteTextAsync(file, OutputContent);
             }
         }
     }

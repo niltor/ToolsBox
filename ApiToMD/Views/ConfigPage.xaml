@@ -5,9 +5,31 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
-    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    Style="{StaticResource PageStyle}"
+    >
+    <Grid
+        x:Name="ContentArea"
+        Margin="{StaticResource MediumLeftRightMargin}">
+        <Grid Background="{ThemeResource SystemControlPageBackgroundChromeLowBrush}">
+            <StackPanel Orientation="Vertical" HorizontalAlignment="Left">
+                <TextBlock x:Uid="Config_Title"
+                           Style="{StaticResource HeaderTextBlockStyle}"/>
+                <TextBox x:Uid="Config_Author"
+                         Text="{x:Bind ViewModel.Author}"
+                         Style="{StaticResource FormTextBox}"/>
+                <TextBox x:Uid="Config_LocalUrl"
+                         Text="{x:Bind ViewModel.LocalUrl}"
+                         Style="{StaticResource FormTextBox}"/>
+                <TextBox x:Uid="Config_ActualUrl"
+                         Text="{x:Bind ViewModel.ActualUrl}"
+                         Style="{StaticResource FormTextBox}"/>
 
-    <Grid>
-        <TextBlock>config</TextBlock>
+                <Button x:Uid="Config_SaveConfig"
+                        HorizontalAlignment="Right"
+                        Margin="24,0,0,48"
+                        Click="{x:Bind ViewModel.OnSaveConfigClickAsync}"
+                        />
+            </StackPanel>
+        </Grid>
     </Grid>
 </Page>

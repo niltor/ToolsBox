@@ -1,15 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Package xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10"
-         xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest"
-         xmlns:uap3="http://schemas.microsoft.com/appx/manifest/uap/windows10/3"
-         xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10"
-         xmlns:genTemplate="http://schemas.microsoft.com/appx/developer/windowsTemplateStudio"
-         xmlns:uap6="http://schemas.microsoft.com/appx/manifest/uap/windows10/6"
-         xmlns:iot="http://schemas.microsoft.com/appx/manifest/iot/windows10"
-         xmlns:uap2="http://schemas.microsoft.com/appx/manifest/uap/windows10/2"
-         xmlns:uap4="http://schemas.microsoft.com/appx/manifest/uap/windows10/4"
-         xmlns:rescap="http://schemas.microsoft.com/appx/manifest/foundation/windows10/restrictedcapabilities"
-         IgnorableNamespaces="uap mp genTemplate uap6 iot uap2 uap4 rescap">
+<Package xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10" xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest" xmlns:uap3="http://schemas.microsoft.com/appx/manifest/uap/windows10/3" xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10" xmlns:genTemplate="http://schemas.microsoft.com/appx/developer/windowsTemplateStudio" xmlns:uap6="http://schemas.microsoft.com/appx/manifest/uap/windows10/6" xmlns:iot="http://schemas.microsoft.com/appx/manifest/iot/windows10" xmlns:uap2="http://schemas.microsoft.com/appx/manifest/uap/windows10/2" xmlns:uap4="http://schemas.microsoft.com/appx/manifest/uap/windows10/4" xmlns:rescap="http://schemas.microsoft.com/appx/manifest/foundation/windows10/restrictedcapabilities" IgnorableNamespaces="uap mp genTemplate uap6 iot uap2 uap4 rescap">
   <Identity Name="996C340E-6362-4724-8C65-AC0B3015A6FF" Publisher="CN=NilTor" Version="1.0.0.0" />
   <mp:PhoneIdentity PhoneProductId="996C340E-6362-4724-8C65-AC0B3015A6FF" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
   <Properties>
@@ -46,20 +36,6 @@
             <uap:Logo>Assets\Icon.png</uap:Logo>
             <uap:DisplayName>ApiToMD</uap:DisplayName>
           </uap:Protocol>
-        </uap:Extension>
-        <uap:Extension Category="windows.fileOpenPicker">
-          <uap:FileOpenPicker>
-            <uap:SupportedFileTypes>
-              <uap:FileType>.json</uap:FileType>
-            </uap:SupportedFileTypes>
-          </uap:FileOpenPicker>
-        </uap:Extension>
-        <uap:Extension Category="windows.fileSavePicker">
-          <uap:FileSavePicker>
-            <uap:SupportedFileTypes>
-              <uap:FileType>.md</uap:FileType>
-            </uap:SupportedFileTypes>
-          </uap:FileSavePicker>
         </uap:Extension>
       </Extensions>
     </Application>

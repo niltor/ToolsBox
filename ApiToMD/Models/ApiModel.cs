@@ -4,9 +4,11 @@ using System.IO;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
+using System.Threading.Tasks;
 using Newtonsoft.Json;
+using Windows.Storage;
 
-namespace PostmanToMD.Models
+namespace ApiToMD.Models
 {
     /// <summary>
     /// Api模型
@@ -16,6 +18,15 @@ namespace PostmanToMD.Models
         public string Name { get; set; }
         public string Author { get; set; }
         public string Email { get; set; }
+
+        /// <summary>
+        /// 本地地址
+        /// </summary>
+        public string LocalUrl { get; set; }
+        /// <summary>
+        /// 替换地址
+        /// </summary>
+        public string ReplaceUrl { get; set; }
 
         /// <summary>
         /// 返回格式
@@ -66,7 +77,13 @@ namespace PostmanToMD.Models
                         RequestBodyType = item.Request.Body?.Mode,
                         ResponseJson = item.Response?.FirstOrDefault()?.Body,
                         Url = item.Request.Url.Raw
+
                     };
+                    // 地址处理
+                    if (!string.IsNullOrWhiteSpace(LocalUrl) && !string.IsNullOrWhiteSpace(ReplaceUrl))
+                    {
+                        apiItem.Url = item.Request.Url.Raw?.Replace(LocalUrl, ReplaceUrl);
+                    }
 
                     //不同请求类型
                     switch (apiItem.RequestBodyType)
@@ -89,25 +106,23 @@ namespace PostmanToMD.Models
                     + GetParams(apiItem.Params) + GetRequestRaw(apiItem.RequestRaw)
                     + GetResponseJson(apiItem.ResponseJson);
                 }
-
             }
             return content;
         }
 
-        public void WriteToMarkdown(string path, List<Item> items)
+        /// <summary>
+        /// 完整文档
+        /// </summary>
+        /// <param name="items"></param>
+        /// <returns></returns>
+        public string ToMarkdown(List<Item> items)
         {
             // 获取接口内容
             var content = GetItemsContent(items, null);
-
             // 生成公共内容及导航
             content = GetTitle(Name) + GetInfo("Author:" + Author) + GetInfo("Email:" + Email) + Introduction + Common
                 + GetNavgation(Items) + content;
-
-            var file = new FileInfo(path);
-            using (var writer = file.CreateText())
-            {
-                writer.Write(content);
-            }
+            return content;
         }
 
         #region text block 
@@ -285,7 +300,4 @@ namespace PostmanToMD.Models
         public List<Params> ResponseFileds { get; set; }
 
     }
-
-
-
 }

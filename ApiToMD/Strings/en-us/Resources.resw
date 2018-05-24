@@ -199,11 +199,11 @@ Stability improvement</value>
     <comment>Displayed as the link to launching the Feedback Hub.</comment>
   </data>
   <data name="Main_ChoseFile.Text" xml:space="preserve">
-    <value>Chose Json FIle</value>
+    <value>Pick a  json file</value>
     <comment>Chose Json File</comment>
   </data>
   <data name="Main_ChoseFileBtn.Content" xml:space="preserve">
-    <value>Chose</value>
+    <value>Pick</value>
   </data>
   <data name="Main_JsonAddress.PlaceholderText" xml:space="preserve">
     <value>chose json file or input url with http:// or https://</value>
@@ -223,5 +223,41 @@ Stability improvement</value>
   </data>
   <data name="Shell_Help.Content" xml:space="preserve">
     <value>Help</value>
+  </data>
+  <data name="Main_Output.Text" xml:space="preserve">
+    <value>Generate md file</value>
+  </data>
+  <data name="Main_PreviewBtn.Content" xml:space="preserve">
+    <value>Preview</value>
+  </data>
+  <data name="Config_ActualUrl.Header" xml:space="preserve">
+    <value>Actual Url</value>
+  </data>
+  <data name="Config_ActualUrl.PlaceholderText" xml:space="preserve">
+    <value>The actual url used</value>
+  </data>
+  <data name="Config_ActualUrl.Text" xml:space="preserve">
+    <value>Actual Url</value>
+  </data>
+  <data name="Config_Author.Header" xml:space="preserve">
+    <value>Author</value>
+  </data>
+  <data name="Config_Author.Text" xml:space="preserve">
+    <value>Author</value>
+  </data>
+  <data name="Config_LocalUrl.Header" xml:space="preserve">
+    <value>Local Url</value>
+  </data>
+  <data name="Config_LocalUrl.PlaceholderText" xml:space="preserve">
+    <value>The local url to be replaced</value>
+  </data>
+  <data name="Config_LocalUrl.Text" xml:space="preserve">
+    <value>Local Url</value>
+  </data>
+  <data name="Config_SaveConfig.Content" xml:space="preserve">
+    <value>Save</value>
+  </data>
+  <data name="Config_Title.text" xml:space="preserve">
+    <value>Config</value>
   </data>
 </root>

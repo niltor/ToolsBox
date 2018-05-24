@@ -220,7 +220,7 @@
   <data name="Main_GenerateMarkdownBtn.Content" xml:space="preserve">
     <value>生成</value>
   </data>
-  <data name="Main_SaveMarkdownBtn" xml:space="preserve">
+  <data name="Main_SaveMarkdownBtn.Content" xml:space="preserve">
     <value>保存</value>
   </data>
 </root>

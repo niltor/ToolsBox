@@ -3,7 +3,9 @@ using System.IO;
 using System.Windows.Input;
 using ApiToMD.Helpers;
 using ApiToMD.Models;
+using ApiToMD.Services;
 using Windows.Storage;
+using Windows.Storage.Pickers;
 using Windows.UI.Popups;
 
 namespace ApiToMD.ViewModels
@@ -24,6 +26,8 @@ namespace ApiToMD.ViewModels
             set { Set(ref _jsonContent, value); }
         }
         public StorageFile JsonFile { get; set; }
+        public StorageFile OutputFile { get; set; }
+
 
         private string _jsonPath;
         /// <summary>
@@ -73,11 +77,10 @@ namespace ApiToMD.ViewModels
         /// </summary>
         public async void OnChoseClickAsync()
         {
-            var picker = new Windows.Storage.Pickers.FileOpenPicker
+            var picker = new FileOpenPicker
             {
-                ViewMode = Windows.Storage.Pickers.PickerViewMode.Thumbnail,
-                SuggestedStartLocation =
-                Windows.Storage.Pickers.PickerLocationId.ComputerFolder
+                ViewMode = PickerViewMode.Thumbnail,
+                SuggestedStartLocation = PickerLocationId.ComputerFolder
             };
             picker.FileTypeFilter.Add(".json");
 
@@ -103,13 +106,43 @@ namespace ApiToMD.ViewModels
             JsonContent = content;
         }
 
-
-        public void OnGenerateClickAsync()
+        /// <summary>
+        /// 生成按钮事件
+        /// </summary>
+        public async void OnGenerateClickAsync()
         {
+            var service = new PostmanService();
+            if (JsonFile == null || OutputPath == null)
+            {
+                dialog.Content = "请先选择来源和输出目录";
+                var re = dialog.ShowAsync();
+            }
+            else
+            {
+                var content = await service.ToMarkdownAsync(JsonFile, OutputFile);
+                OutputContent = content;
+            }
 
         }
 
-        public void OnSaveContentClickAsync()
-        { }
+        /// <summary>
+        /// 保存按钮事件
+        /// </summary>
+        public async void OnSaveContentClickAsync()
+        {
+            var picker = new FileSavePicker
+            {
+                SuggestedStartLocation = PickerLocationId.ComputerFolder,
+                DefaultFileExtension = "md",
+                SuggestedFileName = JsonFile.DisplayName + ".md"
+            };
+
+            var file = await picker.PickSaveFileAsync();
+            if (file != null)
+            {
+                OutputFile = file;
+                OutputPath = file.Path;
+            }
+        }
     }
 }

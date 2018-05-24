@@ -295,7 +295,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include=".editorconfig" />
-    <None Include="ApiToMD_TemporaryKey.pfx" />
     <PRIResource Include="Strings\zh-cn\Resources.resw" />
   </ItemGroup>
   <ItemGroup>

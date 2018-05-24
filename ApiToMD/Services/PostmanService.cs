@@ -29,6 +29,11 @@ namespace ApiToMD.Services
         /// <param name="author">作者名</param>
         public async Task<string> ToMarkdownAsync(StorageFile fileStorage, string author = "niltor")
         {
+            var localSettings = ApplicationData.Current.LocalSettings;
+            author = localSettings.Values["Author"] as string;
+            var LocalUrl = localSettings.Values["LocalUrl"] as string;
+            var ActualUrl = localSettings.Values["ActualUrl"] as string;
+
             string result = null;
             var fileContent = await FileIO.ReadTextAsync(fileStorage);
             try
@@ -38,7 +43,9 @@ namespace ApiToMD.Services
                 {
                     Name = model.Info.Name,
                     Email = $"{author}@msdev.cc",
-                    Author = author
+                    Author = author,
+                    LocalUrl = LocalUrl,
+                    ReplaceUrl = ActualUrl
                 };
                 //设置说明内容
                 api.Introduction = @"";

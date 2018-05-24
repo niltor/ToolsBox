@@ -115,17 +115,7 @@ namespace ApiToMD.ViewModels
         public async void OnGenerateClickAsync()
         {
 
-            var localSettings = ApplicationData.Current.LocalSettings;
-            var Author = localSettings.Values["Author"] as string;
-            var LocalUrl = localSettings.Values["LocalUrl"] as string;
-            var ActualUrl = localSettings.Values["ActualUrl"] as string;
-
-            var service = new PostmanService
-            {
-                LocalUrl = LocalUrl,
-                ReplaceUrl = ActualUrl
-            };
-
+            var service = new PostmanService();
             if (JsonFile == null)
             {
                 dialog.Content = "请先选择文件来源";
@@ -133,10 +123,9 @@ namespace ApiToMD.ViewModels
             }
             else
             {
-                var content = await service.ToMarkdownAsync(JsonFile, Author);
+                var content = await service.ToMarkdownAsync(JsonFile);
                 OutputContent = content;
             }
-
         }
 
         /// <summary>

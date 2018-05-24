@@ -256,7 +256,10 @@
   <data name="Config_SaveConfig.Content" xml:space="preserve">
     <value>保存</value>
   </data>
-  <data name="Config_Title.text" xml:space="preserve">
+  <data name="Config_Title.Text" xml:space="preserve">
     <value>配置</value>
+  </data>
+  <data name="Config_Author.PlaceholderText" xml:space="preserve">
+    <value>作者</value>
   </data>
 </root>

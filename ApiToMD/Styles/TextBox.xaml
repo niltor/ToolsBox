@@ -3,7 +3,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     
     <Style x:Key="FormTextBox" TargetType="TextBox">
-        <Setter Property="Margin" Value="{StaticResource FormTextBoxMargin}"/>
+        <Setter Property="Margin" Value="24,0,0,48"/>
         <Setter Property="Width" Value="400"/>
     </Style>
 </ResourceDictionary>

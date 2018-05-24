@@ -257,7 +257,10 @@ Stability improvement</value>
   <data name="Config_SaveConfig.Content" xml:space="preserve">
     <value>Save</value>
   </data>
-  <data name="Config_Title.text" xml:space="preserve">
+  <data name="Config_Title.Text" xml:space="preserve">
     <value>Config</value>
+  </data>
+  <data name="Config_Author.PlaceholderText" xml:space="preserve">
+    <value>Author</value>
   </data>
 </root>

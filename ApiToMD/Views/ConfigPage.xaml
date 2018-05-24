@@ -12,16 +12,14 @@
         Margin="{StaticResource MediumLeftRightMargin}">
         <Grid Background="{ThemeResource SystemControlPageBackgroundChromeLowBrush}">
             <StackPanel Orientation="Vertical" HorizontalAlignment="Left">
-                <TextBlock x:Uid="Config_Title"
-                           Style="{StaticResource HeaderTextBlockStyle}"/>
                 <TextBox x:Uid="Config_Author"
-                         Text="{x:Bind ViewModel.Author}"
+                         Text="{x:Bind ViewModel.Author,Mode=TwoWay}"
                          Style="{StaticResource FormTextBox}"/>
                 <TextBox x:Uid="Config_LocalUrl"
-                         Text="{x:Bind ViewModel.LocalUrl}"
+                         Text="{x:Bind ViewModel.LocalUrl,Mode=TwoWay}"
                          Style="{StaticResource FormTextBox}"/>
                 <TextBox x:Uid="Config_ActualUrl"
-                         Text="{x:Bind ViewModel.ActualUrl}"
+                         Text="{x:Bind ViewModel.ActualUrl,Mode=TwoWay}"
                          Style="{StaticResource FormTextBox}"/>
 
                 <Button x:Uid="Config_SaveConfig"

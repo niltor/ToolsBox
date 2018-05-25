@@ -18,6 +18,7 @@
             <TextBlock
                 x:Uid="Settings_Personalization"
                 Style="{StaticResource SubtitleTextBlockStyle}" />
+            <!--选择主题-->
             <StackPanel Margin="{StaticResource SettingsSubheaderMargin}">
                 <TextBlock
                     x:Uid="Settings_Theme"
@@ -53,7 +54,6 @@
                     </RadioButton>
                 </StackPanel>
             </StackPanel>
-
             <TextBlock
                 x:Uid="Settings_About"
                 Style="{StaticResource SubtitleTextBlockStyle}" />

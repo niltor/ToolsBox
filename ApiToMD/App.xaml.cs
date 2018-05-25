@@ -6,6 +6,10 @@ using Microsoft.AppCenter;
 using Microsoft.AppCenter.Analytics;
 
 using Windows.ApplicationModel.Activation;
+using Windows.ApplicationModel.Resources;
+using Windows.ApplicationModel.Resources.Core;
+using Windows.Foundation.Collections;
+using Windows.Globalization;
 using Windows.UI.Xaml;
 
 namespace ApiToMD
@@ -56,6 +60,18 @@ namespace ApiToMD
         protected override async void OnBackgroundActivated(BackgroundActivatedEventArgs args)
         {
             await ActivationService.ActivateAsync(args);
+        }
+
+
+
+        private void QualifierValues_MapChanged(IObservableMap<string, string> sender, IMapChangedEventArgs<string> @event)
+        {
+            this.RefreshUIText();
+        }
+
+        private void RefreshUIText()
+        {
+            var resourceLoader = ResourceLoader.GetForCurrentView();
         }
     }
 }

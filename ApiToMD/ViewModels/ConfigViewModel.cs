@@ -58,6 +58,9 @@ namespace ApiToMD.ViewModels
             localSettings.Values["Author"] = Author;
             localSettings.Values["LocalUrl"] = LocalUrl;
             localSettings.Values["ActualUrl"] = ActualUrl;
+
+            Windows.Globalization.ApplicationLanguages.PrimaryLanguageOverride = "zh-cn";
+
         }
 
     }

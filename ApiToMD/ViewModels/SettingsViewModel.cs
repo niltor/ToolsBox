@@ -5,6 +5,7 @@ using ApiToMD.Helpers;
 using ApiToMD.Services;
 
 using Windows.ApplicationModel;
+using Windows.Globalization;
 using Windows.UI.Xaml;
 
 namespace ApiToMD.ViewModels
@@ -91,5 +92,6 @@ namespace ApiToMD.ViewModels
 
             return $"{appName} - {version.Major}.{version.Minor}.{version.Build}.{version.Revision}";
         }
+
     }
 }

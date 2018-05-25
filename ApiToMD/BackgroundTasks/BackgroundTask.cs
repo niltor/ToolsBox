@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Threading.Tasks;
 
 using Windows.ApplicationModel.Background;
@@ -9,7 +9,8 @@ namespace ApiToMD.BackgroundTasks
     {
         public abstract void Register();
 
-        public abstract Task RunAsyncInternal(IBackgroundTaskInstance taskInstance);
+        public abstract void RunInternal(IBackgroundTaskInstance taskInstance);
+
 
         public abstract void OnCanceled(IBackgroundTaskInstance sender, BackgroundTaskCancellationReason reason);
 
@@ -18,11 +19,10 @@ namespace ApiToMD.BackgroundTasks
             return name == GetType().Name;
         }
 
-        public Task RunAsync(IBackgroundTaskInstance taskInstance)
+        public void Run(IBackgroundTaskInstance taskInstance)
         {
             SubscribeToEvents(taskInstance);
-
-            return RunAsyncInternal(taskInstance);
+            RunInternal(taskInstance);
         }
 
         public void SubscribeToEvents(IBackgroundTaskInstance taskInstance)

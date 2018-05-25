@@ -52,14 +52,12 @@ namespace ApiToMD.ViewModels
         /// <summary>
         /// 保存配置
         /// </summary>
-        public async void OnSaveConfigClickAsync()
+        public async void OnSaveConfigClick()
         {
             var localSettings = ApplicationData.Current.LocalSettings;
             localSettings.Values["Author"] = Author;
             localSettings.Values["LocalUrl"] = LocalUrl;
             localSettings.Values["ActualUrl"] = ActualUrl;
-
-            Windows.Globalization.ApplicationLanguages.PrimaryLanguageOverride = "zh-cn";
 
         }
 

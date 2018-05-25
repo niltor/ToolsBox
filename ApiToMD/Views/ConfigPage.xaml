@@ -25,7 +25,7 @@
                 <Button x:Uid="Config_SaveConfig"
                         HorizontalAlignment="Right"
                         Margin="24,0,0,48"
-                        Click="{x:Bind ViewModel.OnSaveConfigClickAsync}"
+                        Click="{x:Bind ViewModel.OnSaveConfigClick}"
                         />
             </StackPanel>
         </Grid>

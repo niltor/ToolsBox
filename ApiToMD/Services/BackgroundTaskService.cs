@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -60,7 +60,7 @@ namespace ApiToMD.Services
                 return;
             }
 
-            task.RunAsync(taskInstance).FireAndForget();
+            task.Run(taskInstance);
         }
 
         protected override async Task HandleInternalAsync(BackgroundActivatedEventArgs args)

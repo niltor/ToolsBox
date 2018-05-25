@@ -1,4 +1,5 @@
-﻿using System;
+using System;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -35,38 +36,21 @@ namespace ApiToMD.BackgroundTasks
             }
         }
 
-        public override Task RunAsyncInternal(IBackgroundTaskInstance taskInstance)
+        public override void RunInternal(IBackgroundTaskInstance taskInstance)
         {
-            if (taskInstance == null)
-            {
-                return null;
-            }
-
+            taskInstance.Canceled += new BackgroundTaskCanceledEventHandler(OnCanceled);
             _deferral = taskInstance.GetDeferral();
 
-            return Task.Run(() =>
-            {
-                //// TODO WTS: Insert the code that should be executed in the background task here.
-                //// This sample initializes a timer that counts to 100 in steps of 10.  It updates Message each time.
-
-                //// Documentation:
-                ////      * General: https://docs.microsoft.com/en-us/windows/uwp/launch-resume/support-your-app-with-background-tasks
-                ////      * Debug: https://docs.microsoft.com/en-us/windows/uwp/launch-resume/debug-a-background-task
-                ////      * Monitoring: https://docs.microsoft.com/windows/uwp/launch-resume/monitor-background-task-progress-and-completion
-
-                //// To show the background progress and message on any page in the application,
-                //// subscribe to the Progress and Completed events.
-                //// You can do this via "BackgroundTaskService.GetBackgroundTasksRegistration"
-
-                _taskInstance = taskInstance;
-                ThreadPoolTimer.CreatePeriodicTimer(new TimerElapsedHandler(SampleTimerCallback), TimeSpan.FromSeconds(1));
-            });
+            _taskInstance = taskInstance;
+            ThreadPoolTimer.CreatePeriodicTimer(new TimerElapsedHandler(SampleTimerCallback), TimeSpan.FromSeconds(1));
         }
 
         public override void OnCanceled(IBackgroundTaskInstance sender, BackgroundTaskCancellationReason reason)
         {
-           // TODO WTS: Insert code to handle the cancelation request here.
-           // Documentation: https://docs.microsoft.com/windows/uwp/launch-resume/handle-a-cancelled-background-task
+            // TODO WTS: Insert code to handle the cancelation request here.
+            // Documentation: https://docs.microsoft.com/windows/uwp/launch-resume/handle-a-cancelled-background-task
+            _cancelRequested = true;
+            Debug.WriteLine("Background " + sender.Task.Name + " Cancel Requested...");
         }
 
         private void SampleTimerCallback(ThreadPoolTimer timer)

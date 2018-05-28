@@ -8,6 +8,7 @@ using ApiToMD.Services;
 using Windows.Storage;
 using Windows.Storage.Pickers;
 using Windows.UI.Popups;
+using Windows.Web.Http;
 
 namespace ApiToMD.ViewModels
 {
@@ -98,14 +99,25 @@ namespace ApiToMD.ViewModels
         /// </summary>
         public async void OnLoadContentClickAsync()
         {
+            var content = "";
             if (JsonPath == null)
             {
                 dialog.Content = "请先选择文件或输入url";
                 dialog.ShowAsync();
                 return;
             }
-            var content = await FileIO.ReadTextAsync(JsonFile);
-
+            // 判断地址类型
+            if (JsonPath.Contains("http://") || JsonPath.Contains("https://"))
+            {
+                using (var hc = new HttpClient())
+                {
+                    content = await hc.GetStringAsync(new Uri(JsonPath));
+                }
+            }
+            else
+            {
+                content = await FileIO.ReadTextAsync(JsonFile);
+            }
             JsonContent = content.Replace("\t", "  ");
         }
 
@@ -114,17 +126,24 @@ namespace ApiToMD.ViewModels
         /// </summary>
         public async void OnGenerateClickAsync()
         {
-
             var service = new PostmanService();
-            if (JsonFile == null)
+            if (JsonContent == null)
             {
-                dialog.Content = "请先选择文件来源";
+                dialog.Content = "请先选择文件来源并加载文件内容!";
                 var re = dialog.ShowAsync();
             }
             else
             {
-                var content = await service.ToMarkdownAsync(JsonFile);
-                OutputContent = content;
+                // 根据内容判断是Postman还是swaager的文件格式
+                if (JsonContent.Contains("_postman_id"))
+                {
+                    var content =  service.ToMarkdown(JsonContent);
+                    OutputContent = content;
+                }
+                else
+                {
+                    // swagger        
+                }
             }
         }
 

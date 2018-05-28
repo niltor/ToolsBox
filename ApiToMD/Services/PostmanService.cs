@@ -63,5 +63,40 @@ namespace ApiToMD.Services
             }
             return result;
         }
+
+        public string ToMarkdown(string fileContent, string author = "niltor")
+        {
+            var localSettings = ApplicationData.Current.LocalSettings;
+            author = localSettings.Values["Author"] as string;
+            var LocalUrl = localSettings.Values["LocalUrl"] as string;
+            var ActualUrl = localSettings.Values["ActualUrl"] as string;
+            string result = null;
+            try
+            {
+                var model = PostManJson.FromJson(fileContent);
+                var api = new ApiModel
+                {
+                    Name = model.Info.Name,
+                    Email = $"{author}@msdev.cc",
+                    Author = author,
+                    LocalUrl = LocalUrl,
+                    ReplaceUrl = ActualUrl
+                };
+                //设置说明内容
+                api.Introduction = @"";
+                //设置环境变量
+                api.Env = new Dictionary<string, string>
+                {
+                    { "{{header_token}}", "Access-Token" },
+                    { "{{header_uuid}}", "UUID" }
+                };
+                result = api.ToMarkdown(model.Item);
+            }
+            catch (Exception e)
+            {
+                //Console.WriteLine("内容解析出错");
+            }
+            return result;
+        }
     }
 }

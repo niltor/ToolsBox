@@ -161,15 +161,30 @@ namespace ApiToMD.Models
         public string GetNavgation(List<ApiItem> items)
         {
             var result = "<a id='navigation'></a>\r\n# 导航\r\n";
-            foreach (var item in items)
+
+            var navigations = items.GroupBy(i => i.Folder);
+            foreach (var navigation in navigations)
             {
-                if (!string.IsNullOrEmpty(item.Folder))
+                // 分级
+                if (!string.IsNullOrEmpty(navigation.Key))
                 {
-                    result += $"- {item.Folder}\r\n\t";
+                    result += $"- {navigation.Key}\r\n";
                 }
-                var md5 = MD5.Create().ComputeHash(Encoding.UTF8.GetBytes(item.Name));
-                var linkName = BitConverter.ToString(md5).Replace("-", "").ToLower();
-                result += $"- [{item.Name}](#{linkName})\r\n";
+                foreach (var item in navigation)
+                {
+                    var md5 = MD5.Create().ComputeHash(Encoding.UTF8.GetBytes(item.Name));
+                    var linkName = BitConverter.ToString(md5).Replace("-", "").ToLower();
+                    // 子标题缩进
+                    if (!string.IsNullOrEmpty(navigation.Key))
+                    {
+                        result += $"\t- [{item.Name}](#{linkName})\r\n";
+                    }
+                    else
+                    {
+                        result += $"- [{item.Name}](#{linkName})\r\n";
+
+                    }
+                }
             }
             return result;
         }

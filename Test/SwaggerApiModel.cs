@@ -229,7 +229,7 @@ namespace Test
                         if (param.schema?.@ref != null)
                         {
                             var schemaName = param.schema.@ref.Replace("#/definitions/", "");
-                            bodyContent += $"|{param.name}|{param.@default}|[{schemaName}]({param.schema.@ref})|{param.format + param.description}|{param.required}|\r\n";
+                            bodyContent += $"|{param.name}|{param.@default}|[{schemaName}](#{schemaName?.ToLower()})|{param.format + param.description}|{param.required}|\r\n";
                         }
                         else
                         {
@@ -266,7 +266,7 @@ namespace Test
             string content = "";
             foreach (var definition in Definitions)
             {
-                content += $"\r\n<a href='#/definitions/{definition.Key}'>{definition.Key}</a>\r\n";
+                content += $"\r\n<a id='{definition.Key.ToLower()}'>{definition.Key}</a>\r\n";
                 var item = definition.Value;
                 if (item != null)
                 {
@@ -319,7 +319,7 @@ namespace Test
                     schemaName = @ref.Replace("#/definitions/", "");
                 }
                 row += $"- 返回类型(type)：{type}\r\n";
-                row += $"- 返回对象(object):[{schemaName ?? "null"}](@ref)";
+                row += $"- 返回对象(object):[{schemaName ?? "null"}](#{schemaName?.ToLower()})";
 
                 content += row + "\r\n";
             }

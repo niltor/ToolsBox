@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Windows.Input;
 using ApiToMD.Helpers;
@@ -127,7 +128,7 @@ namespace ApiToMD.ViewModels
         public async void OnGenerateClickAsync()
         {
             var service = new PostmanService();
-            if (JsonContent == null)
+            if (string.IsNullOrEmpty(JsonContent))
             {
                 dialog.Content = "请先选择文件来源并加载文件内容!";
                 var re = dialog.ShowAsync();
@@ -137,12 +138,17 @@ namespace ApiToMD.ViewModels
                 // 根据内容判断是Postman还是swaager的文件格式
                 if (JsonContent.Contains("_postman_id"))
                 {
-                    var content =  service.ToMarkdown(JsonContent);
+                    var content = service.ToMarkdown(JsonContent);
                     OutputContent = content;
+                }
+                else if(JsonContent.Contains("\"swagger\":\"2.0\""))
+                {
+                    // swagger        
                 }
                 else
                 {
-                    // swagger        
+                    dialog.Content = "未被别的json文件";
+                    dialog.ShowAsync();
                 }
             }
         }
@@ -152,7 +158,7 @@ namespace ApiToMD.ViewModels
         /// </summary>
         public async void OnSaveContentClickAsync()
         {
-            if (JsonContent == null)
+            if (string.IsNullOrWhiteSpace(OutputContent))
             {
                 dialog.Content = "请先加载json文件";
                 dialog.ShowAsync();
@@ -168,9 +174,13 @@ namespace ApiToMD.ViewModels
             savePicker.FileTypeChoices.Add("markdown file", new List<string>() { ".md", ".markdown" });
 
             var file = await savePicker.PickSaveFileAsync();
-            if (file != null)
+            if (file != null && string.IsNullOrEmpty(OutputContent))
             {
                 await FileIO.WriteTextAsync(file, OutputContent);
+            }
+            else
+            {
+                dialog.Content = "";
             }
         }
     }

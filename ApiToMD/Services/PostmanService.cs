@@ -95,6 +95,9 @@ namespace ApiToMD.Services
             catch (Exception e)
             {
                 //Console.WriteLine("内容解析出错");
+
+                var dialog = new MessageDialog("内容解析出错");
+                dialog.ShowAsync();
             }
             return result;
         }

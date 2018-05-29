@@ -266,7 +266,7 @@ namespace Test
             string content = "";
             foreach (var definition in Definitions)
             {
-                content += $"\r\n<a href='@/definitions/{definition.Key}'>{definition.Key}</a>\r\n";
+                content += $"\r\n<a href='#/definitions/{definition.Key}'>{definition.Key}</a>\r\n";
                 var item = definition.Value;
                 if (item != null)
                 {

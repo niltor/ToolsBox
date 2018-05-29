@@ -75,6 +75,7 @@ namespace Test
                 + GetResponse(item.Response);
 
             }
+            content += GetDefinitions();
             return content;
         }
 
@@ -260,26 +261,36 @@ namespace Test
         /// </summary>
         /// <param name="path"></param>
         /// <returns></returns>
-        private string GetDefinition(string path)
+        private string GetDefinitions()
         {
             string content = "";
-            if (path.Contains("#/definitions/"))
+            foreach (var definition in Definitions)
             {
-                path = path.Replace("#/definitions/", "");
-            }
-            var item = Definitions[path];
-            if (item != null)
-            {
-                // 对象
-                if (item.type == "object")
+                content += $"\r\n<a href='@/definitions/{definition.Key}'>{definition.Key}</a>\r\n";
+                var item = definition.Value;
+                if (item != null)
                 {
-                    foreach (var property in item.properties)
+                    string propertiesContent = "|键|值|\r\n|-|-|\r\n";
+                    // 对象
+                    if (item.type == "object")
                     {
-
+                        foreach (var property in item.properties)
+                        {
+                            // TODO 是否为对象
+                            propertiesContent += $"|{property.Key}|{property.Value.type}|\r\n";
+                        }
                     }
+                    else if (item.type == "integer")
+                    {
+                        foreach (var obj in item.@enum)
+                        {
+                            propertiesContent += $"|{obj.ToString()}|{obj.GetType().ToString()}|\r\n";
+                        }
+                    }
+                    // TODO 是否有继承
+                    content += propertiesContent;
                 }
             }
-
             return content;
         }
 
@@ -294,7 +305,7 @@ namespace Test
             foreach (var response in responses)
             {
                 var row = $"- 状态码(StatusCode):{response.Key}\r\n";
-                row += $"- 返回说明(introcduction):{response.Value.description??"无"}\r\n";
+                row += $"- 返回说明(introcduction):{response.Value.description ?? "无"}\r\n";
                 var type = response.Value.schema?.type;
                 var @ref = response.Value.schema?.@ref;
                 // TODO 循环取
@@ -308,9 +319,9 @@ namespace Test
                     schemaName = @ref.Replace("#/definitions/", "");
                 }
                 row += $"- 返回类型(type)：{type}\r\n";
-                row += $"- 返回对象(object):[{schemaName}](@ref)";
+                row += $"- 返回对象(object):[{schemaName ?? "null"}](@ref)";
 
-                content += row+"\r\n";
+                content += row + "\r\n";
             }
             return content;
         }

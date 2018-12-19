@@ -1,78 +1,44 @@
 using System;
-using System.Collections.Generic;
 using System.IO;
-using Newtonsoft.Json;
+using System.Net;
 
 namespace Test
 {
     class Program
     {
-        static void Main(string[] args)
+        static async System.Threading.Tasks.Task Main(string[] args)
         {
-            var content = File.ReadAllText("file.json");
-            //content = content.Replace("$", "@");
-
-            var setting = new JsonSerializerSettings
-            {
-                //ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
-                PreserveReferencesHandling = PreserveReferencesHandling.Objects,
-                MetadataPropertyHandling = MetadataPropertyHandling.Ignore
-
-            };
-            var swagger = JsonConvert.DeserializeObject<SwaggerDocument>(content, setting);
-
-            var apiModel = new SwaggerApiModel
-            {
-                Author = swagger.info.contact?.name,
-                Email = swagger.info.contact?.email,
-                Introduction = swagger.info.description,
-                Name = swagger.info.title,
-                Definitions = swagger.definitions
-            };
-
-            var items = new List<SwaggerApiItem>();
-            // 枚举有效方法
-            foreach (var path in swagger.paths)
-            {
-                var pathItem = ToDictionary(path.Value);
-                foreach (var item in pathItem)
-                {
-                    if (item.Value is Operation value)
-                    {
-                        var apiItem = new SwaggerApiItem
-                        {
-                            Folder = path.Key,
-                            Method = item.Key,
-                            Description = value.description,
-                            Name = value.summary,
-                            Url = path.Key,
-                            RequestBodyType = value.parameters?[0]?.@in,
-                            Request = value.parameters,
-                            Response = value.responses,
-                            OperationId = value.operationId
-                        };
-
-                        items.Add(apiItem);
-                    }
-                    continue;
-                }
-            }
-            var result=apiModel.GetItemsContent(items);
-            File.WriteAllText("outputl.md", result);
-
-            Console.ReadLine();
+            var timer = new RequestTimer();
+            await timer.RunAsync(0,3000);
+            Console.WriteLine("finish");
+           
         }
 
-        static Dictionary<string, object> ToDictionary(Object obj)
+        static void Download()
         {
-            var result = new Dictionary<string, object>();
-            var fields = obj.GetType().GetFields();
-
-            foreach (var field in fields)
+            var urls = File.ReadAllLines("urls.txt");
+            Console.WriteLine("total:" + urls.Length);
+            int i = 0;
+            using (var wc = new WebClient())
             {
-                result.Add(field.Name, field.GetValue(obj));
+                foreach (var url in urls)
+                {
+                    // 文件名
+                    var fileName = url.Substring(url.LastIndexOf("/") + 1);
+                    // 目录名
+                    var path = url.Replace("https://img.cissdata.com/", "");
+                    path = path.Substring(0, path.LastIndexOf("/"));
+                    path = path.Replace("/", "\\");
+                    Console.WriteLine(fileName);
+                    Console.WriteLine(path);
+                    if (!Directory.Exists(path))
+                    {
+                        Directory.CreateDirectory(path);
+                    }
+                    wc.DownloadFile(url, Path.Combine(path, fileName));
+                    Console.WriteLine("done:" + ++i);
+                }
             }
-            return result;
         }
 
     }

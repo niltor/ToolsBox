@@ -15,7 +15,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MetaWeblog", "MetaWeblog\Me
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SyncToCnBlog", "SyncToCnBlog\SyncToCnBlog.csproj", "{BC22E23F-C3FF-42FA-AA33-4264219E3C43}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PostmanCollectionToPythonRequests", "PostmanCollectionToPythonRequests\PostmanCollectionToPythonRequests.csproj", "{2DD26D04-069D-43DE-BAA3-F67503D2A72F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PostmanCollectionToPythonRequests", "PostmanCollectionToPythonRequests\PostmanCollectionToPythonRequests.csproj", "{2DD26D04-069D-43DE-BAA3-F67503D2A72F}"
+EndProject
+Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "python", "python\python.pyproj", "{FDFA2533-0EFE-4B26-BF64-AB1CB2A9B7EB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -147,6 +149,14 @@ Global
 		{2DD26D04-069D-43DE-BAA3-F67503D2A72F}.Release|x64.Build.0 = Release|Any CPU
 		{2DD26D04-069D-43DE-BAA3-F67503D2A72F}.Release|x86.ActiveCfg = Release|Any CPU
 		{2DD26D04-069D-43DE-BAA3-F67503D2A72F}.Release|x86.Build.0 = Release|Any CPU
+		{FDFA2533-0EFE-4B26-BF64-AB1CB2A9B7EB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FDFA2533-0EFE-4B26-BF64-AB1CB2A9B7EB}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{FDFA2533-0EFE-4B26-BF64-AB1CB2A9B7EB}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{FDFA2533-0EFE-4B26-BF64-AB1CB2A9B7EB}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{FDFA2533-0EFE-4B26-BF64-AB1CB2A9B7EB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FDFA2533-0EFE-4B26-BF64-AB1CB2A9B7EB}.Release|ARM.ActiveCfg = Release|Any CPU
+		{FDFA2533-0EFE-4B26-BF64-AB1CB2A9B7EB}.Release|x64.ActiveCfg = Release|Any CPU
+		{FDFA2533-0EFE-4B26-BF64-AB1CB2A9B7EB}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

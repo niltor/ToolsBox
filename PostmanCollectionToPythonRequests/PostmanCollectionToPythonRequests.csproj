@@ -6,7 +6,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="jsons\" />
     <Folder Include="python\ServiceTests\" />
   </ItemGroup>
 

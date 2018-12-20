@@ -1,4 +1,10 @@
 {
     "python.pythonPath": "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\Python37_64\\python.exe",
-    "python.linting.pylintEnabled": true
+    "python.linting.pylintEnabled": true,
+    "python.autoComplete.extraPaths": [
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\Python37_64\\Lib\\site-packages",
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\Python37_64\\DLLs",
+        "C:\\Users\\zpty\\Source\\Repos\\ToolsBox\\PostmanCollectionToPythonRequests\\python\\RequestSercies",
+        "${workspaceRoot}"
+    ]
 }

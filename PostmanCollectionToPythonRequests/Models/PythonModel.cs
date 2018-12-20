@@ -25,9 +25,13 @@ namespace PostmanCollectionToPythonRequests.Models
         /// 说明
         /// </summary>
         public string Introduction { get; set; }
-        public List<ApiItem> Items { get; set; } = new List<ApiItem>();
+        public List<PythonItem> Items { get; set; } = new List<PythonItem>();
 
         public Dictionary<string, string> Env { get; set; }
+        /// <summary>
+        /// 代码片段
+        /// </summary>
+        public string CodeBlock { get; set; }
 
         public PythonModel()
         {
@@ -51,43 +55,43 @@ namespace PostmanCollectionToPythonRequests.Models
                     {
                         item.Name = folder + "-" + item.Name;
                     }
-                    content += BuildClassContent(item.Children, item.Name);
+                    content += BuildClassContent(item.Children, item.Request.Url.Path?.Last() ?? "");
                 }
                 else
                 {
-                    var apiItem = new ApiItem
+                    var pythonItem = new PythonItem
                     {
                         Folder = folder,
-                        Name = item.Name,
+                        Name = item.Request.Url.Path?.Last() ?? "",
                         Description = item.Request.Description,
                         Header = item.Request.Header,
                         Method = item.Request.Method,
                         Query = item.Request.Url.Query,
                         RequestBodyType = item.Request.Body?.Mode,
                         ResponseJson = item.Response?.FirstOrDefault()?.Body,
-                        Url = item.Request.Url.Raw
+                        Url = item.Request.Url.Raw,
+                        Path = string.Join('/', item.Request?.Url?.Path)
                     };
 
+                    bool isJson = false;
                     //不同请求类型
-                    switch (apiItem.RequestBodyType)
+                    switch (pythonItem.RequestBodyType)
                     {
                         case "formdata":
-                            apiItem.Params = item.Request.Body.Formdata;
+                            pythonItem.Params = item.Request.Body.Formdata;
                             break;
                         case "raw":
-                            apiItem.RequestRaw = item.Request.Body.Raw;
+                            pythonItem.RequestRaw = item.Request.Body.Raw;
+                            isJson = true;
                             break;
                         default:
-                            apiItem.Params = item.Request.Body.Urlencoded;
+                            pythonItem.Params = item.Request.Body.Urlencoded;
                             break;
                     }
 
-                    Items.Add(apiItem);
-                    content += GetItemTitle(apiItem.Name)
-                    + GetRequestLine(apiItem.Method, apiItem.Url) + GetDescription(apiItem.Description, apiItem.Name)
-                    + GetHeader(apiItem.Header) + GetQuery(apiItem.Query)
-                    + GetParams(apiItem.Params) + GetRequestRaw(apiItem.RequestRaw)
-                    + GetResponseJson(apiItem.ResponseJson);
+                    Items.Add(pythonItem);
+                    content += GetFunction(pythonItem.Name, pythonItem.Path, pythonItem.Method, isJson);
+                    CodeBlock += GetRequestContent(pythonItem.Name, pythonItem.Query, pythonItem.Params, pythonItem.RequestRaw);
                 }
 
             }
@@ -99,15 +103,23 @@ namespace PostmanCollectionToPythonRequests.Models
         /// </summary>
         /// <param name="path"></param>
         /// <param name="items"></param>
-        public void GenerateClassFile(string path, List<Item> items)
+        public void GenerateClassFile(string path, string name, string content)
         {
             // 获取接口内容
-            var content = "";
-
+            content = GetImport() + GetServiceClass(name) + content;
             // 生成公共内容及导航
-            content = GetTitle(Name) + GetInfo("Author:" + Author) + GetInfo("Email:" + Email) + Introduction + Common
-                + GetNavgation(Items) + content;
+            var file = new FileInfo(path);
+            using (var writer = file.CreateText())
+            {
+                writer.Write(content);
+            }
+        }
 
+        public void GenerateTestFile(string path, string name, string content)
+        {
+            // 获取接口内容
+            content = GetCodeBlock(name, content);
+            // 生成公共内容及导航
             var file = new FileInfo(path);
             using (var writer = file.CreateText())
             {
@@ -116,141 +128,107 @@ namespace PostmanCollectionToPythonRequests.Models
         }
 
         #region text block 
-        private string GetQuery(List<Query> query)
+        public string GetImport()
         {
-            if (query == null)
-                return "";
-            var result = "#### 请求query参数\r\n|键|值|类型|说明|\r\n|-|-|-|-|\r\n";
-            foreach (var item in query)
-            {
-                var row = $"|{item.Key}|{item.Value}|{item.Value?.GetType().ToString()}|{item.Description}|\r\n";
-                result += row;
-            }
-            return result;
+            return "from Service import Service";
+        }
 
+        public string GetServiceClass(string name)
+        {
+            return $@"
+class {name}Service(Service):
+    def __init__(self, url=None, cookie=None, timeout=None):
+        super().__init__(url, cookie, timeout)";
         }
         /// <summary>
-        /// 获取接口描述内容
+        /// 获取函数代码
         /// </summary>
-        /// <param name="description"></param>
         /// <param name="name"></param>
+        /// <param name="url"></param>
+        /// <param name="method"></param>
+        /// <param name="isJson"></param>
         /// <returns></returns>
-        private string GetDescription(string description, string name)
+        public string GetFunction(string name, string url, string method, bool isJson = false)
         {
-            if (name != description)
+            if (method.ToLower().Equals("get"))
             {
-                return $"\r\n说明：**{description}**\r\n";
+                return $@"
+    def {name}(self, data=None, query=None):
+        url = '{url}'
+        if query:
+            for (key, value) in query:
+                url = url+key+'='+value+'&'
+        return super().get(url)
+";
             }
-            return string.Empty;
+            else if (isJson)
+            {
+
+                return $@"
+    def {name}(self, data, query=None):
+        url = '{url}'
+        if query:
+            for (key, value) in query:
+                url = url+key+'='+value+'&'
+        return super().post(url, data=None, json=data)
+";
+            }
+            else
+            {
+                return $@"
+    def {name}(self, data, query=None):
+        url = '{url}'
+        if query:
+            for (key, value) in query:
+                url = url+key+'='+value+'&'
+        return super().post(url, data=data, json=None)
+";
+            }
         }
+
         /// <summary>
-        /// 获取构造的导航
+        /// 获取请求代码
         /// </summary>
-        /// <param name="items"></param>
         /// <returns></returns>
-        public string GetNavgation(List<ApiItem> items)
+        public string GetRequestContent(string name, List<Query> query, List<Params> param, string raw = "")
         {
-            var result = "<a id='navigation'></a>\r\n# 导航\r\n";
-            foreach (var item in items)
-            {
-                if (!string.IsNullOrEmpty(item.Folder))
-                {
-                    result += $"- {item.Folder}\r\n\t";
-                }
-                var md5 = MD5.Create().ComputeHash(Encoding.UTF8.GetBytes(item.Name));
-                var linkName = BitConverter.ToString(md5).Replace("-", "").ToLower();
-                result += $"- [{item.Name}](#{linkName})\r\n";
-            }
-            return result;
-        }
-        public string GetTitle(string title)
-        {
-            return $"# {title}\r\n";
-        }
-        public string GetInfo(string info)
-        {
-            return $"**{info}**  \r\n";
-        }
-        public string GetItemTitle(string title)
-        {
-            var md5 = MD5.Create().ComputeHash(Encoding.UTF8.GetBytes(title));
-            var linkName = BitConverter.ToString(md5).Replace("-", "").ToLower();
-            return $"\r\n---\r\n<a id='{linkName}'></a>\r\n### {title}\r\n[返回导航](#navigation)  \r\n";
-        }
-        public string GetRequestLine(string method, string url)
-        {
-            return $"**[{method}]** `{url}`\r\n";
 
-        }
-        /// <summary>
-        /// 设置header内容
-        /// </summary>
-        /// <param name="headers"></param>
-        /// <returns></returns>
-        public string GetHeader(List<Header> headers)
-        {
-            var result = "";
-            if (headers.Count > 0)
+            var block = "\r\n\tquery = {";
+            if (query != null)
             {
-                result = "#### Header\r\n|键|值|类型|说明|\r\n|-|-|-|-|\r\n";
-                foreach (var item in headers)
+                foreach (var item in query)
                 {
-                    if (Env.TryGetValue(item.Key, out string key))
-                    {
-                        item.Key = key;
-                    }
-                    var row = $"|{item.Key}|{item.Value}|{item.Type}|{item.Key}|\r\n";
-                    result += row;
+                    block += $@"""{item.Key}"":"""", ";
                 }
             }
-
-            return result;
-        }
-        public string GetParams(List<Params> @params)
-        {
-            if (@params == null)
-                return "";
-            var result = "#### 请求body参数 \r\n|键|值|类型|说明|\r\n|-|-|-|-|\r\n";
-            foreach (var item in @params)
+            block += "}";
+            block += "\r\n\tdata = {";
+            if (param != null)
             {
-                var row = $"|{item.Key}|{item.Value}|{item.Value?.GetType().ToString()}|{item.Description}|\r\n";
-                result += row;
-            }
-            return result;
-        }
-        public string GetResponseJson(string json)
-        {
-            var result = "#### 返回字符串\r\n";
-            result += "```json\r\n";
-            if (!string.IsNullOrEmpty(json))
-            {
-                var obj = JsonConvert.DeserializeObject(json);
-                result += JsonConvert.SerializeObject(obj, Formatting.Indented);
-            }
-            result += "\r\n```\r\n";
-
-            return result;
-        }
-        public string GetRequestRaw(string json)
-        {
-            var result = "";
-            if (!string.IsNullOrWhiteSpace(json))
-            {
-                result = "#### 请求Raw\r\n";
-                result += "```json\r\n";
-                if (!string.IsNullOrEmpty(json))
+                foreach (var item in param)
                 {
-                    var obj = JsonConvert.DeserializeObject(json);
-                    result += JsonConvert.SerializeObject(obj, Formatting.Indented);
+                    block += $@"""{item.Key}"":"""", ";
                 }
-                result += "\r\n```\r\n";
             }
-            return result;
+            block += "}";
+            block = block + "\r\n\tservice." + name + "(data,query)\r\n";
+            return block;
+        }
+
+        public string GetCodeBlock(string className, string content)
+        {
+            className = className + "Service";
+            return $@"from RequestServices.{className} import {className}
+
+
+def run():
+    test = {className}(url='', cookie={{}}, timeout=5)
+" + content;
         }
         #endregion
 
     }
-    public class ApiItem
+    public class PythonItem
     {
         /// <summary>
         /// 文件目录
@@ -269,7 +247,10 @@ namespace PostmanCollectionToPythonRequests.Models
         /// 请求头
         /// </summary>
         public List<Header> Header { get; set; }
-
+        /// <summary>
+        /// 相对路径
+        /// </summary>
+        public string Path { get; set; }
         /// <summary>
         /// 请求参数
         /// </summary>

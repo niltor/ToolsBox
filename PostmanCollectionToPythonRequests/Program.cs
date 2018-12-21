@@ -10,7 +10,8 @@ namespace PostmanCollectionToPythonRequests
     {
         static void Main(string[] args)
         {
-            Run(@"C:\Users\zpty\Source\Repos\ToolsBox\PostmanCollectionToPythonRequests\jsons\test.json");
+
+            Console.WriteLine("请将json文件放置到jsons文件中");
             var files = Directory.GetFiles("./jsons");
             foreach (var file in files)
             {
@@ -21,35 +22,29 @@ namespace PostmanCollectionToPythonRequests
 
         }
 
-
+       
         static void Run(string filePath)
         {
             var jsonFile = new FileInfo(filePath);
             var fileContent = jsonFile.OpenText().ReadToEnd();
-            try
-            {
-                var model = PostManJson.FromJson(fileContent);
-                var api = new PythonModel
-                {
-                    Name = model.Info.Name,
-                };
-                var firstItem = model.Item.FirstOrDefault();
-                var path = firstItem?.Request?.Url?.Path;
-                if (path?.Count > 0)
-                {
-                    api.Name = path.FirstOrDefault();
-                    api.Name = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(api.Name.ToLower());
-                }
 
-                string content = api.BuildClassContent(model.Item);
-                api.GenerateClassFile(Path.Combine("python","RequestServices",api.Name + "Service.py"), api.Name, content);
-                api.GenerateTestFile(Path.Combine("python","ServiceTests",api.Name + "Test.py"), api.Name, content);
-
-            }
-            catch (Exception e)
+            var model = PostManJson.FromJson(fileContent);
+            var api = new PythonModel
             {
-                throw;
+                Name = model.Info.Name,
+            };
+            var firstItem = model.Item.FirstOrDefault();
+            var path = firstItem?.Request?.Url?.Path;
+            if (path?.Count > 0)
+            {
+                api.Name = path.FirstOrDefault();
+                api.Name = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(api.Name.ToLower());
             }
+
+            string content = api.BuildClassContent(model.Item);
+            api.GenerateClassFile(Path.Combine("python", "RequestServices", api.Name + "Service.py"), api.Name, content);
+            api.GenerateTestFile(Path.Combine("python", "ServiceTests", api.Name + "Test.py"), api.Name);
+
         }
 
 

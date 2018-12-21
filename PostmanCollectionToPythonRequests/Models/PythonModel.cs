@@ -109,18 +109,20 @@ namespace PostmanCollectionToPythonRequests.Models
             content = GetImport() + GetServiceClass(name) + content;
             // 生成公共内容及导航
             var file = new FileInfo(path);
+            if (!file.Exists) Directory.CreateDirectory(file.Directory.FullName);
             using (var writer = file.CreateText())
             {
                 writer.Write(content);
             }
         }
 
-        public void GenerateTestFile(string path, string name, string content)
+        public void GenerateTestFile(string path, string name)
         {
             // 获取接口内容
-            content = GetCodeBlock(name, content);
+            var content = GetCodeBlock(name, CodeBlock);
             // 生成公共内容及导航
             var file = new FileInfo(path);
+            if (!file.Exists) Directory.CreateDirectory(file.Directory.FullName);
             using (var writer = file.CreateText())
             {
                 writer.Write(content);

@@ -1,6 +1,7 @@
 import requests
 import json
-
+import time
+import codecs
 
 class Service(object):
     baseApiUrl = 'http://localhost/api/'
@@ -16,7 +17,8 @@ class Service(object):
             self.timeout = timeout
 
     def post(self, url, data=None, json=None):
-        url = self.baseApiUrl+url
+        startTime = time.time()
+        url = self.baseApiUrl + url
         header = {'Content-Type': 'application/json'}
         if (data != None):
             r = requests.post(url, headers=header, data=data, cookie=self.cookie,
@@ -24,9 +26,18 @@ class Service(object):
         if (json != None):
             r = requests.post(url, cookies=self.cookie,
                               headers=header, json=json, timeout=self.timeout)
+
+        print('接口:[' + url + ']耗时:' + '[{:.2f}]'.format(time.time() - startTime) + '秒')
         return r.text
 
     def get(self, url):
-        url = self.baseApiUrl+url
+        startTime = time.time()
+        url = self.baseApiUrl + url
         r = requests.get(url, cookies=self.cookie, timeout=self.timeout)
+        print('接口:[' + url + ']耗时:' + '[{:.2f}]'.format(time.time() - startTime) + '秒')
         return r.text
+
+
+    def log(self,content):
+        with codecs.open('./log.txt','a','utf-8') as f:
+            f.write(content + '\r\n')

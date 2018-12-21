@@ -156,9 +156,9 @@ class {name}Service(Service):
             {
                 return $@"
     def {name}(self, data=None, query=None):
-        url = '{url}'
+        url = '{url}?'
         if query:
-            for (key, value) in query:
+            for key, value in query.items():
                 url = url+key+'='+value+'&'
         return super().get(url)
 ";
@@ -170,7 +170,7 @@ class {name}Service(Service):
     def {name}(self, data, query=None):
         url = '{url}'
         if query:
-            for (key, value) in query:
+            for key, value in query.items():
                 url = url+key+'='+value+'&'
         return super().post(url, data=None, json=data)
 ";
@@ -181,7 +181,7 @@ class {name}Service(Service):
     def {name}(self, data, query=None):
         url = '{url}'
         if query:
-            for (key, value) in query:
+            for key, value in query.items():
                 url = url+key+'='+value+'&'
         return super().post(url, data=data, json=None)
 ";

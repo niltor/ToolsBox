@@ -34,12 +34,16 @@ namespace PostmanCollectionToPythonRequests
             {
                 Name = model.Info.Name,
             };
-            var firstItem = model.Item.FirstOrDefault();
-            var path = firstItem?.Request?.Url?.Path;
-            if (path?.Count > 0)
+
+            if (IsChs(api.Name))
             {
-                api.Name = path.FirstOrDefault();
-                api.Name = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(api.Name.ToLower());
+                var firstItem = model.Item.Skip(1).Take(1).FirstOrDefault();
+                var path = firstItem?.Request?.Url?.Path;
+                if (path?.Count > 0)
+                {
+                    api.Name = path.FirstOrDefault();
+                    api.Name = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(api.Name.ToLower());
+                }
             }
 
             string content = api.BuildClassContent(model.Item);
@@ -49,6 +53,16 @@ namespace PostmanCollectionToPythonRequests
             Console.WriteLine("生成代码成功:" + api.Name);
         }
 
+        static bool IsChs(string text)
+        {
+            var result = false;
+            char[] c = text.ToCharArray();
+            for (int i = 0; i < c.Length; i++)
+                if (c[i] >= 0x4e00 && c[i] <= 0x9fbb)
+                    return true;
+
+            return result;
+        }
 
     }
 }

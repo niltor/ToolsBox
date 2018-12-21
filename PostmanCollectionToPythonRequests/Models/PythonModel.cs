@@ -132,7 +132,7 @@ namespace PostmanCollectionToPythonRequests.Models
         #region text block 
         public string GetImport()
         {
-            return "from Service import Service";
+            return "from .Service import Service";
         }
 
         public string GetServiceClass(string name)
@@ -195,7 +195,7 @@ class {name}Service(Service):
         public string GetRequestContent(string name, List<Query> query, List<Params> param, string raw = "")
         {
 
-            var block = "\r\n\tquery = {";
+            var block = "\r\n    query = {";
             if (query != null)
             {
                 foreach (var item in query)
@@ -204,7 +204,7 @@ class {name}Service(Service):
                 }
             }
             block += "}";
-            block += "\r\n\tdata = {";
+            block += "\r\n    data = {";
             if (param != null)
             {
                 foreach (var item in param)
@@ -213,7 +213,7 @@ class {name}Service(Service):
                 }
             }
             block += "}";
-            block = block + "\r\n\tservice." + name + "(data,query)\r\n";
+            block = block + "\r\n    service." + name + "(data,query)\r\n";
             return block;
         }
 
@@ -224,7 +224,7 @@ class {name}Service(Service):
 
 
 def run():
-    test = {className}(url='', cookie={{}}, timeout=5)
+    service = {className}(url=None, cookie={{}}, timeout=5)
 " + content;
         }
         #endregion

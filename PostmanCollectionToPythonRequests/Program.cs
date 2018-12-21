@@ -11,18 +11,19 @@ namespace PostmanCollectionToPythonRequests
         static void Main(string[] args)
         {
 
-            Console.WriteLine("请将json文件放置到jsons文件中");
+
             var files = Directory.GetFiles("./jsons");
             foreach (var file in files)
             {
                 Run(file);
             }
 
+            Console.WriteLine("全部执行结束，按回车键退出");
             Console.ReadLine();
 
         }
 
-       
+
         static void Run(string filePath)
         {
             var jsonFile = new FileInfo(filePath);
@@ -45,6 +46,7 @@ namespace PostmanCollectionToPythonRequests
             api.GenerateClassFile(Path.Combine("python", "RequestServices", api.Name + "Service.py"), api.Name, content);
             api.GenerateTestFile(Path.Combine("python", "ServiceTests", api.Name + "Test.py"), api.Name);
 
+            Console.WriteLine("生成代码成功:" + api.Name);
         }
 
 

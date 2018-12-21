@@ -9,11 +9,11 @@ class Service(object):
     timeout = 5
 
     def __init__(self, url=None, cookie=None, timeout=None):
-        if url != None:
+        if url:
             self.baseApiUrl = url
-        if cookie != None:
+        if cookie:
             self.cookie = cookie
-        if timeout != None:
+        if timeout:
             self.timeout = timeout
 
     def post(self, url, data=None, json=None):
@@ -27,14 +27,14 @@ class Service(object):
             r = requests.post(url, cookies=self.cookie,
                               headers=header, json=json, timeout=self.timeout)
 
-        print('接口:[' + url + ']耗时:' + '[{:.2f}]'.format(time.time() - startTime) + '秒')
+        log('接口:[' + url + ']耗时:' + '[{:.2f}]'.format(time.time() - startTime) + '秒')
         return r.text
 
     def get(self, url):
         startTime = time.time()
         url = self.baseApiUrl + url
         r = requests.get(url, cookies=self.cookie, timeout=self.timeout)
-        print('接口:[' + url + ']耗时:' + '[{:.2f}]'.format(time.time() - startTime) + '秒')
+        log('接口:[' + url + ']耗时:' + '[{:.2f}]'.format(time.time() - startTime) + '秒')
         return r.text
 
 

@@ -1,0 +1,79 @@
+﻿<Window x:Class="ImageHelper.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ImageHelper"
+        mc:Ignorable="d"
+        Title="图片处理助手"
+        Height="722"
+        Width="1068">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="237*" />
+            <ColumnDefinition Width="419*" />
+            <ColumnDefinition Width="412*" />
+        </Grid.ColumnDefinitions>
+        <Grid Grid.Column="0">
+            <Border BorderThickness="1"
+                    BorderBrush="#90000000"></Border>
+            <StackPanel>
+                <StackPanel Margin="0,10,0,20" />
+                <StackPanel Orientation="Horizontal"
+                            Margin="5,10,5,10">
+                    <TextBlock  Text="清晰度"
+                                TextWrapping="Wrap"
+                                Margin="0,0,10,0" />
+                    <TextBox x:Name="SharpnessText"
+                             Text="90"
+                             Width="50"
+                             PreviewTextInput="Sharpness_PreviewTextInput" />
+                </StackPanel>
+                <StackPanel Height="Auto"
+                            Width="Auto"
+                            Orientation="Horizontal"
+                            HorizontalAlignment="Center"
+                            Margin="5,10,5,10">
+                    <StackPanel.Resources>
+                        <Style TargetType="{x:Type Button}">
+                            <Setter Property="Margin"
+                                    Value="5,0,5,0" />
+                        </Style>
+                    </StackPanel.Resources>
+                    <Button x:Name="SelectSourceImageBtn"
+                            Content="选择源图"
+                            Click="SelectSourceImageBtn_Click" />
+                    <Button x:Name="HandleImageBtn"
+                            Content="处理图片"
+                            Click="HandleImageBtn_Click" />
+                    <Button x:Name="SaveImageBtn"
+                            Content="保存"
+                            Click="SaveImageBtn_Click" />
+                </StackPanel>
+            </StackPanel>
+        </Grid>
+        <Grid Grid.Column="1">
+            <Border BorderThickness="1"
+                    BorderBrush="#90000000"></Border>
+            <TextBlock  HorizontalAlignment="Left"
+                        Margin="10,10,0,0"
+                        Text="源图"
+                        TextWrapping="Wrap"
+                        VerticalAlignment="Top" />
+            <Image x:Name="SourceImage"
+                   Margin="10,40,10,110" />
+        </Grid>
+        <Grid Grid.Column="2">
+            <Border BorderThickness="1"
+                    BorderBrush="#90000000"></Border>
+            <Image x:Name="OutputImage"
+                   Margin="10,40,10,110"
+                   />
+            <TextBlock  HorizontalAlignment="Left"
+                        Margin="10,10,0,0"
+                        Text="处理后"
+                        TextWrapping="Wrap"
+                        VerticalAlignment="Top" />
+        </Grid>
+    </Grid>
+</Window>

@@ -57,10 +57,11 @@ namespace 授权码生成工具
         string GenerateShortCode(string user, string days)
         {
             var bytes = Encoding.UTF8.GetBytes(days);
-            var md5 = ToMD5(user + DateTime.Now.Millisecond);
+            var prefix = ToMD5(user);
+            var suffix = ToMD5(DateTime.Now.Millisecond.ToString());
 
             var str = string.Join("", bytes.Select(r => r.ToString("X2")).ToArray());
-            var result = str + "-" + md5.Substring(md5.Length-10) ;
+            var result = str + "-" + prefix.Substring(0, 6) + suffix.Substring(0, 4);
             return result;
         }
 

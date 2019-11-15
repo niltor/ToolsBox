@@ -56,7 +56,7 @@ namespace 授权码生成工具
 
         string GenerateShortCode(string user, string days)
         {
-            var bytes = Encoding.UTF8.GetBytes(days);
+            var bytes = Encoding.ASCII.GetBytes(days);
             var prefix = ToMD5(user);
             var suffix = ToMD5(DateTime.Now.Millisecond.ToString());
 

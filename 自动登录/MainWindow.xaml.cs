@@ -1,20 +1,19 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
 using System.Net.Http;
 using System.Net.NetworkInformation;
-using System.Text.Json;
-using System.Threading;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Media;
 
-namespace AutoLogin
+namespace 自动登录
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// MainWindow.xaml 的交互逻辑
     /// </summary>
     public partial class MainWindow : Window
     {
@@ -74,7 +73,7 @@ namespace AutoLogin
                 if (response.IsSuccessStatusCode)
                 {
                     var responseString = await response.Content.ReadAsStringAsync();
-                    var json = JsonSerializer.Deserialize<LoginResponseModel>(responseString);
+                    var json = JsonConvert.DeserializeObject<LoginResponseModel>(responseString);
                     if (json.status == "0")
                     {
                         MessageBox.Show(json.msg);
@@ -87,11 +86,12 @@ namespace AutoLogin
                         configuration.AppSettings.Settings["password"].Value = password;
                         configuration.Save(ConfigurationSaveMode.Modified);
                         ConfigurationManager.RefreshSection(configuration.AppSettings.SectionInformation.Name);
+                        LoginBtn.Foreground = new SolidColorBrush(Colors.Black);
                         LoginBtn.Content = "登录成功，程序将自动退出";
 
                         var dispatcherTimer = new System.Windows.Threading.DispatcherTimer();
                         dispatcherTimer.Tick += new EventHandler(Exit);
-                        dispatcherTimer.Interval = new TimeSpan(0, 0, 2, 500);
+                        dispatcherTimer.Interval = TimeSpan.FromMilliseconds(2500);
                         dispatcherTimer.Start();
                     }
                 }
@@ -124,13 +124,29 @@ namespace AutoLogin
                    IPProperties = _.GetIPProperties(),
                }).FirstOrDefault();
 
-            var ua = query.IPProperties.UnicastAddresses.Where(ua => ua.IsDnsEligible == true).FirstOrDefault();
+            var ua = query.IPProperties.UnicastAddresses.Where(_ => _.IsDnsEligible == true).FirstOrDefault();
             IpAddress = ua.Address.ToString();
             MacAddress = string.Join(":", query.PhysicalAddress.GetAddressBytes().Select(b => b.ToString("x2")));
             Info.Text = "IP:" + IpAddress + "\nMac:" + MacAddress;
 
         }
- 
 
+        private void ExitBtn_Click(object sender, RoutedEventArgs e)
+        {
+            Application.Current.Shutdown();
+        }
+
+        private void StackPanel_MouseMove(object sender, System.Windows.Input.MouseEventArgs e)
+        {
+            try
+            {
+                if (e.LeftButton == MouseButtonState.Pressed)
+                {
+                    this.DragMove();
+                }
+            }
+            catch { }
+        }
     }
+
 }

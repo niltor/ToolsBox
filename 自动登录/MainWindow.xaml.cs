@@ -53,6 +53,7 @@ namespace 自动登录
 
         private async void LoginBtn_Click(object sender, RoutedEventArgs e)
         {
+            if (!GetLocalInfo()) return;
             var username = UsernameBox.Text;
             var password = PasswordBox.Password;
             if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password))
@@ -110,7 +111,7 @@ namespace 自动登录
         /// <summary>
         /// 获取本地ip及mac信息
         /// </summary>
-        public void GetLocalInfo()
+        public bool GetLocalInfo()
         {
             var query = NetworkInterface.GetAllNetworkInterfaces()
                .Where(n =>
@@ -124,11 +125,19 @@ namespace 自动登录
                    IPProperties = _.GetIPProperties(),
                }).FirstOrDefault();
 
-            var ua = query.IPProperties.UnicastAddresses.Where(_ => _.IsDnsEligible == true).FirstOrDefault();
-            IpAddress = ua.Address.ToString();
-            MacAddress = string.Join(":", query.PhysicalAddress.GetAddressBytes().Select(b => b.ToString("x2")));
-            Info.Text = "IP:" + IpAddress + "\nMac:" + MacAddress;
-
+            if (query == null)
+            {
+                MessageBox.Show("没有有效的网络连接，请检查您的网络连接！");
+                return false;
+            }
+            else
+            {
+                var ua = query.IPProperties.UnicastAddresses.Where(_ => _.IsDnsEligible == true).FirstOrDefault();
+                IpAddress = ua.Address.ToString();
+                MacAddress = string.Join(":", query.PhysicalAddress.GetAddressBytes().Select(b => b.ToString("x2")));
+                Info.Text = "IP:" + IpAddress + "\nMac:" + MacAddress;
+                return true;
+            }
         }
 
         private void ExitBtn_Click(object sender, RoutedEventArgs e)

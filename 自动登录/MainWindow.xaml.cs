@@ -117,7 +117,7 @@ namespace 自动登录
                .Where(n =>
                    n.OperationalStatus == OperationalStatus.Up &&
                    n.NetworkInterfaceType != NetworkInterfaceType.Loopback &&
-                   n.GetIPProperties().DnsAddresses.Any(da => da.ToString() == "10.0.9.1")
+                   n.GetIPProperties().DhcpServerAddresses.Any(dhcp => dhcp.ToString() == "10.0.9.1")
                    )
                .Select(_ => new
                {

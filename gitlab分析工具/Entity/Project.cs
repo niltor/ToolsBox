@@ -8,5 +8,7 @@ namespace gitlab分析工具.Entity
     {
         public int ProjectId { get; set; }
         public string Name { get; set; }
+
+        public ICollection<CommitsTask> CommitsTasks { get; set; }
     }
 }

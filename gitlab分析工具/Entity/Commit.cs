@@ -4,7 +4,7 @@ using System.Text;
 
 namespace gitlab分析工具.Entity
 {
-    public class Commit :DBBase
+    public class Commit : DBBase
     {
         /// <summary>
         /// 姓名

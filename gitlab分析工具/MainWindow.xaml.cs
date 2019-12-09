@@ -1,5 +1,6 @@
 ﻿using CsvHelper;
 using gitlab分析工具.Models;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
@@ -18,8 +19,7 @@ namespace gitlab分析工具
     /// </summary>
     public partial class MainWindow : Window
     {
-        string projectUrl = "/api/v4/projects";
-        string commitUrl = "/api/v4/projects/:id/repository/commits?all=true&with_stats=true";
+
         HttpClient hc = new HttpClient();
         List<Entity.Commit> userCommit = new List<Entity.Commit>();
 
@@ -42,111 +42,48 @@ namespace gitlab分析工具
                 return;
             }
             GetDataBtn.IsEnabled = false;
+            var service = new GLService(ServerUrl.Text, PAT.Text);
             // 获取项目
-            var projects = await GetProjectsAsync();
-            projects = projects.OrderBy(p => p.id).ToList();
-
-            // 获取提交
-            foreach (var project in projects)
+            AppendMessage("开始获取项目信息");
+            var projects = await service.GetProjectsAsync();
+            if (projects.Count > 0)
             {
-                var commit = await GetCommits(project);
-                // 处理数据格式
-                if (commit != null)
+                AppendMessage(projects.Count + "个新项目");
+            }
+            AppendMessage("开始构建任务");
+            var count = await service.BuildTask();
+            if (count > 0)
+            {
+                AppendMessage(count + "个任务构建完成");
+            }
+            AppendMessage("开始执行任务");
+            using (var ctx = new LocalContext())
+            {
+                var tasks = ctx.CommitsTasks.Where(ct => ct.Status == Entity.Status.Default)
+                    .Include(ct => ct.Project)
+                    .ToList();
+                foreach (var task in tasks)
                 {
-                    var currentCommit = commit.Select(s => new Entity.Commit
+                    AppendMessage("执行任务" + task.Id + $"=>{task.Project.Name}:[{task.Page}]");
+                    // 获取提交
+                    var commits = await service.GetCommits(task);
+                    if (commits != null)
                     {
-                        Additions = s.stats.additions,
-                        CreatedTime = s.created_at,
-                        Deletions = s.stats.deletions,
-                        ProjectName = project.name,
-                        Total = s.stats.total,
-                        UserName = s.committer_name,
-
-                    }).ToList();
-                    userCommit.AddRange(currentCommit);
-                    RunMessageTB.Text += "项目" + project.name + "[" + project.id + "] => 共 " + userCommit.Count + "\r\n";
-                    RunMessageTB.ScrollToEnd();
+                        ctx.AddRange(commits);
+                        task.Status = Entity.Status.InValid;
+                        await ctx.SaveChangesAsync();
+                        AppendMessage("任务:" + task.Id + "执行完成");
+                    }
+                    else
+                    {
+                        AppendMessage("任务:" + task.Id + "执行失败");
+                    }
                 }
             }
             RunMessageTB.Text += "已全部采集完成\r\n";
             RunMessageTB.ScrollToEnd();
-
             GetDataBtn.IsEnabled = true;
             SaveToCsvBtn.IsEnabled = true;
-        }
-
-
-        /// <summary>
-        /// 获取项目信息
-        /// </summary>
-        /// <returns></returns>
-        public async Task<List<Project>> GetProjectsAsync()
-        {
-            var url = ServerUrl.Text + projectUrl + "?per_page=100";
-            hc.DefaultRequestHeaders.TryAddWithoutValidation("PRIVATE-TOKEN", PAT.Text);
-            hc.Timeout = TimeSpan.FromSeconds(5);
-            var response = await hc.GetStringAsync(url);
-            var projects = JsonSerializer.Deserialize<List<Project>>(response);
-            return projects;
-        }
-
-        /// <summary>
-        /// 获取commits
-        /// </summary>
-        /// <returns></returns>
-        public async Task<List<Commit>> GetCommits(Project project)
-        {
-            var result = new List<Commit>();
-            var url = ServerUrl.Text + commitUrl.Replace(":id", project.id.ToString());
-            try
-            {
-                var response = await hc.GetAsync(url);
-                if (!response.IsSuccessStatusCode)
-                {
-                    RunMessageTB.Text += "==== 获取commit失败,projectId:" + project.id + "\r\n";
-                    return default;
-                }
-                // 取出分页信息
-                var total = response.Headers.Where(h => h.Key == "X-Total")
-                    .SingleOrDefault().Value?.FirstOrDefault();
-                int pageSize = 100;
-                var page = Convert.ToInt32(total) / pageSize + 1;
-
-                for (int i = 1; i <= page; i++)
-                {
-                    var commits = await GetCommits(project.id, i);
-                    result.AddRange(commits);
-                }
-                return result;
-            }
-            catch (Exception e)
-            {
-                RunMessageTB.Text += "==== 获取prject失败,projectId:" + project.id + "\r\n";
-                Console.WriteLine(e.Message + e.InnerException);
-            }
-            return default;
-        }
-
-        public async Task<List<Commit>> GetCommits(int projectId, int page = 1, int pageSize = 100)
-        {
-            var url = ServerUrl.Text + commitUrl.Replace(":id", projectId.ToString());
-            var pageUrl = url + "&page=" + page + "&per_page=" + pageSize;
-
-            try
-            {
-                var _ = await hc.GetStringAsync(pageUrl);
-                var commits = JsonSerializer.Deserialize<List<Commit>>(_);
-                RunMessageTB.Text += $"获取[{projectId}],page[{page}] \r\n";
-                return commits;
-            }
-            catch (Exception)
-            {
-                // TODO:存储未成功的内容，等待重试
-                RunMessageTB.Text += "==== PID:" + projectId + ";page=" + page + "\r\n";
-                File.AppendAllText("retry.txt", projectId + ";" + page + "\r\n");
-            }
-            Thread.Sleep(80);
-            return default;
         }
 
         private void SaveToCsvBtn_Click(object sender, RoutedEventArgs e)
@@ -172,6 +109,14 @@ namespace gitlab分析工具
                 MessageBox.Show("保存成功");
                 SaveToCsvBtn.IsEnabled = true;
             }
+        }
+
+
+
+        private void AppendMessage(string message)
+        {
+            RunMessageTB.Text += message + "\r\n";
+            RunMessageTB.ScrollToEnd();
         }
     }
 }

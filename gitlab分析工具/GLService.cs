@@ -14,7 +14,7 @@ namespace gitlab分析工具
     public class GLService
     {
         readonly string projectUrl = "/api/v4/projects";
-        readonly string commitUrl = "/api/v4/projects/:id/repository/commits?all=true&with_stats=true";
+        readonly string commitUrl = "/api/v4/projects/:id/repository/commits?with_stats=true";
         private string baseUrl = "";
         private string pat = "";
         private HttpClient hc;
@@ -24,7 +24,7 @@ namespace gitlab分析工具
             this.pat = pat;
             hc = new HttpClient
             {
-                Timeout = TimeSpan.FromSeconds(5)
+                Timeout = TimeSpan.FromSeconds(15)
             };
         }
 
@@ -49,7 +49,8 @@ namespace gitlab分析工具
 
                 using (var ctx = new LocalContext())
                 {
-                    // TODO:查询去重
+                    ctx.Database.EnsureCreated();
+                    // 查询去重
                     var currentProjects = ctx.Projects.ToList();
                     data = data.Where(d => !currentProjects.Select(cp => cp.ProjectId).Contains(d.ProjectId))
                         .ToList();
@@ -70,14 +71,15 @@ namespace gitlab分析工具
         /// <returns></returns>
         public async Task<int> BuildTask()
         {
+            int count = 0;
             using (var ctx = new LocalContext())
             {
                 var projects = ctx.Projects.Where(p => p.Status == Entity.Status.Default)
                     .ToList();
-                var task = new List<Entity.CommitsTask>();
                 foreach (var project in projects)
                 {
-                    var url = baseUrl + commitUrl.Replace(":id", project.Id.ToString());
+                    var task = new List<Entity.CommitsTask>();
+                    var url = baseUrl + commitUrl.Replace(":id", project.ProjectId.ToString());
                     try
                     {
                         var response = await hc.GetAsync(url);
@@ -96,20 +98,23 @@ namespace gitlab分析工具
                         {
                             task.Add(new Entity.CommitsTask
                             {
+                                Project = project,
                                 Pid = project.ProjectId,
                                 Page = i,
                             });
                         }
                         ctx.AddRange(task);
+                        count += task.Count;
                         project.Status = Entity.Status.InValid;
+                        await ctx.SaveChangesAsync();
                     }
-                    catch (Exception)
+                    catch (Exception e)
                     {
-                        return default;
+                        Console.WriteLine(e.Message + e.InnerException);
+                        continue;
                     }
                 }
-                await ctx.SaveChangesAsync();
-                return task.Count;
+                return count;
             }
         }
 

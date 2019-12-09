@@ -46,9 +46,13 @@ namespace gitlab分析工具
             // 获取项目
             AppendMessage("开始获取项目信息");
             var projects = await service.GetProjectsAsync();
-            if (projects.Count > 0)
+            if (projects?.Count > 0)
             {
                 AppendMessage(projects.Count + "个新项目");
+            }
+            else
+            {
+                AppendMessage("无新增项目");
             }
             AppendMessage("开始构建任务");
             var count = await service.BuildTask();
@@ -62,23 +66,28 @@ namespace gitlab分析工具
                 var tasks = ctx.CommitsTasks.Where(ct => ct.Status == Entity.Status.Default)
                     .Include(ct => ct.Project)
                     .ToList();
-                foreach (var task in tasks)
+
+                if (tasks != null)
                 {
-                    AppendMessage("执行任务" + task.Id + $"=>{task.Project.Name}:[{task.Page}]");
-                    // 获取提交
-                    var commits = await service.GetCommits(task);
-                    if (commits != null)
+                    foreach (var task in tasks)
                     {
-                        ctx.AddRange(commits);
-                        task.Status = Entity.Status.InValid;
-                        await ctx.SaveChangesAsync();
-                        AppendMessage("任务:" + task.Id + "执行完成");
-                    }
-                    else
-                    {
-                        AppendMessage("任务:" + task.Id + "执行失败");
+                        AppendMessage("执行任务" + task.Id + $"=>{task.Project?.Name}:[{task.Page}]");
+                        // 获取提交
+                        var commits = await service.GetCommits(task);
+                        if (commits != null)
+                        {
+                            ctx.AddRange(commits);
+                            task.Status = Entity.Status.InValid;
+                            await ctx.SaveChangesAsync();
+                            AppendMessage("任务:" + task.Id + "执行完成");
+                        }
+                        else
+                        {
+                            AppendMessage("任务:" + task.Id + "执行失败");
+                        }
                     }
                 }
+
             }
             RunMessageTB.Text += "已全部采集完成\r\n";
             RunMessageTB.ScrollToEnd();

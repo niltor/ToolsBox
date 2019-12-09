@@ -84,7 +84,7 @@ namespace gitlab分析工具
         {
             var url = ServerUrl.Text + projectUrl + "?per_page=100";
             hc.DefaultRequestHeaders.TryAddWithoutValidation("PRIVATE-TOKEN", PAT.Text);
-            hc.Timeout = TimeSpan.FromSeconds(30);
+            hc.Timeout = TimeSpan.FromSeconds(5);
             var response = await hc.GetStringAsync(url);
             var projects = JsonSerializer.Deserialize<List<Project>>(response);
             return projects;
@@ -98,8 +98,6 @@ namespace gitlab分析工具
         {
             var result = new List<Commit>();
             var url = ServerUrl.Text + commitUrl.Replace(":id", project.id.ToString());
-            int errorPage = 0;
-
             try
             {
                 var response = await hc.GetAsync(url);
@@ -116,21 +114,39 @@ namespace gitlab分析工具
 
                 for (int i = 1; i <= page; i++)
                 {
-                    errorPage = i;
-                    var pageUrl = url + "&page=" + i + "&per_page=" + pageSize;
-                    var _ = await hc.GetStringAsync(pageUrl);
-                    var commits = JsonSerializer.Deserialize<List<Commit>>(_);
+                    var commits = await GetCommits(project.id, i);
                     result.AddRange(commits);
                 }
+                return result;
+            }
+            catch (Exception e)
+            {
+                RunMessageTB.Text += "==== 获取prject失败,projectId:" + project.id + "\r\n";
+                Console.WriteLine(e.Message + e.InnerException);
+            }
+            return default;
+        }
+
+        public async Task<List<Commit>> GetCommits(int projectId, int page = 1, int pageSize = 100)
+        {
+            var url = ServerUrl.Text + commitUrl.Replace(":id", projectId.ToString());
+            var pageUrl = url + "&page=" + page + "&per_page=" + pageSize;
+
+            try
+            {
+                var _ = await hc.GetStringAsync(pageUrl);
+                var commits = JsonSerializer.Deserialize<List<Commit>>(_);
+                RunMessageTB.Text += $"获取[{projectId}],page[{page}] \r\n";
+                return commits;
             }
             catch (Exception)
             {
-                RunMessageTB.Text += "==== PID:" + project.id + ";page=" + errorPage + "\r\n";
-                Console.WriteLine("projectId: " + project.id);
+                // TODO:存储未成功的内容，等待重试
+                RunMessageTB.Text += "==== PID:" + projectId + ";page=" + page + "\r\n";
+                File.AppendAllText("retry.txt", projectId + ";" + page + "\r\n");
             }
-
-            Thread.Sleep(100);
-            return result;
+            Thread.Sleep(80);
+            return default;
         }
 
         private void SaveToCsvBtn_Click(object sender, RoutedEventArgs e)

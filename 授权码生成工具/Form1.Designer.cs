@@ -31,12 +31,13 @@
             this.userTB = new System.Windows.Forms.TextBox();
             this.userLabel = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.daysTB = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.codeTB = new System.Windows.Forms.TextBox();
             this.generateBT = new System.Windows.Forms.Button();
             this.copyBT = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
+            this.daysTB = new System.Windows.Forms.NumericUpDown();
+            ((System.ComponentModel.ISupportInitialize)(this.daysTB)).BeginInit();
             this.SuspendLayout();
             // 
             // userTB
@@ -59,28 +60,20 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(74, 51);
+            this.label1.Location = new System.Drawing.Point(74, 53);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(41, 12);
             this.label1.TabIndex = 3;
             this.label1.Text = "有效期";
             // 
-            // daysTB
-            // 
-            this.daysTB.Location = new System.Drawing.Point(121, 47);
-            this.daysTB.Name = "daysTB";
-            this.daysTB.Size = new System.Drawing.Size(66, 21);
-            this.daysTB.TabIndex = 2;
-            this.daysTB.Text = "30";
-            // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(193, 51);
+            this.label2.Location = new System.Drawing.Point(193, 53);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(17, 12);
+            this.label2.Size = new System.Drawing.Size(71, 12);
             this.label2.TabIndex = 4;
-            this.label2.Text = "天";
+            this.label2.Text = "天（1-365）";
             // 
             // codeTB
             // 
@@ -120,18 +113,40 @@
             this.label3.TabIndex = 8;
             this.label3.Text = "激活码";
             // 
+            // daysTB
+            // 
+            this.daysTB.Location = new System.Drawing.Point(121, 49);
+            this.daysTB.Maximum = new decimal(new int[] {
+            365,
+            0,
+            0,
+            0});
+            this.daysTB.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.daysTB.Name = "daysTB";
+            this.daysTB.Size = new System.Drawing.Size(66, 21);
+            this.daysTB.TabIndex = 9;
+            this.daysTB.Value = new decimal(new int[] {
+            30,
+            0,
+            0,
+            0});
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(571, 196);
+            this.Controls.Add(this.daysTB);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.copyBT);
             this.Controls.Add(this.generateBT);
             this.Controls.Add(this.codeTB);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.daysTB);
             this.Controls.Add(this.userLabel);
             this.Controls.Add(this.userTB);
             this.MaximizeBox = false;
@@ -139,6 +154,7 @@
             this.Opacity = 0.95D;
             this.Text = "授权激活码生成工具";
             this.Load += new System.EventHandler(this.授权激活码生成工具_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.daysTB)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -149,12 +165,12 @@
         private System.Windows.Forms.TextBox userTB;
         private System.Windows.Forms.Label userLabel;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox daysTB;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox codeTB;
         private System.Windows.Forms.Button generateBT;
         private System.Windows.Forms.Button copyBT;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.NumericUpDown daysTB;
     }
 }
 

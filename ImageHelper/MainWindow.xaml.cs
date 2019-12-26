@@ -65,25 +65,30 @@ namespace ImageHelper
                 MessageBox.Show("请先选择源文件");
             }
 
-            int sharpness = 90;
-            if (!string.IsNullOrEmpty(SharpnessText.Text))
-            {
-                sharpness = Convert.ToInt32(SharpnessText.Text);
-            }
+            //int sharpness = 90;
+            //if (!string.IsNullOrEmpty(SharpnessText.Text))
+            //{
+            //    sharpness = Convert.ToInt32(SharpnessText.Text);
+            //}
 
-            var currentDir = Environment.CurrentDirectory;
-            var outputPath = System.IO.Path.Combine(currentDir, "temp.jpg");
-            var fileInfo = new FileInfo(dlg.FileName);
+            //var currentDir = Environment.CurrentDirectory;
+            //var outputPath = System.IO.Path.Combine(currentDir, "temp.jpg");
+            //var fileInfo = new FileInfo(dlg.FileName);
 
             using var outStream = new MemoryStream();
-            using var image = SixLabors.ImageSharp.Image.Load(File.OpenRead(fileInfo.FullName));
-            image.Clone(x => x.BackgroundColor(Rgba32.Transparent));
+            //using var image = SixLabors.ImageSharp.Image.Load(File.OpenRead(fileInfo.FullName));
+            //image.Clone(x => x.BackgroundColor(Rgba32.Transparent));
 
-            image.SaveAsJpeg(outStream, new JpegEncoder
-            {
-                Quality = sharpness
-            });
-            outStream.Seek(0, SeekOrigin.Begin);
+            //image.SaveAsJpeg(outStream, new JpegEncoder
+            //{
+            //    Quality = sharpness
+            //});
+            //outStream.Seek(0, SeekOrigin.Begin);
+
+            var helper = new ImageProcess();
+
+            helper.AddWatermark(outStream);
+
             var bitmapImage = new BitmapImage();
             bitmapImage.BeginInit();
             bitmapImage.CacheOption = BitmapCacheOption.OnLoad;

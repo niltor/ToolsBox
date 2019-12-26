@@ -11,6 +11,7 @@ using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 
 namespace gitlab分析工具
 {
@@ -19,10 +20,6 @@ namespace gitlab分析工具
     /// </summary>
     public partial class MainWindow : Window
     {
-
-        HttpClient hc = new HttpClient();
-        List<Entity.Commit> userCommit = new List<Entity.Commit>();
-
         public MainWindow()
         {
             InitializeComponent();
@@ -42,6 +39,8 @@ namespace gitlab分析工具
                 return;
             }
             GetDataBtn.IsEnabled = false;
+            SaveToCsvBtn.IsEnabled = false;
+
             var service = new GLService(ServerUrl.Text, PAT.Text);
             // 获取项目
             AppendMessage("开始获取项目信息");
@@ -54,11 +53,15 @@ namespace gitlab分析工具
             {
                 AppendMessage("无新增项目");
             }
-            AppendMessage("开始构建任务");
-            var count = await service.BuildTask();
+            AppendMessage("开始构建任务,请耐心等待!");
+            var count = await service.BuildTask(RunMessageTB);
             if (count > 0)
             {
                 AppendMessage(count + "个任务构建完成");
+            }
+            else
+            {
+                AppendMessage("无新任务构建");
             }
             AppendMessage("开始执行任务");
             using (var ctx = new LocalContext())
@@ -71,7 +74,7 @@ namespace gitlab分析工具
                 {
                     foreach (var task in tasks)
                     {
-                        AppendMessage("执行任务" + task.Id + $"=>{task.Project?.Name}:[{task.Page}]");
+                        AppendMessage("执行任务" + task.Id + $"=>{task.Project?.Name}:{task.Project.ProjectId}[{task.Page}]");
                         // 获取提交
                         var commits = await service.GetCommits(task);
                         if (commits != null)
@@ -107,12 +110,15 @@ namespace gitlab分析工具
             if (dlg.ShowDialog() == true)
             {
                 SaveToCsvBtn.IsEnabled = false;
-                // 保存数据
-                using (var writer = new StreamWriter(dlg.FileName))
+                using (var ctx = new LocalContext())
                 {
-                    using (var csv = new CsvWriter(writer))
+                    var data = ctx.Commits.ToList();
+                    using (var writer = new StreamWriter(dlg.FileName))
                     {
-                        csv.WriteRecords(userCommit);
+                        using (var csv = new CsvWriter(writer))
+                        {
+                            csv.WriteRecords(data);
+                        }
                     }
                 }
                 MessageBox.Show("保存成功");

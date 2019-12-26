@@ -1,6 +1,7 @@
 using System;
 using System.IO;
 using System.Net;
+using System.Text;
 
 namespace Test
 {
@@ -8,10 +9,12 @@ namespace Test
     {
         static async System.Threading.Tasks.Task Main(string[] args)
         {
-            var timer = new RequestTimer();
-            await timer.RunAsync(0,3000);
+            //var timer = new RequestTimer();
+            //await timer.RunAsync(0,3000);
+
+            Test();
             Console.WriteLine("finish");
-           
+
         }
 
         static void Download()
@@ -39,6 +42,18 @@ namespace Test
                     Console.WriteLine("done:" + ++i);
                 }
             }
+        }
+
+        static void Test()
+        {
+            byte[] bytes = Encoding.UTF8.GetBytes("我");
+            var myString = Encoding.ASCII.GetString(bytes);
+
+            foreach (var item in bytes)
+            {
+                Console.WriteLine(item);
+            }
+            Console.WriteLine(myString);
         }
 
     }

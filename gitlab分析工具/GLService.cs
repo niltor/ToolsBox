@@ -7,6 +7,7 @@ using System.Text;
 using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Windows.Controls;
 using gitlab分析工具.Models;
 
 namespace gitlab分析工具
@@ -24,10 +25,9 @@ namespace gitlab分析工具
             this.pat = pat;
             hc = new HttpClient
             {
-                Timeout = TimeSpan.FromSeconds(15)
+                Timeout = TimeSpan.FromSeconds(30)
             };
         }
-
 
         /// <summary>
         /// 项目信息
@@ -69,7 +69,7 @@ namespace gitlab分析工具
         /// 创建commit任务
         /// </summary>
         /// <returns></returns>
-        public async Task<int> BuildTask()
+        public async Task<int> BuildTask(TextBox box = null)
         {
             int count = 0;
             using (var ctx = new LocalContext())
@@ -107,6 +107,11 @@ namespace gitlab分析工具
                         count += task.Count;
                         project.Status = Entity.Status.InValid;
                         await ctx.SaveChangesAsync();
+                        if (box != null)
+                        {
+                            //box.Text += "";
+                            //box.ScrollToEnd();
+                        }
                     }
                     catch (Exception e)
                     {

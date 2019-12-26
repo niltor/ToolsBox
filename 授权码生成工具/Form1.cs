@@ -39,7 +39,8 @@ namespace 授权码生成工具
             }
             else
             {
-                var code = GenerateShortCode(user, days);
+                var afterDays = Convert.ToDouble(days);
+                var code = GenerateShortCode(user, afterDays);
                 codeTB.Text = code;
             }
         }
@@ -54,14 +55,21 @@ namespace 授权码生成工具
             return result;
         }
 
-        string GenerateShortCode(string user, string days)
+        string GenerateShortCode(string user, double days)
         {
-            var bytes = Encoding.ASCII.GetBytes(days);
+            var timestamp = (Int32)(DateTime.UtcNow.AddDays(days)
+                .Subtract(new DateTime(1970, 1, 1))).TotalSeconds;
+            var unit16 = Convert.ToString(timestamp, 16);
             var prefix = ToMD5(user);
             var suffix = ToMD5(DateTime.Now.Millisecond.ToString());
+            var strbuilder = new StringBuilder();
+            for (int i = 0; i < 5; i++)
+            {
+                strbuilder.Append(suffix[i]);
+                strbuilder.Append(prefix[i]);
+            }
 
-            var str = string.Join("", bytes.Select(r => r.ToString("X2")).ToArray());
-            var result = str + "-" + prefix.Substring(0, 6) + suffix.Substring(0, 4);
+            string result = unit16.ToUpper() + strbuilder.ToString();
             return result;
         }
 

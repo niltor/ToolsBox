@@ -40,15 +40,19 @@ namespace ImageHelper
             }
         }
 
-
-        public void AddWatermark(Stream stream)
+        /// <summary>
+        /// 添加文字
+        /// </summary>
+        /// <param name="stream"></param>
+        /// <returns></returns>
+        public Stream AddWatermark(Stream stream)
         {
             var watermarkedStream = new MemoryStream();
             using (var img = System.Drawing.Image.FromStream(stream))
             {
                 using (var graphic = Graphics.FromImage(img))
                 {
-                    var font = new Font(FontFamily.GenericSansSerif, 20, FontStyle.Bold, GraphicsUnit.Pixel);
+                    var font = new Font(FontFamily.GenericSansSerif, 24, FontStyle.Bold, GraphicsUnit.Pixel);
                     var color = System.Drawing.Color.FromArgb(128, 255, 255, 255);
                     var brush = new SolidBrush(color);
                     var point = new System.Drawing.Point(img.Width - 120, img.Height - 30);
@@ -57,20 +61,24 @@ namespace ImageHelper
                     img.Save(watermarkedStream, ImageFormat.Png);
                 }
             }
+            return watermarkedStream;
+
         }
-        public void AddWatermark(Stream stream, string logoPath)
+
+        /// <summary>
+        /// 添加图片
+        /// </summary>
+        /// <param name="stream"></param>
+        /// <param name="logoPath"></param>
+        /// <returns></returns>
+        public Stream AddWatermark(Stream stream, string logoPath)
         {
             var watermarkedStream = new MemoryStream();
             using (var img = System.Drawing.Image.FromStream(stream))
             {
                 using (var graphic = Graphics.FromImage(img))
                 {
-                    var font = new Font(FontFamily.GenericSansSerif, 20, FontStyle.Bold, GraphicsUnit.Pixel);
-                    var color = System.Drawing.Color.FromArgb(128, 255, 255, 255);
-                    var brush = new SolidBrush(color);
-                    var point = new System.Drawing.Point(img.Width - 120, img.Height - 30);
-
-                    graphic.DrawString("Test", font, brush, point);
+                    var point = new System.Drawing.Point(img.Width - 400, img.Height - 400);
                     using (var logoImg = System.Drawing.Image.FromFile(logoPath))
                     {
                         graphic.DrawImage(logoImg, point);
@@ -78,6 +86,7 @@ namespace ImageHelper
                     img.Save(watermarkedStream, ImageFormat.Png);
                 }
             }
+            return watermarkedStream;
         }
     }
 }

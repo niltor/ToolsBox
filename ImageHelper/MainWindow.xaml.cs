@@ -65,17 +65,16 @@ namespace ImageHelper
                 MessageBox.Show("请先选择源文件");
             }
 
-            //int sharpness = 90;
-            //if (!string.IsNullOrEmpty(SharpnessText.Text))
-            //{
-            //    sharpness = Convert.ToInt32(SharpnessText.Text);
-            //}
+            int sharpness = 90;
+            if (!string.IsNullOrEmpty(SharpnessText.Text))
+            {
+                sharpness = Convert.ToInt32(SharpnessText.Text);
+            }
 
-            //var currentDir = Environment.CurrentDirectory;
-            //var outputPath = System.IO.Path.Combine(currentDir, "temp.jpg");
-            //var fileInfo = new FileInfo(dlg.FileName);
+            var currentDir = Environment.CurrentDirectory;
+            var outputPath = System.IO.Path.Combine(currentDir, "temp.jpg");
+            var fileInfo = new FileInfo(dlg.FileName);
 
-            using var outStream = new MemoryStream();
             //using var image = SixLabors.ImageSharp.Image.Load(File.OpenRead(fileInfo.FullName));
             //image.Clone(x => x.BackgroundColor(Rgba32.Transparent));
 
@@ -86,13 +85,13 @@ namespace ImageHelper
             //outStream.Seek(0, SeekOrigin.Begin);
 
             var helper = new ImageProcess();
-
-            helper.AddWatermark(outStream);
+            var outStream = File.OpenRead(fileInfo.FullName);
+            var stream = helper.AddWatermark(outStream, "./test.png", Position.BottomRight, 200, 80);
 
             var bitmapImage = new BitmapImage();
             bitmapImage.BeginInit();
             bitmapImage.CacheOption = BitmapCacheOption.OnLoad;
-            bitmapImage.StreamSource = outStream;
+            bitmapImage.StreamSource = stream;
             bitmapImage.EndInit();
             OutputImage.Source = bitmapImage;
             MessageBox.Show("处理完成，你可以点击保存选择将图片另存为");

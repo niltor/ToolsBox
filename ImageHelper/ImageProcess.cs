@@ -1,13 +1,8 @@
 ﻿using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.Formats.Jpeg;
 using SixLabors.ImageSharp.Formats.Png;
-using SixLabors.ImageSharp.PixelFormats;
-using SixLabors.ImageSharp.Primitives;
 using SixLabors.ImageSharp.Processing;
 using SixLabors.Primitives;
-using System.Drawing;
-using System.Drawing.Drawing2D;
-using System.Drawing.Imaging;
 using System.IO;
 using Image = SixLabors.ImageSharp.Image;
 
@@ -31,41 +26,15 @@ namespace ImageHelper
         {
             using (var image = Image.Load(stream))
             {
-                image.Mutate(x => x
+                image.Mutate(img => img
                     .Resize(new ResizeOptions
                     {
-                        Size = new SixLabors.Primitives.Size(width, height),
+                        Size = new Size(width, height),
                         Mode = ResizeMode.Max,
                     }));
                 image.Save(outputPath); // Automatic encoder selected based on extension.
             }
         }
-
-        /// <summary>
-        /// 添加文字
-        /// </summary>
-        /// <param name="stream"></param>
-        /// <returns></returns>
-        public Stream AddWatermark(Stream stream)
-        {
-            var watermarkedStream = new MemoryStream();
-            using (var img = System.Drawing.Image.FromStream(stream))
-            {
-                using (var graphic = Graphics.FromImage(img))
-                {
-                    var font = new Font(FontFamily.GenericSansSerif, 24, FontStyle.Bold, GraphicsUnit.Pixel);
-                    var color = System.Drawing.Color.FromArgb(128, 255, 255, 255);
-                    var brush = new SolidBrush(color);
-                    var point = new System.Drawing.Point(img.Width - 120, img.Height - 30);
-
-                    graphic.DrawString("Test", font, brush, point);
-                    img.Save(watermarkedStream, ImageFormat.Png);
-                }
-            }
-            return watermarkedStream;
-
-        }
-
         /// <summary>
         /// 添加图片
         /// </summary>
@@ -76,10 +45,10 @@ namespace ImageHelper
         /// <param name="height">高度</param>
         /// <param name="padding">边距</param>
         /// <returns></returns>
-        public Stream AddWatermark(Stream stream, string logoPath, Position position = Position.BottomRight, int width = 100, int height = 40, int padding = 4)
+        public Stream AddWatermark(Stream stream, Stream logoStream, Position position = Position.BottomRight, int width = 100, int height = 40, int padding = 4)
         {
             var watermarkedStream = new MemoryStream();
-            using (var img = System.Drawing.Image.FromStream(stream))
+            using (var img = Image.Load(stream))
             {
                 // 确定位置
                 int px = 0;
@@ -105,26 +74,18 @@ namespace ImageHelper
                     default:
                         break;
                 }
-
                 // 处理被添加的水印资源 
-                using (FileStream pngStream = new FileStream("test.png", FileMode.Open, FileAccess.Read))
-                using (var logoImg = System.Drawing.Image.FromFile(logoPath))
+                using (var logoImg = Image.Load(logoStream))
                 {
-                    var resized = new Bitmap(width, height);
-                    using (var graphics = Graphics.FromImage(resized))
+                    logoImg.Mutate(img => img.Resize(new ResizeOptions
                     {
-                        graphics.CompositingQuality = CompositingQuality.HighSpeed;
-                        graphics.InterpolationMode = InterpolationMode.HighQualityBicubic;
-                        graphics.CompositingMode = CompositingMode.SourceCopy;
-                        graphics.DrawImage(logoImg, 0, 0, width, height);
-                        resized.Save($"resized-temp.png", ImageFormat.Png);
-                    }
-                    using (var graphic = Graphics.FromImage(img))
-                    {
-                        var point = new System.Drawing.Point(px, py);
-                        graphic.DrawImage(resized, point);
-                        img.Save(watermarkedStream, ImageFormat.Png);
-                    }
+                        Size = new Size(width, height),
+                        Mode = ResizeMode.Max
+                    }));
+                    //logoImg.SaveAsPng(logoStream);
+
+                    img.Mutate(img => img.DrawImage(logoImg, new Point(px, py), 0.75f));
+                    img.Save(watermarkedStream,new JpegEncoder() { });
                 }
                 return watermarkedStream;
             }

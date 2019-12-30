@@ -86,7 +86,7 @@ namespace ImageHelper
 
             var helper = new ImageProcess();
             var outStream = File.OpenRead(fileInfo.FullName);
-            var stream = helper.AddWatermark(outStream, File.OpenRead("./test.png"), Position.BottomRight, 200, 80);
+            var stream = helper.AddWatermark(outStream, File.OpenRead("./test.png"), Position.TopLeft, 200, 80);
 
             stream.Position = 0;
             var bitmapImage = new BitmapImage();

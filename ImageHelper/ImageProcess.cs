@@ -56,15 +56,15 @@ namespace ImageHelper
                 switch (position)
                 {
                     case Position.TopLeft:
-                        px = width + padding;
-                        py = height + padding;
+                        px = padding;
+                        py = padding;
                         break;
                     case Position.TopRight:
                         py = height + padding;
                         px = img.Width - width - padding;
                         break;
                     case Position.BottomLeft:
-                        px = width + padding;
+                        px = padding;
                         py = img.Height - (height + padding);
                         break;
                     case Position.BottomRight:
@@ -84,8 +84,8 @@ namespace ImageHelper
                     }));
                     //logoImg.SaveAsPng(logoStream);
 
-                    img.Mutate(img => img.DrawImage(logoImg, new Point(px, py), 0.75f));
-                    img.Save(watermarkedStream,new JpegEncoder() { });
+                    img.Mutate(img => img.DrawImage(logoImg, new Point(px, py), 0.8f));
+                    img.Save(watermarkedStream, new JpegEncoder() { });
                 }
                 return watermarkedStream;
             }

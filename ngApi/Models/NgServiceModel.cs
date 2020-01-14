@@ -26,7 +26,7 @@ namespace ngApi.Models
         {
         }
 
-        public string getServiceName()
+        public string GetServiceName()
         {
             if (Methods.Count < 1) return default;
             // 获取serviceName
@@ -82,7 +82,7 @@ import {{ Observable }} from 'rxjs';
   providedIn: 'root'
 }})
 {comments}
-export class {getServiceName()}Service extends BaseService {{
+export class {GetServiceName()}Service extends BaseService {{
   constructor(http: HttpClient) {{
     super(http);
   }}

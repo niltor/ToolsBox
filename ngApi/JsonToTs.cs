@@ -1,7 +1,9 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using ngApi.Models;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Text;
 
 namespace ngApi
@@ -9,26 +11,13 @@ namespace ngApi
     public class JsonToTs
     {
 
-        readonly Person person;
         public JsonToTs()
         {
-            person = new Person
-            {
-                Name = "chris",
-                Age = 18,
-            };
 
-            var skills = new List<Skill>();
-            skills.Add(new Skill { Name = "math", Level = "Top" });
-            skills.Add(new Skill { Name = "language", Level = "Middle" });
-            skills.Add(new Skill { Name = "english", Level = "Bottom" });
-            person.Skills = skills;
         }
 
-        public void ParseJson()
+        public void ParseJson(string jsonStr)
         {
-            var jsonStr = JsonConvert.SerializeObject(person);
-
             var job = JObject.Parse(jsonStr);
             foreach (var prop in job.Properties())
             {
@@ -37,19 +26,35 @@ namespace ngApi
                 Console.WriteLine(prop.Value.Type);
             }
         }
-    }
+
+        public void ToNgService(string filePath = "./test.json")
+        {
+            var jsonFile = new FileInfo(filePath);
+            var fileContent = jsonFile.OpenText().ReadToEnd();
+            try
+            {
+                var project = PostManJson.FromJson(fileContent);
+
+                foreach (var service in project.Item)
+                {
+                    var model = new NgServiceModel
+                    {
+                        Introduction = service.Name,
+                        Methods = service.Children
+                    };
+
+                    var serviceContent = model.BuildServiceContent();
+                    // 创建服务文件
+                }
 
 
-    public class Person
-    {
-        public string Name { get; set; }
-        public int Age { get; set; }
-        public List<Skill> Skills { get; set; }
+            }
+            catch (Exception e)
+            {
+                throw;
+            }
+        }
+
     }
 
-    public class Skill
-    {
-        public string Name { get; set; }
-        public string Level { get; set; }
-    }
 }

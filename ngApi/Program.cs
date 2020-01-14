@@ -9,7 +9,7 @@ namespace ngApi
             Console.WriteLine("Hello World!");
 
             var toTs = new JsonToTs();
-            toTs.ParseJson();
+            toTs.ToNgService();
         }
     }
 }

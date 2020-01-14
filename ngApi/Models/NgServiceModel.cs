@@ -28,9 +28,11 @@ namespace ngApi.Models
 
         public string getServiceName()
         {
+            if (Methods.Count < 1) return default;
             // 获取serviceName
             var path = Methods.First().Request.Url?.Path;
-            return path[1];
+            var serviceName = path[1];
+            return serviceName.First().ToString().ToUpper() + serviceName.Substring(1);
         }
 
         /// <summary>
@@ -40,6 +42,7 @@ namespace ngApi.Models
         /// <returns></returns>
         public string BuildServiceContent()
         {
+            if (Methods.Count < 1) return default;
             string functionContent = "";
             foreach (var item in Methods)
             {

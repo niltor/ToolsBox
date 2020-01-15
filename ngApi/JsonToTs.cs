@@ -1,10 +1,7 @@
-﻿using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
+﻿using Newtonsoft.Json.Linq;
 using ngApi.Models;
 using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Text;
 
 namespace ngApi
 {
@@ -14,17 +11,6 @@ namespace ngApi
         public JsonToTs()
         {
 
-        }
-
-        public void ParseJson(string jsonStr)
-        {
-            var job = JObject.Parse(jsonStr);
-            foreach (var prop in job.Properties())
-            {
-                Console.WriteLine(prop.Name);
-                Console.WriteLine(prop.Value.ToString());
-                Console.WriteLine(prop.Value.Type);
-            }
         }
 
         public void ToNgService(string filePath = "./test.json")
@@ -44,10 +30,9 @@ namespace ngApi
                     };
 
                     var serviceContent = model.BuildServiceContent();
+                    
                     // 创建服务文件
                 }
-
-
             }
             catch (Exception e)
             {

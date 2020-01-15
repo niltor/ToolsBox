@@ -1,4 +1,5 @@
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -11,7 +12,7 @@ namespace ngApi.Models
     /// <summary>
     /// ng服务模型
     /// </summary>
-    class NgServiceModel
+    public class NgServiceModel
     {
         /// <summary>
         /// 说明
@@ -32,7 +33,12 @@ namespace ngApi.Models
             // 获取serviceName
             var path = Methods.First().Request.Url?.Path;
             var serviceName = path[1];
-            return serviceName.First().ToString().ToUpper() + serviceName.Substring(1);
+            return ToTitle(serviceName);
+        }
+
+        public string ToTitle(string str)
+        {
+            return str.First().ToString().ToUpper() + str.Substring(1);
         }
 
         /// <summary>
@@ -44,6 +50,7 @@ namespace ngApi.Models
         {
             if (Methods.Count < 1) return default;
             string functionContent = "";
+            string modelsContent = "";
             foreach (var item in Methods)
             {
                 var requestMethod = new RequestMethodModel
@@ -69,6 +76,7 @@ namespace ngApi.Models
                         break;
                 }
                 functionContent += requestMethod.ToString();
+                modelsContent += requestMethod.BuildTsInterface();
             }
             string comments = @$"/**
   * {Introduction}
@@ -90,6 +98,7 @@ export class {GetServiceName()}Service extends BaseService {{
 {functionContent}
 }}
 ";
+            content += modelsContent;
             return content;
         }
     }
@@ -128,7 +137,37 @@ export class {GetServiceName()}Service extends BaseService {{
 
         public List<Params> ResponseFileds { get; set; }
 
+        /// <summary>
+        /// 生成ts对应的接口
+        /// </summary>
+        /// <returns></returns>
+        public string BuildTsInterface()
+        {
+            string modelContent = "";
+            string name = Path.Last();
+            name = name.First().ToString().ToUpper() + name.Substring(1);
+            // 返回的模型构建
+            if (ResponseJson != null)
+            {
+                var response = JObject.Parse(ResponseJson);
+                if (response["data"].HasValues)
+                {
+                    modelContent += ParseJson((JObject)response["data"], name + "VM");
+                }
+            }
+            // 请求的模型
+            if (Params != null && Params.Count > 0)
+            {
+                modelContent += ParamsToTs(name + "Form");
+            }
 
+            if (!string.IsNullOrEmpty(RequestRaw))
+            {
+                var request = JObject.Parse(RequestRaw);
+                modelContent += ParseJson(request, name + "Form");
+            }
+            return modelContent;
+        }
 
         public override string ToString()
         {
@@ -151,6 +190,7 @@ export class {GetServiceName()}Service extends BaseService {{
         private string GetGetFunction()
         {
             var name = Path.Last();
+            name = name.First().ToString().ToUpper() + name.Substring(1);
             var query = Query?.Select(s => s.Key + ": string").ToList();
 
             var functionParams = query == null ? "" : string.Join(",", query);
@@ -167,6 +207,16 @@ export class {GetServiceName()}Service extends BaseService {{
             }
 
             var typeName = name + "VM";
+            // 判断是否有返回的示例
+            if (ResponseJson != null)
+            {
+                var response = JObject.Parse(ResponseJson);
+                var data = response["data"];
+                if (!data.HasValues)
+                {
+                    typeName = "string";
+                }
+            }
             var function = @$"{name}({functionParams}): Observable<{typeName}>{{
   const url='{routePath}?'{queryString};
   return this.get<{typeName}>(url);
@@ -181,6 +231,7 @@ export class {GetServiceName()}Service extends BaseService {{
         private string GetPostFunction()
         {
             var name = Path.Last();
+            name = name.First().ToString().ToUpper() + name.Substring(1);
             var query = Query?.Select(s => s.Key + ": string").ToList();
             var functionParams = query == null ? "" : string.Join(",", query);
             if (!string.IsNullOrEmpty(functionParams))
@@ -203,7 +254,13 @@ export class {GetServiceName()}Service extends BaseService {{
 
             var dataType = name + "Form";
             var typeName = name + "VM";
-
+            // 判断是否有返回的示例
+            var response = JObject.Parse(ResponseJson);
+            var data = response["data"];
+            if (!data.HasValues)
+            {
+                typeName = "string";
+            }
             var function = @$"{name}({functionParams}data: {dataType}): Observable<{typeName}>{{
   const url='{routePath}?'{queryString};
   return this.post<{typeName}>(url, data);
@@ -234,10 +291,95 @@ export class {GetServiceName()}Service extends BaseService {{
                 var name = Path.Last();
                 data = $"\r\n * {name}Form 提交数据\r\n";
             }
-            var comments = @$"/**
+            var comments = @$"
+/**
  * {Description}{commentsParams}{data} */
 ";
             return comments;
+        }
+
+        public string ParseJson(JObject data, string name)
+        {
+            string propertyString = "";
+            string innerContent = "";
+
+            if (data != null && data.HasValues)
+            {
+                foreach (var prop in (data).Properties())
+                {
+                    string valueType = "";
+                    switch (prop.Value.Type)
+                    {
+                        case JTokenType.Object:
+                            valueType = $"{prop.Name}VM";
+                            innerContent += ParseJson((JObject)prop.Value, $"{prop.Name}VM");
+                            break;
+                        case JTokenType.Array:
+                            valueType = $"{prop.Name}VM[]";
+                            var value = prop.Value?.First;
+                            if (value != null && value.Type == JTokenType.Object)
+                            {
+                                innerContent += ParseJson((JObject)value, $"{prop.Name}VM[]");
+                            }
+                            break;
+                        case JTokenType.Integer:
+                        case JTokenType.Bytes:
+                        case JTokenType.Float:
+                            valueType = "number";
+                            break;
+                        case JTokenType.Boolean:
+                            valueType = "boolean";
+                            break;
+                        case JTokenType.Null:
+                            valueType = "null";
+                            break;
+                        case JTokenType.Undefined:
+                            break;
+                        case JTokenType.Date:
+                        case JTokenType.TimeSpan:
+                            valueType = "Date";
+                            break;
+                        default:
+                            valueType = "string";
+                            break;
+                    }
+
+                    propertyString += $"{prop.Name}: {valueType};\r\n";
+                }
+            }
+
+            string interfaceString = @$"export interface {name} {{
+  {propertyString}
+}}
+{innerContent}
+";
+
+            return interfaceString;
+        }
+
+        /// <summary>
+        /// 请求参数变为ts接口
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns></returns>
+        public string ParamsToTs(string name)
+        {
+            string propertyString = "";
+            foreach (var item in Params)
+            {
+                var comment = @$"/**
+ * {item.Description}
+ */
+";
+                propertyString += comment + $"{item.Key}: string;\r\n";
+            }
+
+            string interfaceString = @$"export interface {name} {{
+{propertyString}
+}}
+";
+
+            return interfaceString;
         }
     }
 

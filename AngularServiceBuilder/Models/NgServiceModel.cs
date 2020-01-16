@@ -1,0 +1,386 @@
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Security.Cryptography;
+using System.Text;
+
+namespace AngularServiceBuilder.Models
+{
+    /// <summary>
+    /// ng服务模型
+    /// </summary>
+    public class NgServiceModel
+    {
+        /// <summary>
+        /// 说明
+        /// </summary>
+        public string Introduction { get; set; }
+        /// <summary>
+        /// 接口方法
+        /// </summary>
+        public List<Item> Methods { get; set; }
+
+        public NgServiceModel()
+        {
+        }
+
+        public string GetServiceName()
+        {
+            if (Methods.Count < 1) return default;
+            // 获取serviceName
+            var path = Methods.First().Request.Url?.Path;
+            var serviceName = path[1];
+            return ToTitle(serviceName);
+        }
+
+        public string ToTitle(string str)
+        {
+            return str.First().ToString().ToUpper() + str.Substring(1);
+        }
+
+        /// <summary>
+        /// 一组接口内容
+        /// </summary>
+        /// <param name="items"></param>
+        /// <returns></returns>
+        public string BuildServiceContent()
+        {
+            if (Methods.Count < 1) return default;
+            string functionContent = "";
+            string modelsContent = "";
+            foreach (var item in Methods)
+            {
+                var requestMethod = new RequestMethodModel
+                {
+                    Description = item.Name,
+                    Method = item.Request.Method,
+                    Query = item.Request.Url.Query,
+                    RequestBodyType = item.Request.Body?.Mode,
+                    ResponseJson = item.Response?.FirstOrDefault()?.Body,
+                    Path = item.Request.Url.Path
+                };
+                //不同请求类型
+                switch (requestMethod.RequestBodyType)
+                {
+                    case "formdata":
+                        requestMethod.Params = item.Request.Body.Formdata;
+                        break;
+                    case "raw":
+                        requestMethod.RequestRaw = item.Request.Body.Raw;
+                        break;
+                    default:
+                        requestMethod.Params = item.Request.Body.Urlencoded;
+                        break;
+                }
+                functionContent += requestMethod.ToString();
+                modelsContent += requestMethod.BuildTsInterface();
+            }
+            string comments = @$"/**
+  * {Introduction}
+  */";
+            string content = $@"import {{ Injectable }} from '@angular/core';
+import {{ BaseService }} from './base.service';
+import {{ HttpClient }} from '@angular/common/http';
+import {{ Observable }} from 'rxjs';
+
+@Injectable({{
+  providedIn: 'root'
+}})
+{comments}
+export class {GetServiceName()}Service extends BaseService {{
+  constructor(http: HttpClient) {{
+    super(http);
+  }}
+
+{functionContent}
+}}
+";
+            content += modelsContent;
+            return content;
+        }
+    }
+
+    /// <summary>
+    /// 请求方法模型
+    /// </summary>
+    public class RequestMethodModel
+    {
+        public string Method { get; set; }
+        public List<string> Path { get; set; }
+        /// <summary>
+        /// 请求类型
+        /// </summary>
+        public string RequestBodyType { get; set; }
+        /// <summary>
+        /// 请求参数
+        /// </summary>
+        public List<Params> Params { get; set; }
+        /// <summary>
+        /// 请求query
+        /// </summary>
+        public List<Query> Query { get; set; }
+        /// <summary>
+        /// 请求内容
+        /// </summary>
+        public string RequestRaw { get; set; }
+        /// <summary>
+        /// 描述
+        /// </summary>
+        public string Description { get; set; }
+        /// <summary>
+        /// 返回的json示例
+        /// </summary>
+        public string ResponseJson { get; set; }
+
+        public List<Params> ResponseFileds { get; set; }
+
+        /// <summary>
+        /// 生成ts对应的接口
+        /// </summary>
+        /// <returns></returns>
+        public string BuildTsInterface()
+        {
+            string modelContent = "";
+            string name = Path.Last();
+            name = name.First().ToString().ToUpper() + name.Substring(1);
+            // 返回的模型构建
+            if (ResponseJson != null)
+            {
+                var response = JObject.Parse(ResponseJson);
+                if (response["data"].HasValues)
+                {
+                    modelContent += ParseJson((JObject)response["data"], name + "VM");
+                }
+            }
+            // 请求的模型
+            if (Params != null && Params.Count > 0)
+            {
+                modelContent += ParamsToTs(name + "Form");
+            }
+
+            if (!string.IsNullOrEmpty(RequestRaw))
+            {
+                var request = JObject.Parse(RequestRaw);
+                modelContent += ParseJson(request, name + "Form");
+            }
+            return modelContent;
+        }
+
+        public override string ToString()
+        {
+            string functionStr;
+            if (Method.ToLower() == "get")
+            {
+                functionStr = GetGetFunction();
+            }
+            else
+            {
+                functionStr = GetPostFunction();
+            }
+
+            return GetComments() + functionStr;
+        }
+        /// <summary>
+        /// 获取get请求函数
+        /// </summary>
+        /// <returns></returns>
+        private string GetGetFunction()
+        {
+            var name = Path.Last();
+            name = name.First().ToString().ToUpper() + name.Substring(1);
+            var query = Query?.Select(s => s.Key + ": string").ToList();
+
+            var functionParams = query == null ? "" : string.Join(",", query);
+            query = Query?.Select(s => s.Key + $"=${{{s.Key.Trim()}}}").ToList();
+            var queryString = query == null ? "" : string.Join("&", query);
+            if (!string.IsNullOrEmpty(queryString))
+            {
+                queryString = @$" + `{queryString}`";
+            }
+            var routePath = "";
+            foreach (var item in Path)
+            {
+                routePath += "/" + item;
+            }
+
+            var typeName = name + "VM";
+            // 判断是否有返回的示例
+            if (ResponseJson != null)
+            {
+                var response = JObject.Parse(ResponseJson);
+                var data = response["data"];
+                if (!data.HasValues)
+                {
+                    typeName = "string";
+                }
+            }
+            var function = @$"{name}({functionParams}): Observable<{typeName}>{{
+  const url='{routePath}?'{queryString};
+  return this.get<{typeName}>(url);
+}}
+";
+            return function;
+        }
+        /// <summary>
+        /// 获取post请求函数
+        /// </summary>
+        /// <returns></returns>
+        private string GetPostFunction()
+        {
+            var name = Path.Last();
+            name = name.First().ToString().ToUpper() + name.Substring(1);
+            var query = Query?.Select(s => s.Key + ": string").ToList();
+            var functionParams = query == null ? "" : string.Join(",", query);
+            if (!string.IsNullOrEmpty(functionParams))
+            {
+                functionParams += ", ";
+            }
+
+            query = Query?.Select(s => s.Key + $"={{{s.Key}}}").ToList();
+            var queryString = query == null ? "" : string.Join("&", query);
+            if (!string.IsNullOrEmpty(queryString))
+            {
+                queryString = @$" + `{queryString}`";
+            }
+
+            var routePath = "";
+            foreach (var item in Path)
+            {
+                routePath += "/" + item;
+            }
+
+            var dataType = name + "Form";
+            var typeName = name + "VM";
+            // 判断是否有返回的示例
+            var response = JObject.Parse(ResponseJson);
+            var data = response["data"];
+            if (!data.HasValues)
+            {
+                typeName = "string";
+            }
+            var function = @$"{name}({functionParams}data: {dataType}): Observable<{typeName}>{{
+  const url='{routePath}?'{queryString};
+  return this.post<{typeName}>(url, data);
+}}
+";
+            return function;
+        }
+        /// <summary>
+        /// 获取接口注释
+        /// </summary>
+        /// <returns></returns>
+        private string GetComments()
+        {
+            var commentsParams = "";
+            if (Query != null)
+            {
+                foreach (var item in Query)
+                {
+                    commentsParams += $" * @param {item.Key} {item.Description}\r\n";
+                }
+                commentsParams = "\r\n" + commentsParams;
+
+            }
+            // 如果是Post请求
+            var data = "";
+            if (RequestBodyType != null)
+            {
+                var name = Path.Last();
+                data = $"\r\n * {name}Form 提交数据\r\n";
+            }
+            var comments = @$"
+/**
+ * {Description}{commentsParams}{data} */
+";
+            return comments;
+        }
+
+        public string ParseJson(JObject data, string name)
+        {
+            string propertyString = "";
+            string innerContent = "";
+
+            if (data != null && data.HasValues)
+            {
+                foreach (var prop in (data).Properties())
+                {
+                    string valueType = "";
+                    switch (prop.Value.Type)
+                    {
+                        case JTokenType.Object:
+                            valueType = $"{prop.Name}VM";
+                            innerContent += ParseJson((JObject)prop.Value, $"{prop.Name}VM");
+                            break;
+                        case JTokenType.Array:
+                            valueType = $"{prop.Name}VM[]";
+                            var value = prop.Value?.First;
+                            if (value != null && value.Type == JTokenType.Object)
+                            {
+                                innerContent += ParseJson((JObject)value, $"{prop.Name}VM[]");
+                            }
+                            break;
+                        case JTokenType.Integer:
+                        case JTokenType.Bytes:
+                        case JTokenType.Float:
+                            valueType = "number";
+                            break;
+                        case JTokenType.Boolean:
+                            valueType = "boolean";
+                            break;
+                        case JTokenType.Null:
+                            valueType = "null";
+                            break;
+                        case JTokenType.Undefined:
+                            break;
+                        case JTokenType.Date:
+                        case JTokenType.TimeSpan:
+                            valueType = "Date";
+                            break;
+                        default:
+                            valueType = "string";
+                            break;
+                    }
+
+                    propertyString += $"{prop.Name}: {valueType};\r\n";
+                }
+            }
+
+            string interfaceString = @$"export interface {name} {{
+  {propertyString}
+}}
+{innerContent}
+";
+
+            return interfaceString;
+        }
+
+        /// <summary>
+        /// 请求参数变为ts接口
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns></returns>
+        public string ParamsToTs(string name)
+        {
+            string propertyString = "";
+            foreach (var item in Params)
+            {
+                var comment = @$"/**
+ * {item.Description}
+ */
+";
+                propertyString += comment + $"{item.Key}: string;\r\n";
+            }
+
+            string interfaceString = @$"export interface {name} {{
+{propertyString}
+}}
+";
+
+            return interfaceString;
+        }
+    }
+
+}

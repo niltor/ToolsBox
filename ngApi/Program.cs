@@ -8,8 +8,8 @@ namespace ngApi
         {
             Console.WriteLine("Hello World!");
 
-            var toTs = new JsonToTs();
-            toTs.ToNgService();
+            //var toTs = new JsonToTs();
+            //toTs.ToNgService();
         }
     }
 }

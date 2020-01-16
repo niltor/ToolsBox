@@ -1,0 +1,53 @@
+﻿@page "/"
+<style>
+    textarea {
+        min-height: 300px;
+    }
+</style>
+<div class="container">
+    <div class="col">
+        <p>
+            请复制postman导出的json内容！
+        </p>
+        <button class="btn btn-primary" @onclick="Generate">生成服务</button>
+        <textarea class="form-control my-2" @bind="@fileContent"></textarea>
+    </div>
+    <div class="row">
+        @foreach (var item in list as List<ServiceView>)
+        {
+            <div class="col-md-6">
+                <h4>@item.Name<span>Service</span></h4>
+                <textarea cols="50" class="form-control">@item.Content</textarea>
+            </div>
+        }
+    </div>
+</div>
+@code{
+    private string fileContent = "";
+    private List<ServiceView> list = new List<ServiceView>();
+    private void Generate()
+    {
+        var project = PostManJson.FromJson(fileContent);
+
+        foreach (var service in project.Item)
+        {
+            var model = new NgServiceModel
+            {
+                Introduction = service.Name,
+                Methods = service.Children
+            };
+
+            var serviceContent = model.BuildServiceContent();
+
+            if (!string.IsNullOrEmpty(serviceContent))
+            {
+                list.Add(new ServiceView
+                {
+                    Content = serviceContent,
+                    Name = model.GetServiceName()
+                });
+            }
+
+        }
+    }
+}

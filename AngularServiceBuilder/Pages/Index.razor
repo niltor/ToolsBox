@@ -10,6 +10,9 @@
             请复制postman导出的json内容！
         </p>
         <button class="btn btn-primary" @onclick="Generate">生成服务</button>
+        <p class="text-danger mt-2">
+            @errorMessage
+        </p>
         <textarea class="form-control my-2" @bind="@fileContent"></textarea>
     </div>
     <div class="row">
@@ -24,30 +27,37 @@
 </div>
 @code{
     private string fileContent = "";
+    private string errorMessage = "";
     private List<ServiceView> list = new List<ServiceView>();
     private void Generate()
     {
-        var project = PostManJson.FromJson(fileContent);
-
-        foreach (var service in project.Item)
+        try
         {
-            var model = new NgServiceModel
+            var project = PostManJson.FromJson(fileContent);
+            foreach (var service in project.Item)
             {
-                Introduction = service.Name,
-                Methods = service.Children
-            };
-
-            var serviceContent = model.BuildServiceContent();
-
-            if (!string.IsNullOrEmpty(serviceContent))
-            {
-                list.Add(new ServiceView
+                var model = new NgServiceModel
                 {
-                    Content = serviceContent,
-                    Name = model.GetServiceName()
-                });
-            }
+                    Introduction = service.Name,
+                    Methods = service.Children
+                };
 
+                var serviceContent = model.BuildServiceContent();
+
+                if (!string.IsNullOrEmpty(serviceContent))
+                {
+                    list.Add(new ServiceView
+                    {
+                        Content = serviceContent,
+                        Name = model.GetServiceName()
+                    });
+                }
+            }
+        }
+        catch (Exception)
+        {
+            errorMessage = "解析错误，请确认导入的json正确";
+            throw;
         }
     }
 }

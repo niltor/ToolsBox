@@ -79,6 +79,7 @@ namespace PostmanToMD
             }
             catch (Exception e)
             {
+                throw;
                 MessageBox.Show("内容解析出错:" + e.Message);
             }
         }

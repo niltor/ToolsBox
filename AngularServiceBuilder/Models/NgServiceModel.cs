@@ -82,8 +82,8 @@ namespace AngularServiceBuilder.Models
             string comments = @$"/**
   * {Introduction}
   */";
-            string content = $@"import {{ Injectable }} from '@angular/core';
-import {{ BaseService }} from './base.service';
+            string content = $@"import {{ Injectable, Inject }} from '@angular/core';
+import {{ BaseService, API_BASE_URL, Result }} from './base.service';
 import {{ HttpClient }} from '@angular/common/http';
 import {{ Observable }} from 'rxjs';
 
@@ -92,8 +92,8 @@ import {{ Observable }} from 'rxjs';
 }})
 {comments}
 export class {GetServiceName()}Service extends BaseService {{
-  constructor(http: HttpClient) {{
-    super(http);
+  constructor(http: HttpClient, @Inject(API_BASE_URL) baseUrl?: string) {{
+    super(http, baseUrl);
   }}
 
 {functionContent}
@@ -175,7 +175,8 @@ export class {GetServiceName()}Service extends BaseService {{
         public override string ToString()
         {
             string functionStr;
-            if (Method.ToLower() == "get")
+            string requestMethod = Method.ToLower();
+            if (requestMethod == "get" || requestMethod == "delete")
             {
                 functionStr = GetGetFunction();
             }
@@ -223,9 +224,14 @@ export class {GetServiceName()}Service extends BaseService {{
                     typeName = "string";
                 }
             }
-            var function = @$"{name}({functionParams}): Observable<{typeName}>{{
+            else
+            {
+                typeName = "void";
+            }
+            string prefix = Method.ToLower();
+            var function = @$"{ToTitle(prefix) + name}({functionParams}): Observable<Result<{typeName}>>{{
   const url='{routePath}?'{queryString};
-  return this.get<{typeName}>(url);
+  return this.{prefix}<Result<{typeName}>>(url);
 }}
 ";
             return function;
@@ -236,6 +242,7 @@ export class {GetServiceName()}Service extends BaseService {{
         /// <returns></returns>
         private string GetPostFunction()
         {
+            var prefix = Method.ToLower();
             var name = Path.Last();
             name = name.Replace("_", "");
             name = name.First().ToString().ToUpper() + name.Substring(1);
@@ -273,9 +280,13 @@ export class {GetServiceName()}Service extends BaseService {{
                     typeName = "string";
                 }
             }
-            var function = @$"{name}({functionParams}data: {dataType}): Observable<{typeName}>{{
+            else
+            {
+                typeName = "void";
+            }
+            var function = @$"{ToTitle(prefix) + name}({functionParams}data: {dataType}): Observable<Result<{typeName}>>{{
   const url='{routePath}?'{queryString};
-  return this.post<{typeName}>(url, data);
+  return this.{prefix}<Result<{typeName}>>(url, data);
 }}
 ";
             return function;

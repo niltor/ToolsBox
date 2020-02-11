@@ -268,8 +268,7 @@ export class {GetServiceName()}Service extends BaseService {{
                 routePath += "/" + item;
             }
             string dataType = "";
-            string hasData = "";
-
+            string hasData = ", {}";
 
             if (Params == null && string.IsNullOrEmpty(RequestRaw))
             {
@@ -339,6 +338,7 @@ export class {GetServiceName()}Service extends BaseService {{
 
         public string ParseJson(JToken data, string name)
         {
+            name = name.Replace("_", "");
             string propertyString = "";
             string innerContent = "";
             if (data != null && data.HasValues)
@@ -391,7 +391,7 @@ export class {GetServiceName()}Service extends BaseService {{
                             valueType = "string";
                             break;
                     }
-                    propertyString += $"{prop.Name}: {valueType};\r\n";
+                    propertyString += $"{prop.Name}: {valueType.Replace("_", "")};\r\n";
                 }
             }
 

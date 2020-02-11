@@ -223,6 +223,10 @@ export class {GetServiceName()}Service extends BaseService {{
                 {
                     typeName = "string";
                 }
+                else if (data.Type == JTokenType.Array)
+                {
+                    typeName = name + "VM[]";
+                }
             }
             else
             {
@@ -248,10 +252,6 @@ export class {GetServiceName()}Service extends BaseService {{
             name = name.First().ToString().ToUpper() + name.Substring(1);
             var query = Query?.Select(s => s.Key.Replace("[", "").Replace("]", "") + ": string").ToList();
             var functionParams = query == null ? "" : string.Join(",", query);
-            if (!string.IsNullOrEmpty(functionParams))
-            {
-                functionParams += ", ";
-            }
 
             query = Query?.Select(s => s.Key.Replace("[", "").Replace("]", "") +
                 $"=${{{s.Key.Replace("[", "").Replace("]", "").Trim()}}}")
@@ -267,8 +267,23 @@ export class {GetServiceName()}Service extends BaseService {{
             {
                 routePath += "/" + item;
             }
+            string dataType = "";
+            string hasData = "";
 
-            var dataType = name + "Form";
+
+            if (Params == null && string.IsNullOrEmpty(RequestRaw))
+            {
+                dataType = "";
+            }
+            else
+            {
+                dataType = "data: " + name + "Form";
+                hasData = ", data";
+                if (!string.IsNullOrEmpty(functionParams))
+                {
+                    dataType = ", " + dataType;
+                }
+            }
             var typeName = name + "VM";
             // 判断是否有返回的示例
             if (ResponseJson != null)
@@ -284,9 +299,9 @@ export class {GetServiceName()}Service extends BaseService {{
             {
                 typeName = "void";
             }
-            var function = @$"{ToTitle(prefix) + name}({functionParams}data: {dataType}): Observable<Result<{typeName}>>{{
+            var function = @$"{ToTitle(prefix) + name}({functionParams}{dataType}): Observable<Result<{typeName}>>{{
   const url='{routePath}?'{queryString};
-  return this.{prefix}<Result<{typeName}>>(url, data);
+  return this.{prefix}<Result<{typeName}>>(url{hasData});
 }}
 ";
             return function;

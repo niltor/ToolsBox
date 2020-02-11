@@ -80,8 +80,8 @@ namespace AngularServiceBuilder.Models
                 modelsContent += requestMethod.BuildTsInterface();
             }
             string comments = @$"/**
-  * {Introduction}
-  */";
+ * {Introduction}
+ */";
             string content = $@"import {{ Injectable, Inject }} from '@angular/core';
 import {{ BaseService, API_BASE_URL, Result }} from './base.service';
 import {{ HttpClient }} from '@angular/common/http';
@@ -305,8 +305,6 @@ export class {GetServiceName()}Service extends BaseService {{
                     item.Description ??= "无说明";
                     commentsParams += $" * @param {item.Key} {item.Description}\r\n";
                 }
-                commentsParams = "\r\n" + commentsParams;
-
             }
             // 如果是Post请求
             var data = "";
@@ -314,11 +312,12 @@ export class {GetServiceName()}Service extends BaseService {{
             {
                 var name = Path.Last();
                 name = name.Replace("_", "");
-                data = $"\r\n * @param {name}Form 提交数据\r\n";
+                data = $" * @param {name}Form 提交数据\r\n";
             }
             var comments = @$"
 /**
- * {Description}{commentsParams}{data} */
+ * {Description}
+{commentsParams}{data} */
 ";
             return comments;
         }
@@ -348,10 +347,11 @@ export class {GetServiceName()}Service extends BaseService {{
                             innerContent += ParseJson((JObject)prop.Value, $"{ToTitle(prop.Name)}VM");
                             break;
                         case JTokenType.Array:
-                            valueType = $"{ToTitle(prop.Name)}VM[]";
                             var value = prop.Value?.First;
+                            valueType = GetType(value) + "[]";
                             if (value != null && value.Type == JTokenType.Object)
                             {
+                                valueType = $"{ToTitle(prop.Name)}VM[]";
                                 innerContent += ParseJson((JObject)value, $"{ToTitle(prop.Name)}VM");
                             }
                             break;
@@ -387,6 +387,34 @@ export class {GetServiceName()}Service extends BaseService {{
 ";
 
             return interfaceString;
+        }
+        public string GetType(JToken data)
+        {
+            string valueType = "";
+            switch (data.Type)
+            {
+                case JTokenType.Integer:
+                case JTokenType.Bytes:
+                case JTokenType.Float:
+                    valueType = "number";
+                    break;
+                case JTokenType.Boolean:
+                    valueType = "boolean";
+                    break;
+                case JTokenType.Null:
+                    valueType = "null";
+                    break;
+                case JTokenType.Undefined:
+                    break;
+                case JTokenType.Date:
+                case JTokenType.TimeSpan:
+                    valueType = "Date";
+                    break;
+                default:
+                    valueType = "string";
+                    break;
+            }
+            return valueType;
         }
 
         /// <summary>

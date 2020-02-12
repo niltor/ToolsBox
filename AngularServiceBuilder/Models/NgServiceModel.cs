@@ -278,6 +278,16 @@ export class {GetServiceName()}Service extends BaseService {{
             {
                 dataType = "data: " + name + "Form";
                 hasData = ", data";
+
+                // 是否文件上传
+                if (RequestBodyType == "formdata")
+                {
+                    var hasFile = Params?.Any(p => p.Type == "file");
+                    if (hasFile.Value)
+                    {
+                        dataType = "data: FormData";
+                    }
+                }
                 if (!string.IsNullOrEmpty(functionParams))
                 {
                     dataType = ", " + dataType;
@@ -440,6 +450,8 @@ export class {GetServiceName()}Service extends BaseService {{
         public string ParamsToTs(string name)
         {
             string propertyString = "";
+            // 文件上传不生成对应类型
+            if (RequestBodyType == "formdata") return propertyString;
             foreach (var item in Params)
             {
                 var comment = @$"/**

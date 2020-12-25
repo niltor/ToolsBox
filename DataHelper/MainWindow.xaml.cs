@@ -79,7 +79,7 @@ namespace DataHelper
 
             // 入库
             var helper = new WorkSafetyDBHelper(Dispatcher, OutputMsg);
-            await helper.InsertUsersAsync(list);
+            helper.InsertUsersAsync(list);
             button1.IsEnabled = true;
         }
 

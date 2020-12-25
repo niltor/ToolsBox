@@ -35,11 +35,8 @@ namespace DataHelper
                 {
                     //Get the path of specified file
                     FilePath.Text = openFileDialog.FileName;
-                    //Read the contents of the file into a stream
-
 
                 }
-
             }
         }
 
@@ -81,12 +78,12 @@ namespace DataHelper
             }
 
             // 入库
-            var helper = new WorkSafetyDBHelper(OutputMsg);
+            var helper = new WorkSafetyDBHelper(Dispatcher, OutputMsg);
             await helper.InsertUsersAsync(list);
             button1.IsEnabled = true;
         }
 
-        private async void button2_ClickAsync(object sender, RoutedEventArgs e)
+        private void button2_ClickAsync(object sender, RoutedEventArgs e)
         {
             button2.IsEnabled = false;
             // 读取内容
@@ -112,7 +109,7 @@ namespace DataHelper
                             getBirthday = DateTime.TryParseExact(birthday, "yyyy/M/d", CultureInfo.InvariantCulture, DateTimeStyles.None, out date);
                         }
                         var contactRole = sheet.Cells[i, 14].Text?.Trim();
-                        byte contactRoleIntValue = 0;
+                        byte contactRoleIntValue = 9;
                         switch (contactRole)
                         {
                             case "安全生产分管领导":
@@ -162,11 +159,10 @@ namespace DataHelper
 
             }
             // 入库
-            var helper = new WorkSafetyDBHelper(OutputMsg);
+            var helper = new WorkSafetyDBHelper(Dispatcher, OutputMsg);
             var task = helper.InsertPersonFileAsync(list);
             task.Wait();
             button2.IsEnabled = true;
-
         }
 
         private async void button3_ClickAsync(object sender, RoutedEventArgs e)
@@ -223,7 +219,7 @@ namespace DataHelper
                 }
             }
             // 入库
-            var helper = new WorkSafetyDBHelper(OutputMsg);
+            var helper = new WorkSafetyDBHelper(Dispatcher, OutputMsg);
             await helper.InsertOrgInfoAsync(list);
             button3.IsEnabled = true;
 

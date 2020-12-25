@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
+using System.Windows.Threading;
 
 namespace DataHelper
 {
@@ -15,14 +16,16 @@ namespace DataHelper
     {
 
         static work_safety3Context _context = new work_safety3Context();
+        readonly Dispatcher dispatcher;
         TextBox _box;
         IMapper _mapper;
         public WorkSafetyDBHelper()
         {
 
         }
-        public WorkSafetyDBHelper(TextBox box)
+        public WorkSafetyDBHelper(Dispatcher dispatcher, TextBox box)
         {
+            this.dispatcher = dispatcher;
             _box = box;
             var configuration = new MapperConfiguration(cfg =>
             {
@@ -119,12 +122,17 @@ namespace DataHelper
                 personFile.ProvinceId = provinceId;
                 personFile.CityId = cityId;
                 personFile.OrgId = orgId;
-                personFile.InputUser = "系统添加";
+                personFile.InputUser = "批量导入";
                 // 判断是否存在，存在则更新
                 var exist = _context.PersonFile.Where(p => p.Phone == personFile.Phone && p.ContactRole == personFile.ContactRole)
                     .FirstOrDefault();
                 if (exist != null)
                 {
+                    dispatcher.Invoke(() =>
+                    {
+                        _box.AppendText($"更新数据{exist.RealName}:{exist.Phone}\r\n");
+                    });
+
                     _context.Entry(exist).CurrentValues.SetValues(person);
                     exist.ProvinceId = provinceId;
                     exist.CityId = cityId;
@@ -133,12 +141,19 @@ namespace DataHelper
                 }
                 else
                 {
+                    dispatcher.Invoke(() =>
+                    {
+                        _box.AppendText($"[{insertNumber}]添加数据{personFile.Phone}\r\n");
+                    });
                     insertNumber++;
                     _context.Add(personFile);
                     await _context.SaveChangesAsync();
                 }
             }
-            _box.AppendText($"完成，共插入{insertNumber}条数据!");
+            dispatcher.Invoke(() =>
+            {
+                _box.AppendText($"完成，共插入{insertNumber}条数据!\r\n");
+            });
         }
 
 

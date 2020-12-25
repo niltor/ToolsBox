@@ -21,7 +21,7 @@ namespace DataHelper.Models
         public byte IsPartTime { get; set; } = 1;
         public string InternalPhone { get; set; }
         public string PublicPhone { get; set; }
-        public byte? ContactRole { get; set; } = 0;
+        public byte? ContactRole { get; set; } = 9;
 
     }
 }

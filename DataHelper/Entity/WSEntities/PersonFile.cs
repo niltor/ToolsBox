@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DataHelper.Entity.WSEntities
 {
+    [Table("person_file_copy")]
     public partial class PersonFile
     {
         public int Id { get; set; }

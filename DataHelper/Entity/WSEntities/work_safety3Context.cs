@@ -998,6 +998,11 @@ namespace DataHelper.Entity.WSEntities
                     .HasDefaultValueSql("'0'")
                     .HasComment("是否为联系人");
 
+                entity.Property(e => e.ContractType)
+                    .HasColumnName("contractType")
+                    .HasColumnType("tinyint(1)")
+                    .HasComment("角色");
+
                 entity.Property(e => e.IsDeleted)
                     .HasColumnName("isDeleted")
                     .HasColumnType("tinyint(1)")

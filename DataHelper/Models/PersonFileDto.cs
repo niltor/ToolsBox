@@ -22,6 +22,7 @@ namespace DataHelper.Models
         public string InternalPhone { get; set; }
         public string PublicPhone { get; set; }
         public byte? ContactRole { get; set; } = 9;
+        public byte? ContractType { get; set; } = 0;
 
     }
 }

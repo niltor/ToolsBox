@@ -4,7 +4,6 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DataHelper.Entity.WSEntities
 {
-    [Table("person_file_copy")]
     public partial class PersonFile
     {
         public int Id { get; set; }
@@ -43,6 +42,7 @@ namespace DataHelper.Entity.WSEntities
         public byte? IsDeleted { get; set; }
         public byte? ActionType { get; set; }
         public byte? IsLeader { get; set; }
-        public byte? ContactRole{ get; set; }
+        public byte? ContactRole { get; set; }
+        public byte? ContractType { get; set; }
     }
 }

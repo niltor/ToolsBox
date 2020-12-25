@@ -83,7 +83,7 @@ namespace DataHelper
             button1.IsEnabled = true;
         }
 
-        private void button2_ClickAsync(object sender, RoutedEventArgs e)
+        private async void button2_ClickAsync(object sender, RoutedEventArgs e)
         {
             button2.IsEnabled = false;
             // 读取内容
@@ -100,7 +100,7 @@ namespace DataHelper
                     // 循环获取整个Excel数据表数据
                     for (int i = startRowNumber; i <= endRowNumber; i++)
                     {
-                        var fulltime = sheet.Cells[i, 11].Text?.Trim();
+                        var fulltime = sheet.Cells[i, 12].Text?.Trim();
                         var birthday = sheet.Cells[i, 8].Text?.Trim();
                         var getBirthday = false;
                         DateTime date = DateTime.Today;
@@ -108,7 +108,9 @@ namespace DataHelper
                         {
                             getBirthday = DateTime.TryParseExact(birthday, "yyyy/M/d", CultureInfo.InvariantCulture, DateTimeStyles.None, out date);
                         }
-                        var contactRole = sheet.Cells[i, 14].Text?.Trim();
+                        var contractType = sheet.Cells[i, 9].Text?.Trim();
+                        var contactRole = sheet.Cells[i, 15].Text?.Trim();
+
                         byte contactRoleIntValue = 9;
                         switch (contactRole)
                         {
@@ -127,6 +129,18 @@ namespace DataHelper
                             default:
                                 break;
                         }
+                        byte contractTypeIntValue = 0;
+                        switch (contractType)
+                        {
+                            case "派遣制":
+                                contractTypeIntValue = 1;
+                                break;
+                            case "合作单位":
+                                contractTypeIntValue = 2;
+                                break;
+                            default:
+                                break;
+                        }
 
                         var personFile = new PersonFileDto
                         {
@@ -137,14 +151,15 @@ namespace DataHelper
                             Sex = sheet.Cells[i, 6].Text?.Trim(),
                             Position = sheet.Cells[i, 7].Text?.Trim(),
                             Birthday = getBirthday ? date : DateTime.Today,
-                            Number = sheet.Cells[i, 9].Text?.Trim(),
-                            Education = sheet.Cells[i, 10].Text?.Trim(),
+                            ContractType = contractTypeIntValue,
+                            Number = sheet.Cells[i, 10].Text?.Trim(),
+                            Education = sheet.Cells[i, 11].Text?.Trim(),
                             IsFulltime = (byte)(fulltime == "是" ? 1 : 0),
-                            Phone = sheet.Cells[i, 12].Text?.Trim(),
-                            Email = sheet.Cells[i, 13].Text?.Trim(),
+                            Phone = sheet.Cells[i, 13].Text?.Trim(),
+                            Email = sheet.Cells[i, 14].Text?.Trim(),
                             ContactRole = contactRoleIntValue,
-                            InternalPhone = sheet.Cells[i, 15].Text?.Trim(),
-                            PublicPhone = sheet.Cells[i, 16].Text?.Trim(),
+                            //InternalPhone = sheet.Cells[i, 16].Text?.Trim(),
+                            //PublicPhone = sheet.Cells[i, 17].Text?.Trim(),
                             IsPartTime = 0
                         };
 
@@ -158,10 +173,10 @@ namespace DataHelper
                 System.Windows.MessageBox.Show("解析错误，请选择相对应的表格");
 
             }
+            OutputMsg.AppendText("读取表格数据完成，准备入库！");
             // 入库
             var helper = new WorkSafetyDBHelper(Dispatcher, OutputMsg);
-            var task = helper.InsertPersonFileAsync(list);
-            task.Wait();
+            await helper.InsertPersonFileAsync(list);
             button2.IsEnabled = true;
         }
 

@@ -1,2544 +1,422 @@
 {
-	"info": {
-		"_postman_id": "f6b82cc7-058d-49d9-b0be-26d3b4af17ef",
-		"name": "921项目",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
-	},
-	"item": [
-		{
-			"name": "上传清单",
-			"item": [
-				{
-					"name": "上传清单",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "formdata",
-							"formdata": [
-								{
-									"key": "file",
-									"description": "上传文件（必填）",
-									"type": "file"
-								}
-							]
-						},
-						"url": {
-							"raw": "http://921.com/api/import/excelList",
-							"protocol": "http",
-							"host": [
-								"921",
-								"com"
-							],
-							"path": [
-								"api",
-								"import",
-								"excelList"
-							]
-						}
-					},
-					"response": [
-						{
-							"name": "上传清单",
-							"originalRequest": {
-								"method": "POST",
-								"header": [],
-								"body": {
-									"mode": "formdata",
-									"formdata": [
-										{
-											"key": "file",
-											"description": "上传文件（必填）",
-											"type": "file",
-											"src": {
-												"0": {}
-											}
-										}
-									]
-								},
-								"url": {
-									"raw": "http://921.com/api/import/excelList",
-									"protocol": "http",
-									"host": [
-										"921",
-										"com"
-									],
-									"path": [
-										"api",
-										"import",
-										"excelList"
-									]
-								}
-							},
-							"status": "OK",
-							"code": 200,
-							"_postman_previewlanguage": "json",
-							"header": [
-								{
-									"key": "Cache-Control",
-									"value": "no-cache, private",
-									"name": "Cache-Control",
-									"description": "Tells all caching mechanisms from server to client whether they may cache this object. It is measured in seconds"
-								},
-								{
-									"key": "Connection",
-									"value": "Keep-Alive",
-									"name": "Connection",
-									"description": "Options that are desired for the connection"
-								},
-								{
-									"key": "Content-Length",
-									"value": "402",
-									"name": "Content-Length",
-									"description": "The length of the response body in octets (8-bit bytes)"
-								},
-								{
-									"key": "Content-Type",
-									"value": "application/json",
-									"name": "Content-Type",
-									"description": "The mime type of this content"
-								},
-								{
-									"key": "Date",
-									"value": "Tue, 28 May 2019 01:56:12 GMT",
-									"name": "Date",
-									"description": "The date and time that the message was sent"
-								},
-								{
-									"key": "Keep-Alive",
-									"value": "timeout=5, max=100",
-									"name": "Keep-Alive",
-									"description": "Custom header"
-								},
-								{
-									"key": "Server",
-									"value": "Apache/2.4.37 (Win32) OpenSSL/1.1.1a PHP/7.3.1",
-									"name": "Server",
-									"description": "A name for the server"
-								},
-								{
-									"key": "X-Powered-By",
-									"value": "PHP/7.3.1",
-									"name": "X-Powered-By",
-									"description": "Specifies the technology (ASP.NET, PHP, JBoss, e.g.) supporting the web application (version details are often in X-Runtime, X-Version, or X-AspNet-Version)"
-								}
-							],
-							"cookie": [],
-							"body": "{\"error_code\":0,\"msg\":\"\\u4e0a\\u4f20\\u6210\\u529f\\uff0c\\u6b63\\u5728\\u5ba1\\u67e5\",\"data\":{\"name\":\"\\u7a7a\\u95f4\\u73af\\u5883\\u76d1\\u6d4b\\u8f7d\\u8377\\u56fd\\u4ea7\\u7535\\u5b50\\u5143\\u5668\\u4ef6\\u6e05\\u535520190506.xlsx\",\"stage\":\"\",\"type\":\"\",\"file_path\":\"upload\\\\5bb5628e12da1d69a622dfffd79b95a5.xlsx\",\"structure_id\":0,\"id\":12,\"url\":\"921.com\\/attachment\\/import\\/upload\\\\5bb5628e12da1d69a622dfffd79b95a5.xlsx\"}}"
-						}
-					]
-				},
-				{
-					"name": "获取清单审查进度",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"body": {},
-						"url": {
-							"raw": "http://921.com/api/import/status?list_id=1",
-							"protocol": "http",
-							"host": [
-								"921",
-								"com"
-							],
-							"path": [
-								"api",
-								"import",
-								"status"
-							],
-							"query": [
-								{
-									"key": "list_id",
-									"value": "1",
-									"description": "上传清单文件id（必填）"
-								}
-							]
-						}
-					},
-					"response": [
-						{
-							"name": "获取清单审查进度",
-							"originalRequest": {
-								"method": "GET",
-								"header": [],
-								"body": {},
-								"url": {
-									"raw": "http://921.com/api/import/status?list_id=1",
-									"protocol": "http",
-									"host": [
-										"921",
-										"com"
-									],
-									"path": [
-										"api",
-										"import",
-										"status"
-									],
-									"query": [
-										{
-											"key": "list_id",
-											"value": "1",
-											"description": "上传清单文件id（必填）"
-										}
-									]
-								}
-							},
-							"status": "OK",
-							"code": 200,
-							"_postman_previewlanguage": "json",
-							"header": [
-								{
-									"key": "Cache-Control",
-									"value": "no-cache, private",
-									"name": "Cache-Control",
-									"description": "Tells all caching mechanisms from server to client whether they may cache this object. It is measured in seconds"
-								},
-								{
-									"key": "Connection",
-									"value": "Keep-Alive",
-									"name": "Connection",
-									"description": "Options that are desired for the connection"
-								},
-								{
-									"key": "Content-Length",
-									"value": "197",
-									"name": "Content-Length",
-									"description": "The length of the response body in octets (8-bit bytes)"
-								},
-								{
-									"key": "Content-Type",
-									"value": "application/json",
-									"name": "Content-Type",
-									"description": "The mime type of this content"
-								},
-								{
-									"key": "Date",
-									"value": "Tue, 28 May 2019 08:57:59 GMT",
-									"name": "Date",
-									"description": "The date and time that the message was sent"
-								},
-								{
-									"key": "Keep-Alive",
-									"value": "timeout=5, max=100",
-									"name": "Keep-Alive",
-									"description": "Custom header"
-								},
-								{
-									"key": "Server",
-									"value": "Apache/2.4.37 (Win32) OpenSSL/1.1.1a PHP/7.3.1",
-									"name": "Server",
-									"description": "A name for the server"
-								},
-								{
-									"key": "X-Powered-By",
-									"value": "PHP/7.3.1",
-									"name": "X-Powered-By",
-									"description": "Specifies the technology (ASP.NET, PHP, JBoss, e.g.) supporting the web application (version details are often in X-Runtime, X-Version, or X-AspNet-Version)"
-								}
-							],
-							"cookie": [],
-							"body": "{\"error_code\":0,\"msg\":\"ok\",\"data\":{\"id\":1,\"status\":\"1\",\"valid_status\":\"2\",\"total_number\":64,\"current_number\":64,\"output_path\":\"\\u5ba1\\u67e5\\u7ed3\\u679c.xlsx\",\"url\":\"921.com\\/attachment\\/import\\/\"}}"
-						}
-					]
-				},
-				{
-					"name": "获取版本号",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"body": {},
-						"url": {
-							"raw": "http://921.com/api/import/getVersion?stage=初样阶段&structure_id=1&type=2",
-							"protocol": "http",
-							"host": [
-								"921",
-								"com"
-							],
-							"path": [
-								"api",
-								"import",
-								"getVersion"
-							],
-							"query": [
-								{
-									"key": "stage",
-									"value": "初样阶段",
-									"description": "阶段（必填）"
-								},
-								{
-									"key": "structure_id",
-									"value": "1",
-									"description": "挂载节点id（必填）"
-								},
-								{
-									"key": "type",
-									"value": "2",
-									"description": "清单类型（1：国产  2：进口）（必填）"
-								}
-							]
-						}
-					},
-					"response": [
-						{
-							"name": "获取版本号",
-							"originalRequest": {
-								"method": "GET",
-								"header": [],
-								"body": {},
-								"url": {
-									"raw": "http://921.com/api/import/getVersion?stage=初样阶段&structure_id=1&type=2",
-									"protocol": "http",
-									"host": [
-										"921",
-										"com"
-									],
-									"path": [
-										"api",
-										"import",
-										"getVersion"
-									],
-									"query": [
-										{
-											"key": "stage",
-											"value": "初样阶段",
-											"description": "阶段（必填）"
-										},
-										{
-											"key": "structure_id",
-											"value": "1",
-											"description": "挂载节点id（必填）"
-										},
-										{
-											"key": "type",
-											"value": "2",
-											"description": "清单类型（1：国产  2：进口）（必填）"
-										}
-									]
-								}
-							},
-							"status": "OK",
-							"code": 200,
-							"_postman_previewlanguage": "json",
-							"header": [
-								{
-									"key": "Cache-Control",
-									"value": "no-cache, private",
-									"name": "Cache-Control",
-									"description": "Tells all caching mechanisms from server to client whether they may cache this object. It is measured in seconds"
-								},
-								{
-									"key": "Connection",
-									"value": "Keep-Alive",
-									"name": "Connection",
-									"description": "Options that are desired for the connection"
-								},
-								{
-									"key": "Content-Length",
-									"value": "54",
-									"name": "Content-Length",
-									"description": "The length of the response body in octets (8-bit bytes)"
-								},
-								{
-									"key": "Content-Type",
-									"value": "application/json",
-									"name": "Content-Type",
-									"description": "The mime type of this content"
-								},
-								{
-									"key": "Date",
-									"value": "Thu, 30 May 2019 02:45:58 GMT",
-									"name": "Date",
-									"description": "The date and time that the message was sent"
-								},
-								{
-									"key": "Keep-Alive",
-									"value": "timeout=5, max=100",
-									"name": "Keep-Alive",
-									"description": "Custom header"
-								},
-								{
-									"key": "Server",
-									"value": "Apache/2.4.37 (Win32) OpenSSL/1.1.1a PHP/7.3.1",
-									"name": "Server",
-									"description": "A name for the server"
-								},
-								{
-									"key": "X-Powered-By",
-									"value": "PHP/7.3.1",
-									"name": "X-Powered-By",
-									"description": "Specifies the technology (ASP.NET, PHP, JBoss, e.g.) supporting the web application (version details are often in X-Runtime, X-Version, or X-AspNet-Version)"
-								}
-							],
-							"cookie": [],
-							"body": "{\"error_code\":0,\"msg\":\"ok\",\"data\":{\"versionNumber\":1}}"
-						},
-						{
-							"name": "获取版本号",
-							"originalRequest": {
-								"method": "GET",
-								"header": [],
-								"body": {},
-								"url": {
-									"raw": "http://921.com/api/import/getVersion?stage=初样阶段&structure_id=3&type=1",
-									"protocol": "http",
-									"host": [
-										"921",
-										"com"
-									],
-									"path": [
-										"api",
-										"import",
-										"getVersion"
-									],
-									"query": [
-										{
-											"key": "stage",
-											"value": "初样阶段",
-											"description": "阶段（必填）"
-										},
-										{
-											"key": "structure_id",
-											"value": "3",
-											"description": "挂载节点id（必填）"
-										},
-										{
-											"key": "type",
-											"value": "1",
-											"description": "清单类型（1：国产  2：进口）（必填）"
-										}
-									]
-								}
-							},
-							"status": "OK",
-							"code": 200,
-							"_postman_previewlanguage": "json",
-							"header": [
-								{
-									"key": "Cache-Control",
-									"value": "no-cache, private",
-									"name": "Cache-Control",
-									"description": "Tells all caching mechanisms from server to client whether they may cache this object. It is measured in seconds"
-								},
-								{
-									"key": "Connection",
-									"value": "Keep-Alive",
-									"name": "Connection",
-									"description": "Options that are desired for the connection"
-								},
-								{
-									"key": "Content-Length",
-									"value": "54",
-									"name": "Content-Length",
-									"description": "The length of the response body in octets (8-bit bytes)"
-								},
-								{
-									"key": "Content-Type",
-									"value": "application/json",
-									"name": "Content-Type",
-									"description": "The mime type of this content"
-								},
-								{
-									"key": "Date",
-									"value": "Sat, 01 Jun 2019 03:59:44 GMT",
-									"name": "Date",
-									"description": "The date and time that the message was sent"
-								},
-								{
-									"key": "Keep-Alive",
-									"value": "timeout=5, max=100",
-									"name": "Keep-Alive",
-									"description": "Custom header"
-								},
-								{
-									"key": "Server",
-									"value": "Apache/2.4.37 (Win32) OpenSSL/1.1.1a PHP/7.3.1",
-									"name": "Server",
-									"description": "A name for the server"
-								},
-								{
-									"key": "X-Powered-By",
-									"value": "PHP/7.3.1",
-									"name": "X-Powered-By",
-									"description": "Specifies the technology (ASP.NET, PHP, JBoss, e.g.) supporting the web application (version details are often in X-Runtime, X-Version, or X-AspNet-Version)"
-								}
-							],
-							"cookie": [],
-							"body": "{\"error_code\":0,\"msg\":\"ok\",\"data\":{\"versionNumber\":3}}"
-						}
-					]
-				},
-				{
-					"name": "创建清单",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "formdata",
-							"formdata": [
-								{
-									"key": "file_id",
-									"value": "1",
-									"description": "上传清单id（必填）",
-									"type": "text"
-								},
-								{
-									"key": "type",
-									"value": "1",
-									"description": "清单类型（1：国产  2：进口）",
-									"type": "text"
-								},
-								{
-									"key": "name",
-									"value": "氮气回路清单",
-									"description": "清单名称（必填）",
-									"type": "text"
-								},
-								{
-									"key": "stage",
-									"value": "初样阶段",
-									"description": "研制阶段（必填）",
-									"type": "text"
-								},
-								{
-									"key": "structure_id",
-									"value": "17",
-									"description": "挂载节点（必填）",
-									"type": "text"
-								},
-								{
-									"key": "version_number",
-									"value": "3",
-									"description": "版本号（必填）",
-									"type": "text"
-								},
-								{
-									"key": "version_explain",
-									"value": "氮气回路清单版本1.0",
-									"description": "版本说明（非必填）",
-									"type": "text"
-								}
-							]
-						},
-						"url": {
-							"raw": "http://921.com/api/import/createList",
-							"protocol": "http",
-							"host": [
-								"921",
-								"com"
-							],
-							"path": [
-								"api",
-								"import",
-								"createList"
-							]
-						}
-					},
-					"response": [
-						{
-							"name": "创建清单",
-							"originalRequest": {
-								"method": "POST",
-								"header": [],
-								"body": {
-									"mode": "formdata",
-									"formdata": [
-										{
-											"key": "file_id",
-											"value": "1",
-											"description": "上传清单id（必填）",
-											"type": "text"
-										},
-										{
-											"key": "name",
-											"value": "氮气回路清单",
-											"description": "清单名称（必填）",
-											"type": "text"
-										},
-										{
-											"key": "stage",
-											"value": "1",
-											"description": "研制阶段（必填）",
-											"type": "text"
-										},
-										{
-											"key": "structure_id",
-											"value": "20",
-											"description": "挂载节点（必填）",
-											"type": "text"
-										},
-										{
-											"key": "version_number",
-											"value": "1",
-											"description": "版本号（必填）",
-											"type": "text"
-										},
-										{
-											"key": "version_explain",
-											"value": "氮气回路清单版本1.0",
-											"description": "版本说明（非必填）",
-											"type": "text"
-										}
-									]
-								},
-								"url": {
-									"raw": "http://921.com/api/import/createList",
-									"protocol": "http",
-									"host": [
-										"921",
-										"com"
-									],
-									"path": [
-										"api",
-										"import",
-										"createList"
-									]
-								}
-							},
-							"status": "OK",
-							"code": 200,
-							"_postman_previewlanguage": "json",
-							"header": [
-								{
-									"key": "Cache-Control",
-									"value": "no-cache, private",
-									"name": "Cache-Control",
-									"description": "Tells all caching mechanisms from server to client whether they may cache this object. It is measured in seconds"
-								},
-								{
-									"key": "Connection",
-									"value": "Keep-Alive",
-									"name": "Connection",
-									"description": "Options that are desired for the connection"
-								},
-								{
-									"key": "Content-Length",
-									"value": "37",
-									"name": "Content-Length",
-									"description": "The length of the response body in octets (8-bit bytes)"
-								},
-								{
-									"key": "Content-Type",
-									"value": "application/json",
-									"name": "Content-Type",
-									"description": "The mime type of this content"
-								},
-								{
-									"key": "Date",
-									"value": "Tue, 28 May 2019 02:03:18 GMT",
-									"name": "Date",
-									"description": "The date and time that the message was sent"
-								},
-								{
-									"key": "Keep-Alive",
-									"value": "timeout=5, max=99",
-									"name": "Keep-Alive",
-									"description": "Custom header"
-								},
-								{
-									"key": "Server",
-									"value": "Apache/2.4.37 (Win32) OpenSSL/1.1.1a PHP/7.3.1",
-									"name": "Server",
-									"description": "A name for the server"
-								},
-								{
-									"key": "X-Powered-By",
-									"value": "PHP/7.3.1",
-									"name": "X-Powered-By",
-									"description": "Specifies the technology (ASP.NET, PHP, JBoss, e.g.) supporting the web application (version details are often in X-Runtime, X-Version, or X-AspNet-Version)"
-								}
-							],
-							"cookie": [],
-							"body": "{\"error_code\":0,\"msg\":\"ok\",\"data\":\"\"}"
-						}
-					]
-				},
-				{
-					"name": "上传意见清单",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "formdata",
-							"formdata": [
-								{
-									"key": "file",
-									"description": "上传文件（必填）",
-									"type": "file"
-								}
-							]
-						},
-						"url": {
-							"raw": "http://921.com/api/import/addOpinion",
-							"protocol": "http",
-							"host": [
-								"921",
-								"com"
-							],
-							"path": [
-								"api",
-								"import",
-								"addOpinion"
-							]
-						}
-					},
-					"response": [
-						{
-							"name": "上传意见清单",
-							"originalRequest": {
-								"method": "POST",
-								"header": [],
-								"body": {
-									"mode": "formdata",
-									"formdata": [
-										{
-											"key": "file",
-											"description": "上传文件（必填）",
-											"type": "file",
-											"src": {
-												"0": {}
-											}
-										}
-									]
-								},
-								"url": {
-									"raw": "http://921.com/api/import/addOpinion",
-									"protocol": "http",
-									"host": [
-										"921",
-										"com"
-									],
-									"path": [
-										"api",
-										"import",
-										"addOpinion"
-									]
-								}
-							},
-							"status": "OK",
-							"code": 200,
-							"_postman_previewlanguage": "json",
-							"header": [
-								{
-									"key": "Cache-Control",
-									"value": "no-cache, private",
-									"name": "Cache-Control",
-									"description": "Tells all caching mechanisms from server to client whether they may cache this object. It is measured in seconds"
-								},
-								{
-									"key": "Connection",
-									"value": "Keep-Alive",
-									"name": "Connection",
-									"description": "Options that are desired for the connection"
-								},
-								{
-									"key": "Content-Length",
-									"value": "37",
-									"name": "Content-Length",
-									"description": "The length of the response body in octets (8-bit bytes)"
-								},
-								{
-									"key": "Content-Type",
-									"value": "application/json",
-									"name": "Content-Type",
-									"description": "The mime type of this content"
-								},
-								{
-									"key": "Date",
-									"value": "Tue, 28 May 2019 08:38:46 GMT",
-									"name": "Date",
-									"description": "The date and time that the message was sent"
-								},
-								{
-									"key": "Keep-Alive",
-									"value": "timeout=5, max=100",
-									"name": "Keep-Alive",
-									"description": "Custom header"
-								},
-								{
-									"key": "Server",
-									"value": "Apache/2.4.37 (Win32) OpenSSL/1.1.1a PHP/7.3.1",
-									"name": "Server",
-									"description": "A name for the server"
-								},
-								{
-									"key": "X-Powered-By",
-									"value": "PHP/7.3.1",
-									"name": "X-Powered-By",
-									"description": "Specifies the technology (ASP.NET, PHP, JBoss, e.g.) supporting the web application (version details are often in X-Runtime, X-Version, or X-AspNet-Version)"
-								}
-							],
-							"cookie": [],
-							"body": "{\"error_code\":0,\"msg\":\"ok\",\"data\":\"\"}"
-						}
-					]
-				}
-			]
-		},
-		{
-			"name": "双清单管理",
-			"item": [
-				{
-					"name": "获取元器件列表数据",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "formdata",
-							"formdata": [
-								{
-									"key": "is_init",
-									"value": "",
-									"description": "是否初始化（不填：否 ,  1：是）（非必填）",
-									"type": "text"
-								},
-								{
-									"key": "structure_id",
-									"value": "8",
-									"description": "挂载节点id（非必填）",
-									"type": "text"
-								},
-								{
-									"key": "type",
-									"value": "2",
-									"description": "清单类型（1：国产,  2：进口）（非必填）",
-									"type": "text"
-								},
-								{
-									"key": "cpn_category",
-									"value": "",
-									"description": "元器件分类（非必填）",
-									"type": "text"
-								},
-								{
-									"key": "is_opinion",
-									"value": "",
-									"description": "是否有意见（不填：否 ,  1：是）（非必填）",
-									"type": "text"
-								},
-								{
-									"key": "cpn_specification_model",
-									"value": "",
-									"description": "型号规格（非必填）",
-									"type": "text"
-								},
-								{
-									"key": "page_size",
-									"value": "",
-									"description": "每页显示数（非必填）",
-									"type": "text"
-								},
-								{
-									"key": "page",
-									"value": "",
-									"description": "页码（非必填）",
-									"type": "text"
-								},
-								{
-									"key": "selected_fields[cpn_control_level][]",
-									"value": "",
-									"type": "text"
-								},
-								{
-									"key": "selected_fields[cpn_control_level][]",
-									"value": "B",
-									"type": "text",
-									"disabled": true
-								},
-								{
-									"key": "selected_fields[cpn_is_core_important][]",
-									"value": "是",
-									"type": "text",
-									"disabled": true
-								},
-								{
-									"key": "selected_fields[cpn_is_core_important][]",
-									"value": "否",
-									"type": "text",
-									"disabled": true
-								}
-							]
-						},
-						"url": {
-							"raw": "http://921.com/api/management/getCpnData",
-							"protocol": "http",
-							"host": [
-								"921",
-								"com"
-							],
-							"path": [
-								"api",
-								"management",
-								"getCpnData"
-							]
-						}
-					},
-					"response": [
-						{
-							"name": "获取元器件列表数据",
-							"originalRequest": {
-								"method": "POST",
-								"header": [],
-								"body": {
-									"mode": "formdata",
-									"formdata": [
-										{
-											"key": "is_init",
-											"value": "",
-											"description": "是否初始化（不填：否 ,  1：是）（非必填）",
-											"type": "text"
-										},
-										{
-											"key": "structure_id",
-											"value": "2",
-											"description": "挂载节点id（非必填）",
-											"type": "text"
-										},
-										{
-											"key": "type",
-											"value": "1",
-											"description": "清单类型（1：国产,  2：进口）（非必填）",
-											"type": "text"
-										},
-										{
-											"key": "cpn_category",
-											"value": "590501",
-											"description": "元器件分类（非必填）",
-											"type": "text"
-										},
-										{
-											"key": "is_opinion",
-											"value": "",
-											"description": "是否有意见（不填：否 ,  1：是）（非必填）",
-											"type": "text"
-										},
-										{
-											"key": "cpn_specification_model",
-											"value": "",
-											"description": "型号规格（非必填）",
-											"type": "text"
-										},
-										{
-											"key": "page_size",
-											"value": "",
-											"description": "每页显示数（非必填）",
-											"type": "text"
-										},
-										{
-											"key": "page",
-											"value": "",
-											"description": "页码（非必填）",
-											"type": "text"
-										}
-									]
-								},
-								"url": {
-									"raw": "http://921.com/api/management/getCpnData",
-									"protocol": "http",
-									"host": [
-										"921",
-										"com"
-									],
-									"path": [
-										"api",
-										"management",
-										"getCpnData"
-									]
-								}
-							},
-							"status": "OK",
-							"code": 200,
-							"_postman_previewlanguage": "json",
-							"header": [
-								{
-									"key": "Cache-Control",
-									"value": "no-cache, private",
-									"name": "Cache-Control",
-									"description": "Tells all caching mechanisms from server to client whether they may cache this object. It is measured in seconds"
-								},
-								{
-									"key": "Connection",
-									"value": "Keep-Alive",
-									"name": "Connection",
-									"description": "Options that are desired for the connection"
-								},
-								{
-									"key": "Content-Type",
-									"value": "application/json",
-									"name": "Content-Type",
-									"description": "The mime type of this content"
-								},
-								{
-									"key": "Date",
-									"value": "Thu, 30 May 2019 10:17:35 GMT",
-									"name": "Date",
-									"description": "The date and time that the message was sent"
-								},
-								{
-									"key": "Keep-Alive",
-									"value": "timeout=5, max=100",
-									"name": "Keep-Alive",
-									"description": "Custom header"
-								},
-								{
-									"key": "Server",
-									"value": "Apache/2.4.37 (Win32) OpenSSL/1.1.1a PHP/7.3.1",
-									"name": "Server",
-									"description": "A name for the server"
-								},
-								{
-									"key": "Transfer-Encoding",
-									"value": "chunked",
-									"name": "Transfer-Encoding",
-									"description": "The form of encoding used to safely transfer the entity to the user. Currently defined methods are: chunked, compress, deflate, gzip, identity."
-								},
-								{
-									"key": "X-Powered-By",
-									"value": "PHP/7.3.1",
-									"name": "X-Powered-By",
-									"description": "Specifies the technology (ASP.NET, PHP, JBoss, e.g.) supporting the web application (version details are often in X-Runtime, X-Version, or X-AspNet-Version)"
-								}
-							],
-							"cookie": [],
-							"body": "{\"error_code\":0,\"msg\":\"ok\",\"data\":{\"is_has_opinion\":false,\"statics\":{\"cpn_total\":94,\"cpn_specification_model_total\":93},\"cpnData\":{\"current_page\":1,\"data\":[{\"id\":1,\"list_id\":1,\"list_no\":1,\"cpn_category_code\":\"5905010101\",\"cpn_category_second_name\":null,\"amount\":40,\"unique_code\":null,\"cpn_ref_price\":\"5.48\",\"cpn_name\":\"\\u91d1\\u5c5e\\u819c\\u7535\\u963b\",\"cpn_specification_model\":\"RJ25-0.5W-2-1%\",\"cpn_quality\":\"CAST C\",\"cpn_package\":\"\\u76f4\\u63d2\",\"cpn_control_level\":\"A\",\"cpn_country\":null,\"cpn_manufacturer\":\"718\\u5382\",\"cpn_is_core_important\":0,\"cpn_period\":24,\"cpn_detect_apartment\":\"\\u4e2d\\u56fd\\u79d1\\u5b66\\u9662\\u7a7a\\u95f4\\u5e94\\u7528\\u5de5\\u7a0b\\u4e0e\\u6280\\u672f\\u4e2d\\u5fc3\",\"history\":\"\\u5929\\u5bab\\u4e00\\u53f7,\\u5929\\u5bab\\u4e8c\\u53f7,\\u98ce\\u4e91\\u7cfb\\u5217\",\"dependence\":null,\"safe_color\":null,\"proposed_safe_color\":null,\"necessity\":null,\"access_channel\":null,\"equip_name\":\"\\u7c92\\u5b50\\u901a\\u91cf\\u4e0e\\u592a\\u9633\\u6d3b\\u52a8\\u63a2\\u6d4b\\u5668,\\u5927\\u6c14\\u5bc6\\u5ea6\\u591a\\u5411\\u63a2\\u6d4b\\u5668\",\"equip_research_apartment\":\"\\u56fd\\u5bb6\\u7a7a\\u95f4\\u79d1\\u5b66\\u4e2d\\u5fc3\",\"equip_use_number\":20,\"equip_number\":2,\"remark\":\"\",\"status\":0,\"is_national\":null,\"equip_research_subsystem\":\"\\u7a7a\\u95f4\\u73af\\u5883\\u76d1\\u6d4b\\u8f7d\\u8377\",\"cpn_standard\":\"CAST\",\"hash_code\":\"8780ba343077ad20befb8ab54db14d8f\",\"opinion\":null,\"source\":\"\\u56fd\\u4ea7\"},{\"id\":2,\"list_id\":1,\"list_no\":2,\"cpn_category_code\":\"5905010101\",\"cpn_category_second_name\":null,\"amount\":8,\"unique_code\":null,\"cpn_ref_price\":\"4.88\",\"cpn_name\":\"\\u91d1\\u5c5e\\u819c\\u7535\\u963b\",\"cpn_specification_model\":\"RJ24-0.25W-5-1%\",\"cpn_quality\":\"CAST C\",\"cpn_package\":\"\\u76f4\\u63d2\",\"cpn_control_level\":\"A\",\"cpn_country\":null,\"cpn_manufacturer\":\"718\\u5382\",\"cpn_is_core_important\":0,\"cpn_period\":24,\"cpn_detect_apartment\":\"\\u4e2d\\u56fd\\u79d1\\u5b66\\u9662\\u7a7a\\u95f4\\u5e94\\u7528\\u5de5\\u7a0b\\u4e0e\\u6280\\u672f\\u4e2d\\u5fc3\",\"history\":\"\\u5929\\u5bab\\u4e00\\u53f7,\\u5929\\u5bab\\u4e8c\\u53f7,\\u98ce\\u4e91\\u7cfb\\u5217\",\"dependence\":null,\"safe_color\":null,\"proposed_safe_color\":null,\"necessity\":null,\"access_channel\":null,\"equip_name\":\"\\u540c\\u4e0a\",\"equip_research_apartment\":\"\\u540c\\u4e0a\",\"equip_use_number\":4,\"equip_number\":2,\"remark\":\"\",\"status\":0,\"is_national\":null,\"equip_research_subsystem\":\"\\u540c\\u4e0a\",\"cpn_standard\":\"CAST\",\"hash_code\":\"c13923ebeed44e5c6cdff628cd9c2fc4\",\"opinion\":null,\"source\":\"\\u56fd\\u4ea7\"},{\"id\":3,\"list_id\":1,\"list_no\":3,\"cpn_category_code\":\"5905010101\",\"cpn_category_second_name\":null,\"amount\":232,\"unique_code\":null,\"cpn_ref_price\":\"3.75\",\"cpn_name\":\"\\u91d1\\u5c5e\\u819c\\u7535\\u963b\",\"cpn_specification_model\":\"RJ24-0.25W-10-1%\",\"cpn_quality\":\"CAST C\",\"cpn_package\":\"\\u76f4\\u63d2\",\"cpn_control_level\":\"A\",\"cpn_country\":null,\"cpn_manufacturer\":\"718\\u5382\",\"cpn_is_core_important\":0,\"cpn_period\":24,\"cpn_detect_apartment\":\"\\u4e2d\\u56fd\\u79d1\\u5b66\\u9662\\u7a7a\\u95f4\\u5e94\\u7528\\u5de5\\u7a0b\\u4e0e\\u6280\\u672f\\u4e2d\\u5fc3\",\"history\":\"\\u5929\\u5bab\\u4e00\\u53f7,\\u5929\\u5bab\\u4e8c\\u53f7,\\u98ce\\u4e91\\u7cfb\\u5217\",\"dependence\":null,\"safe_color\":null,\"proposed_safe_color\":null,\"necessity\":null,\"access_channel\":null,\"equip_name\":\"\\u540c\\u4e0a\",\"equip_research_apartment\":\"\\u540c\\u4e0a\",\"equip_use_number\":116,\"equip_number\":2,\"remark\":\"\",\"status\":0,\"is_national\":null,\"equip_research_subsystem\":\"\\u540c\\u4e0a\",\"cpn_standard\":\"CAST\",\"hash_code\":\"a526684cd527b4f05037cfc614a40a2f\",\"opinion\":null,\"source\":\"\\u56fd\\u4ea7\"},{\"id\":4,\"list_id\":1,\"list_no\":4,\"cpn_category_code\":\"5905010101\",\"cpn_category_second_name\":null,\"amount\":188,\"unique_code\":null,\"cpn_ref_price\":\"3.75\",\"cpn_name\":\"\\u91d1\\u5c5e\\u819c\\u7535\\u963b\",\"cpn_specification_model\":\"RJ24-0.25W-20-1%\",\"cpn_quality\":\"CAST C\",\"cpn_package\":\"\\u76f4\\u63d2\",\"cpn_control_level\":\"A\",\"cpn_country\":null,\"cpn_manufacturer\":\"718\\u5382\",\"cpn_is_core_important\":0,\"cpn_period\":24,\"cpn_detect_apartment\":\"\\u4e2d\\u56fd\\u79d1\\u5b66\\u9662\\u7a7a\\u95f4\\u5e94\\u7528\\u5de5\\u7a0b\\u4e0e\\u6280\\u672f\\u4e2d\\u5fc3\",\"history\":\"\\u5929\\u5bab\\u4e00\\u53f7,\\u5929\\u5bab\\u4e8c\\u53f7,\\u98ce\\u4e91\\u7cfb\\u5217\",\"dependence\":null,\"safe_color\":null,\"proposed_safe_color\":null,\"necessity\":null,\"access_channel\":null,\"equip_name\":\"\\u540c\\u4e0a\",\"equip_research_apartment\":\"\\u540c\\u4e0a\",\"equip_use_number\":94,\"equip_number\":2,\"remark\":\"\",\"status\":0,\"is_national\":null,\"equip_research_subsystem\":\"\\u540c\\u4e0a\",\"cpn_standard\":\"CAST\",\"hash_code\":\"638ccf8ae8b25bcd899270d04b697836\",\"opinion\":null,\"source\":\"\\u56fd\\u4ea7\"},{\"id\":5,\"list_id\":1,\"list_no\":5,\"cpn_category_code\":\"5905010101\",\"cpn_category_second_name\":null,\"amount\":24,\"unique_code\":null,\"cpn_ref_price\":\"3.75\",\"cpn_name\":\"\\u91d1\\u5c5e\\u819c\\u7535\\u963b\",\"cpn_specification_model\":\"RJ24-0.25W-100-1%\",\"cpn_quality\":\"CAST C\",\"cpn_package\":\"\\u76f4\\u63d2\",\"cpn_control_level\":\"A\",\"cpn_country\":null,\"cpn_manufacturer\":\"718\\u5382\",\"cpn_is_core_important\":0,\"cpn_period\":24,\"cpn_detect_apartment\":\"\\u4e2d\\u56fd\\u79d1\\u5b66\\u9662\\u7a7a\\u95f4\\u5e94\\u7528\\u5de5\\u7a0b\\u4e0e\\u6280\\u672f\\u4e2d\\u5fc3\",\"history\":\"\\u5929\\u5bab\\u4e00\\u53f7,\\u5929\\u5bab\\u4e8c\\u53f7,\\u98ce\\u4e91\\u7cfb\\u5217\",\"dependence\":null,\"safe_color\":null,\"proposed_safe_color\":null,\"necessity\":null,\"access_channel\":null,\"equip_name\":\"\\u540c\\u4e0a\",\"equip_research_apartment\":\"\\u540c\\u4e0a\",\"equip_use_number\":12,\"equip_number\":2,\"remark\":\"\",\"status\":0,\"is_national\":null,\"equip_research_subsystem\":\"\\u540c\\u4e0a\",\"cpn_standard\":\"CAST\",\"hash_code\":\"c8c1191191ecebe988277305aa5de660\",\"opinion\":null,\"source\":\"\\u56fd\\u4ea7\"},{\"id\":6,\"list_id\":1,\"list_no\":6,\"cpn_category_code\":\"5905010101\",\"cpn_category_second_name\":null,\"amount\":88,\"unique_code\":null,\"cpn_ref_price\":\"3.75\",\"cpn_name\":\"\\u91d1\\u5c5e\\u819c\\u7535\\u963b\",\"cpn_specification_model\":\"RJ24-0.25W-200-1%\",\"cpn_quality\":\"CAST C\",\"cpn_package\":\"\\u76f4\\u63d2\",\"cpn_control_level\":\"A\",\"cpn_country\":null,\"cpn_manufacturer\":\"718\\u5382\",\"cpn_is_core_important\":0,\"cpn_period\":24,\"cpn_detect_apartment\":\"\\u4e2d\\u56fd\\u79d1\\u5b66\\u9662\\u7a7a\\u95f4\\u5e94\\u7528\\u5de5\\u7a0b\\u4e0e\\u6280\\u672f\\u4e2d\\u5fc3\",\"history\":\"\\u5929\\u5bab\\u4e00\\u53f7,\\u5929\\u5bab\\u4e8c\\u53f7,\\u98ce\\u4e91\\u7cfb\\u5217\",\"dependence\":null,\"safe_color\":null,\"proposed_safe_color\":null,\"necessity\":null,\"access_channel\":null,\"equip_name\":\"\\u540c\\u4e0a\",\"equip_research_apartment\":\"\\u540c\\u4e0a\",\"equip_use_number\":44,\"equip_number\":2,\"remark\":\"\",\"status\":0,\"is_national\":null,\"equip_research_subsystem\":\"\\u540c\\u4e0a\",\"cpn_standard\":\"CAST\",\"hash_code\":\"2b43963610b09fd13646668ee8adeffc\",\"opinion\":null,\"source\":\"\\u56fd\\u4ea7\"},{\"id\":7,\"list_id\":1,\"list_no\":7,\"cpn_category_code\":\"5905010101\",\"cpn_category_second_name\":null,\"amount\":72,\"unique_code\":null,\"cpn_ref_price\":\"3.75\",\"cpn_name\":\"\\u91d1\\u5c5e\\u819c\\u7535\\u963b\",\"cpn_specification_model\":\"RJ24-0.25W-300-1%\",\"cpn_quality\":\"CAST C\",\"cpn_package\":\"\\u76f4\\u63d2\",\"cpn_control_level\":\"A\",\"cpn_country\":null,\"cpn_manufacturer\":\"718\\u5382\",\"cpn_is_core_important\":0,\"cpn_period\":24,\"cpn_detect_apartment\":\"\\u4e2d\\u56fd\\u79d1\\u5b66\\u9662\\u7a7a\\u95f4\\u5e94\\u7528\\u5de5\\u7a0b\\u4e0e\\u6280\\u672f\\u4e2d\\u5fc3\",\"history\":\"\\u5929\\u5bab\\u4e00\\u53f7,\\u5929\\u5bab\\u4e8c\\u53f7,\\u98ce\\u4e91\\u7cfb\\u5217\",\"dependence\":null,\"safe_color\":null,\"proposed_safe_color\":null,\"necessity\":null,\"access_channel\":null,\"equip_name\":\"\\u540c\\u4e0a\",\"equip_research_apartment\":\"\\u540c\\u4e0a\",\"equip_use_number\":36,\"equip_number\":2,\"remark\":\"\",\"status\":0,\"is_national\":null,\"equip_research_subsystem\":\"\\u540c\\u4e0a\",\"cpn_standard\":\"CAST\",\"hash_code\":\"9c8eb93b8a071514d529e128f6080481\",\"opinion\":null,\"source\":\"\\u56fd\\u4ea7\"},{\"id\":8,\"list_id\":1,\"list_no\":8,\"cpn_category_code\":\"5905010101\",\"cpn_category_second_name\":null,\"amount\":40,\"unique_code\":null,\"cpn_ref_price\":\"3.75\",\"cpn_name\":\"\\u91d1\\u5c5e\\u819c\\u7535\\u963b\",\"cpn_specification_model\":\"RJ24-0.25W-390-1%\",\"cpn_quality\":\"CAST C\",\"cpn_package\":\"\\u76f4\\u63d2\",\"cpn_control_level\":\"A\",\"cpn_country\":null,\"cpn_manufacturer\":\"718\\u5382\",\"cpn_is_core_important\":0,\"cpn_period\":24,\"cpn_detect_apartment\":\"\\u4e2d\\u56fd\\u79d1\\u5b66\\u9662\\u7a7a\\u95f4\\u5e94\\u7528\\u5de5\\u7a0b\\u4e0e\\u6280\\u672f\\u4e2d\\u5fc3\",\"history\":\"\\u5929\\u5bab\\u4e00\\u53f7,\\u5929\\u5bab\\u4e8c\\u53f7,\\u98ce\\u4e91\\u7cfb\\u5217\",\"dependence\":null,\"safe_color\":null,\"proposed_safe_color\":null,\"necessity\":null,\"access_channel\":null,\"equip_name\":\"\\u540c\\u4e0a\",\"equip_research_apartment\":\"\\u540c\\u4e0a\",\"equip_use_number\":20,\"equip_number\":2,\"remark\":\"\",\"status\":0,\"is_national\":null,\"equip_research_subsystem\":\"\\u540c\\u4e0a\",\"cpn_standard\":\"CAST\",\"hash_code\":\"2115bbb91dedac4b8fc9b746e2a52bd2\",\"opinion\":null,\"source\":\"\\u56fd\\u4ea7\"},{\"id\":9,\"list_id\":1,\"list_no\":9,\"cpn_category_code\":\"5905010101\",\"cpn_category_second_name\":null,\"amount\":32,\"unique_code\":null,\"cpn_ref_price\":\"3.75\",\"cpn_name\":\"\\u91d1\\u5c5e\\u819c\\u7535\\u963b\",\"cpn_specification_model\":\"RJ24-0.25W-470-1%\",\"cpn_quality\":\"CAST C\",\"cpn_package\":\"\\u76f4\\u63d2\",\"cpn_control_level\":\"A\",\"cpn_country\":null,\"cpn_manufacturer\":\"718\\u5382\",\"cpn_is_core_important\":0,\"cpn_period\":24,\"cpn_detect_apartment\":\"\\u4e2d\\u56fd\\u79d1\\u5b66\\u9662\\u7a7a\\u95f4\\u5e94\\u7528\\u5de5\\u7a0b\\u4e0e\\u6280\\u672f\\u4e2d\\u5fc3\",\"history\":\"\\u5929\\u5bab\\u4e00\\u53f7,\\u5929\\u5bab\\u4e8c\\u53f7,\\u98ce\\u4e91\\u7cfb\\u5217\",\"dependence\":null,\"safe_color\":null,\"proposed_safe_color\":null,\"necessity\":null,\"access_channel\":null,\"equip_name\":\"\\u540c\\u4e0a\",\"equip_research_apartment\":\"\\u540c\\u4e0a\",\"equip_use_number\":16,\"equip_number\":2,\"remark\":\"\",\"status\":0,\"is_national\":null,\"equip_research_subsystem\":\"\\u540c\\u4e0a\",\"cpn_standard\":\"CAST\",\"hash_code\":\"775a2339de5d64ea749b1672ff6fb264\",\"opinion\":null,\"source\":\"\\u56fd\\u4ea7\"},{\"id\":10,\"list_id\":1,\"list_no\":10,\"cpn_category_code\":\"5905010101\",\"cpn_category_second_name\":null,\"amount\":40,\"unique_code\":null,\"cpn_ref_price\":\"3.75\",\"cpn_name\":\"\\u91d1\\u5c5e\\u819c\\u7535\\u963b\",\"cpn_specification_model\":\"RJ24-0.25W-500-1%\",\"cpn_quality\":\"CAST C\",\"cpn_package\":\"\\u76f4\\u63d2\",\"cpn_control_level\":\"A\",\"cpn_country\":null,\"cpn_manufacturer\":\"718\\u5382\",\"cpn_is_core_important\":0,\"cpn_period\":24,\"cpn_detect_apartment\":\"\\u4e2d\\u56fd\\u79d1\\u5b66\\u9662\\u7a7a\\u95f4\\u5e94\\u7528\\u5de5\\u7a0b\\u4e0e\\u6280\\u672f\\u4e2d\\u5fc3\",\"history\":\"\\u5929\\u5bab\\u4e00\\u53f7,\\u5929\\u5bab\\u4e8c\\u53f7,\\u98ce\\u4e91\\u7cfb\\u5217\",\"dependence\":null,\"safe_color\":null,\"proposed_safe_color\":null,\"necessity\":null,\"access_channel\":null,\"equip_name\":\"\\u540c\\u4e0a\",\"equip_research_apartment\":\"\\u540c\\u4e0a\",\"equip_use_number\":20,\"equip_number\":2,\"remark\":\"\",\"status\":0,\"is_national\":null,\"equip_research_subsystem\":\"\\u540c\\u4e0a\",\"cpn_standard\":\"CAST\",\"hash_code\":\"ecb7f77ce4618b7b7881353f74a11ad3\",\"opinion\":null,\"source\":\"\\u56fd\\u4ea7\"},{\"id\":11,\"list_id\":1,\"list_no\":11,\"cpn_category_code\":\"5905010101\",\"cpn_category_second_name\":null,\"amount\":32,\"unique_code\":null,\"cpn_ref_price\":\"3.75\",\"cpn_name\":\"\\u91d1\\u5c5e\\u819c\\u7535\\u963b\",\"cpn_specification_model\":\"RJ24-0.25W-560-1%\",\"cpn_quality\":\"CAST C\",\"cpn_package\":\"\\u76f4\\u63d2\",\"cpn_control_level\":\"A\",\"cpn_country\":null,\"cpn_manufacturer\":\"718\\u5382\",\"cpn_is_core_important\":0,\"cpn_period\":24,\"cpn_detect_apartment\":\"\\u4e2d\\u56fd\\u79d1\\u5b66\\u9662\\u7a7a\\u95f4\\u5e94\\u7528\\u5de5\\u7a0b\\u4e0e\\u6280\\u672f\\u4e2d\\u5fc3\",\"history\":\"\\u5929\\u5bab\\u4e00\\u53f7,\\u5929\\u5bab\\u4e8c\\u53f7,\\u98ce\\u4e91\\u7cfb\\u5217\",\"dependence\":null,\"safe_color\":null,\"proposed_safe_color\":null,\"necessity\":null,\"access_channel\":null,\"equip_name\":\"\\u540c\\u4e0a\",\"equip_research_apartment\":\"\\u540c\\u4e0a\",\"equip_use_number\":16,\"equip_number\":2,\"remark\":\"\",\"status\":0,\"is_national\":null,\"equip_research_subsystem\":\"\\u540c\\u4e0a\",\"cpn_standard\":\"CAST\",\"hash_code\":\"3a2f710a9aa486d615602fee5f6435c1\",\"opinion\":null,\"source\":\"\\u56fd\\u4ea7\"},{\"id\":12,\"list_id\":1,\"list_no\":12,\"cpn_category_code\":\"5905010101\",\"cpn_category_second_name\":null,\"amount\":20,\"unique_code\":null,\"cpn_ref_price\":\"3.75\",\"cpn_name\":\"\\u91d1\\u5c5e\\u819c\\u7535\\u963b\",\"cpn_specification_model\":\"RJ24-0.25W-700-1%\",\"cpn_quality\":\"CAST C\",\"cpn_package\":\"\\u76f4\\u63d2\",\"cpn_control_level\":\"A\",\"cpn_country\":null,\"cpn_manufacturer\":\"718\\u5382\",\"cpn_is_core_important\":0,\"cpn_period\":24,\"cpn_detect_apartment\":\"\\u4e2d\\u56fd\\u79d1\\u5b66\\u9662\\u7a7a\\u95f4\\u5e94\\u7528\\u5de5\\u7a0b\\u4e0e\\u6280\\u672f\\u4e2d\\u5fc3\",\"history\":\"\\u5929\\u5bab\\u4e00\\u53f7,\\u5929\\u5bab\\u4e8c\\u53f7,\\u98ce\\u4e91\\u7cfb\\u5217\",\"dependence\":null,\"safe_color\":null,\"proposed_safe_color\":null,\"necessity\":null,\"access_channel\":null,\"equip_name\":\"\\u540c\\u4e0a\",\"equip_research_apartment\":\"\\u540c\\u4e0a\",\"equip_use_number\":10,\"equip_number\":2,\"remark\":\"\",\"status\":0,\"is_national\":null,\"equip_research_subsystem\":\"\\u540c\\u4e0a\",\"cpn_standard\":\"CAST\",\"hash_code\":\"a1b398e6f5f3da5fb59357dd3fe959e3\",\"opinion\":null,\"source\":\"\\u56fd\\u4ea7\"},{\"id\":13,\"list_id\":1,\"list_no\":13,\"cpn_category_code\":\"5905010101\",\"cpn_category_second_name\":null,\"amount\":8,\"unique_code\":null,\"cpn_ref_price\":\"3.75\",\"cpn_name\":\"\\u91d1\\u5c5e\\u819c\\u7535\\u963b\",\"cpn_specification_model\":\"RJ24-0.25W-820-1%\",\"cpn_quality\":\"CAST C\",\"cpn_package\":\"\\u76f4\\u63d2\",\"cpn_control_level\":\"A\",\"cpn_country\":null,\"cpn_manufacturer\":\"718\\u5382\",\"cpn_is_core_important\":0,\"cpn_period\":24,\"cpn_detect_apartment\":\"\\u4e2d\\u56fd\\u79d1\\u5b66\\u9662\\u7a7a\\u95f4\\u5e94\\u7528\\u5de5\\u7a0b\\u4e0e\\u6280\\u672f\\u4e2d\\u5fc3\",\"history\":\"\\u5929\\u5bab\\u4e00\\u53f7,\\u5929\\u5bab\\u4e8c\\u53f7,\\u98ce\\u4e91\\u7cfb\\u5217\",\"dependence\":null,\"safe_color\":null,\"proposed_safe_color\":null,\"necessity\":null,\"access_channel\":null,\"equip_name\":\"\\u540c\\u4e0a\",\"equip_research_apartment\":\"\\u540c\\u4e0a\",\"equip_use_number\":4,\"equip_number\":2,\"remark\":\"\",\"status\":0,\"is_national\":null,\"equip_research_subsystem\":\"\\u540c\\u4e0a\",\"cpn_standard\":\"CAST\",\"hash_code\":\"dcf5479e494f08fbc4ff9bb44afd6672\",\"opinion\":null,\"source\":\"\\u56fd\\u4ea7\"},{\"id\":14,\"list_id\":1,\"list_no\":14,\"cpn_category_code\":\"5905010101\",\"cpn_category_second_name\":null,\"amount\":76,\"unique_code\":null,\"cpn_ref_price\":\"3.75\",\"cpn_name\":\"\\u91d1\\u5c5e\\u819c\\u7535\\u963b\",\"cpn_specification_model\":\"RJ24-0.25W-1K-1%\",\"cpn_quality\":\"CAST C\",\"cpn_package\":\"\\u76f4\\u63d2\",\"cpn_control_level\":\"A\",\"cpn_country\":null,\"cpn_manufacturer\":\"718\\u5382\",\"cpn_is_core_important\":0,\"cpn_period\":24,\"cpn_detect_apartment\":\"\\u4e2d\\u56fd\\u79d1\\u5b66\\u9662\\u7a7a\\u95f4\\u5e94\\u7528\\u5de5\\u7a0b\\u4e0e\\u6280\\u672f\\u4e2d\\u5fc3\",\"history\":\"\\u5929\\u5bab\\u4e00\\u53f7,\\u5929\\u5bab\\u4e8c\\u53f7,\\u98ce\\u4e91\\u7cfb\\u5217\",\"dependence\":null,\"safe_color\":null,\"proposed_safe_color\":null,\"necessity\":null,\"access_channel\":null,\"equip_name\":\"\\u540c\\u4e0a\",\"equip_research_apartment\":\"\\u540c\\u4e0a\",\"equip_use_number\":38,\"equip_number\":2,\"remark\":\"\",\"status\":0,\"is_national\":null,\"equip_research_subsystem\":\"\\u540c\\u4e0a\",\"cpn_standard\":\"CAST\",\"hash_code\":\"d886c58f4f05d1d4da13999e40f737de\",\"opinion\":null,\"source\":\"\\u56fd\\u4ea7\"},{\"id\":15,\"list_id\":1,\"list_no\":15,\"cpn_category_code\":\"5905010101\",\"cpn_category_second_name\":null,\"amount\":16,\"unique_code\":null,\"cpn_ref_price\":\"3.75\",\"cpn_name\":\"\\u91d1\\u5c5e\\u819c\\u7535\\u963b\",\"cpn_specification_model\":\"RJ24-0.25W-1.5K-1%\",\"cpn_quality\":\"CAST C\",\"cpn_package\":\"\\u76f4\\u63d2\",\"cpn_control_level\":\"A\",\"cpn_country\":null,\"cpn_manufacturer\":\"718\\u5382\",\"cpn_is_core_important\":0,\"cpn_period\":24,\"cpn_detect_apartment\":\"\\u4e2d\\u56fd\\u79d1\\u5b66\\u9662\\u7a7a\\u95f4\\u5e94\\u7528\\u5de5\\u7a0b\\u4e0e\\u6280\\u672f\\u4e2d\\u5fc3\",\"history\":\"\\u5929\\u5bab\\u4e00\\u53f7,\\u5929\\u5bab\\u4e8c\\u53f7,\\u98ce\\u4e91\\u7cfb\\u5217\",\"dependence\":null,\"safe_color\":null,\"proposed_safe_color\":null,\"necessity\":null,\"access_channel\":null,\"equip_name\":\"\\u540c\\u4e0a\",\"equip_research_apartment\":\"\\u540c\\u4e0a\",\"equip_use_number\":8,\"equip_number\":2,\"remark\":\"\",\"status\":0,\"is_national\":null,\"equip_research_subsystem\":\"\\u540c\\u4e0a\",\"cpn_standard\":\"CAST\",\"hash_code\":\"a315cbe1ba389837b4f95ab55b83e6be\",\"opinion\":null,\"source\":\"\\u56fd\\u4ea7\"}],\"first_page_url\":\"http:\\/\\/921.com\\/api\\/management\\/getCpnData?page=1\",\"from\":1,\"last_page\":7,\"last_page_url\":\"http:\\/\\/921.com\\/api\\/management\\/getCpnData?page=7\",\"next_page_url\":\"http:\\/\\/921.com\\/api\\/management\\/getCpnData?page=2\",\"path\":\"http:\\/\\/921.com\\/api\\/management\\/getCpnData\",\"per_page\":15,\"prev_page_url\":null,\"to\":15,\"total\":94}}}"
-						},
-						{
-							"name": "获取元器件列表数据",
-							"originalRequest": {
-								"method": "POST",
-								"header": [],
-								"body": {
-									"mode": "formdata",
-									"formdata": [
-										{
-											"key": "is_init",
-											"value": "",
-											"description": "是否初始化（不填：否 ,  1：是）（非必填）",
-											"type": "text"
-										},
-										{
-											"key": "structure_id",
-											"value": "2",
-											"description": "挂载节点id（非必填）",
-											"type": "text"
-										},
-										{
-											"key": "type",
-											"value": "1",
-											"description": "清单类型（1：国产,  2：进口）（非必填）",
-											"type": "text"
-										},
-										{
-											"key": "cpn_category",
-											"value": "",
-											"description": "元器件分类（非必填）",
-											"type": "text"
-										},
-										{
-											"key": "is_opinion",
-											"value": "",
-											"description": "是否有意见（不填：否 ,  1：是）（非必填）",
-											"type": "text"
-										},
-										{
-											"key": "cpn_specification_model",
-											"value": "",
-											"description": "型号规格（非必填）",
-											"type": "text"
-										},
-										{
-											"key": "page_size",
-											"value": "",
-											"description": "每页显示数（非必填）",
-											"type": "text"
-										},
-										{
-											"key": "page",
-											"value": "",
-											"description": "页码（非必填）",
-											"type": "text"
-										}
-									]
-								},
-								"url": {
-									"raw": "http://921.com/api/management/getCpnData",
-									"protocol": "http",
-									"host": [
-										"921",
-										"com"
-									],
-									"path": [
-										"api",
-										"management",
-										"getCpnData"
-									]
-								}
-							},
-							"status": "OK",
-							"code": 200,
-							"_postman_previewlanguage": "json",
-							"header": [
-								{
-									"key": "Cache-Control",
-									"value": "no-cache, private",
-									"name": "Cache-Control",
-									"description": "Tells all caching mechanisms from server to client whether they may cache this object. It is measured in seconds"
-								},
-								{
-									"key": "Connection",
-									"value": "Keep-Alive",
-									"name": "Connection",
-									"description": "Options that are desired for the connection"
-								},
-								{
-									"key": "Content-Type",
-									"value": "application/json",
-									"name": "Content-Type",
-									"description": "The mime type of this content"
-								},
-								{
-									"key": "Date",
-									"value": "Wed, 12 Jun 2019 02:27:12 GMT",
-									"name": "Date",
-									"description": "The date and time that the message was sent"
-								},
-								{
-									"key": "Keep-Alive",
-									"value": "timeout=5, max=100",
-									"name": "Keep-Alive",
-									"description": "Custom header"
-								},
-								{
-									"key": "Server",
-									"value": "Apache/2.4.37 (Win32) OpenSSL/1.1.1a PHP/7.3.1",
-									"name": "Server",
-									"description": "A name for the server"
-								},
-								{
-									"key": "Transfer-Encoding",
-									"value": "chunked",
-									"name": "Transfer-Encoding",
-									"description": "The form of encoding used to safely transfer the entity to the user. Currently defined methods are: chunked, compress, deflate, gzip, identity."
-								},
-								{
-									"key": "X-Powered-By",
-									"value": "PHP/7.3.1",
-									"name": "X-Powered-By",
-									"description": "Specifies the technology (ASP.NET, PHP, JBoss, e.g.) supporting the web application (version details are often in X-Runtime, X-Version, or X-AspNet-Version)"
-								}
-							],
-							"cookie": [],
-							"body": "{\"error_code\":0,\"msg\":\"ok\",\"data\":{\"is_has_opinion\":false,\"statics\":{\"cpn_total\":125006,\"cpn_specification_model_total\":496},\"selectFields\":{\"cpn_control_level\":[\"A\"],\"cpn_is_core_important\":[\"\\u662f\"],\"cpn_standard\":[\"CAST\",\"SAST\",\"\\u4f01\\u519b\\u6807\",\"\\u534f\\u8bae\"],\"cpn_detect_apartment\":[\"\\u4e2d\\u56fd\\u79d1\\u5b66\\u9662\\u7a7a\\u95f4\\u5e94\\u7528\\u5de5\\u7a0b\\u4e0e\\u6280\\u672f\\u4e2d\\u5fc3\"],\"equip_research_apartment\":[\"\\u56fd\\u79d1\\u73af\\u5b87\",\"\\u96c6\\u6210\\u6280\\u672f\\u4e2d\\u5fc3\"],\"equip_research_subsystem\":[\"\\u6c2e\\u6c14\\u56de\\u8def\"]},\"cpnData\":{\"current_page\":1,\"data\":[{\"id\":1002,\"list_id\":5,\"list_no\":1,\"cpn_category_code\":\"590501\",\"cpn_category_second_name\":\"\\u56fa\\u5b9a\\u7535\\u963b\\u5668\",\"amount\":\"1\",\"unique_code\":\"-\",\"cpn_ref_price\":\"10\",\"cpn_name\":\"\\u8d34\\u7247\\u7535\\u5bb9\",\"cpn_specification_model\":\"CT41L-0805-BY-50V-104K\",\"cpn_quality\":\"CAST B\",\"cpn_package\":\"C0805\",\"cpn_control_level\":\"A\",\"cpn_country\":\"-\",\"cpn_manufacturer\":\"715\\u5382\",\"cpn_is_core_important\":\"\\u5426\",\"cpn_period\":\"16\",\"cpn_detect_apartment\":\"\\u4e2d\\u56fd\\u79d1\\u5b66\\u9662\\u7a7a\\u95f4\\u5e94\\u7528\\u5de5\\u7a0b\\u4e0e\\u6280\\u672f\\u4e2d\\u5fc3\",\"history\":\"\\u65e0\",\"dependence\":\"-\",\"safe_color\":\"-\",\"proposed_safe_color\":\"-\",\"necessity\":\"-\",\"access_channel\":\"-\",\"equip_name\":\"\\u6c2e\\u6c14\\u56de\\u8def\",\"equip_research_apartment\":\"\\u56fd\\u79d1\\u73af\\u5b87\",\"equip_use_number\":\"1\",\"equip_number\":\"1\",\"remark\":\"-\",\"status\":\"-\",\"is_national\":\"-\",\"equip_research_subsystem\":\"\\u6c2e\\u6c14\\u56de\\u8def\",\"cpn_standard\":\"CAST\",\"hash_code\":\"08d169cc9cdde057088066416ef469e1\",\"opinion\":\"-\",\"source\":\"\\u56fd\\u4ea7\"},{\"id\":1003,\"list_id\":5,\"list_no\":2,\"cpn_category_code\":\"590501\",\"cpn_category_second_name\":\"\\u56fa\\u5b9a\\u7535\\u963b\\u5668\",\"amount\":\"1\",\"unique_code\":\"-\",\"cpn_ref_price\":\"10\",\"cpn_name\":\"\\u8d34\\u7247\\u7535\\u5bb9\",\"cpn_specification_model\":\"CT41L-0805-BY-50V-104K\",\"cpn_quality\":\"CAST B\",\"cpn_package\":\"C0805\",\"cpn_control_level\":\"A\",\"cpn_country\":\"-\",\"cpn_manufacturer\":\"715\\u5382\",\"cpn_is_core_important\":\"\\u5426\",\"cpn_period\":\"16\",\"cpn_detect_apartment\":\"\\u4e2d\\u56fd\\u79d1\\u5b66\\u9662\\u7a7a\\u95f4\\u5e94\\u7528\\u5de5\\u7a0b\\u4e0e\\u6280\\u672f\\u4e2d\\u5fc3\",\"history\":\"\\u65e0\",\"dependence\":\"-\",\"safe_color\":\"-\",\"proposed_safe_color\":\"-\",\"necessity\":\"-\",\"access_channel\":\"-\",\"equip_name\":\"\\u6c2e\\u6c14\\u56de\\u8def\",\"equip_research_apartment\":\"\\u56fd\\u79d1\\u73af\\u5b87\",\"equip_use_number\":\"1\",\"equip_number\":\"1\",\"remark\":\"-\",\"status\":\"-\",\"is_national\":\"-\",\"equip_research_subsystem\":\"\\u6c2e\\u6c14\\u56de\\u8def\",\"cpn_standard\":\"CAST\",\"hash_code\":\"da28fa712a3b87d09fc638696bdf569c\",\"opinion\":\"-\",\"source\":\"\\u56fd\\u4ea7\"},{\"id\":1004,\"list_id\":5,\"list_no\":3,\"cpn_category_code\":\"590501\",\"cpn_category_second_name\":\"\\u56fa\\u5b9a\\u7535\\u963b\\u5668\",\"amount\":\"1\",\"unique_code\":\"-\",\"cpn_ref_price\":\"10\",\"cpn_name\":\"\\u8d34\\u7247\\u7535\\u5bb9\",\"cpn_specification_model\":\"CT41L-0805-BY-50V-104K\",\"cpn_quality\":\"CAST B\",\"cpn_package\":\"C0805\",\"cpn_control_level\":\"A\",\"cpn_country\":\"-\",\"cpn_manufacturer\":\"715\\u5382\",\"cpn_is_core_important\":\"\\u5426\",\"cpn_period\":\"16\",\"cpn_detect_apartment\":\"\\u4e2d\\u56fd\\u79d1\\u5b66\\u9662\\u7a7a\\u95f4\\u5e94\\u7528\\u5de5\\u7a0b\\u4e0e\\u6280\\u672f\\u4e2d\\u5fc3\",\"history\":\"\\u65e0\",\"dependence\":\"-\",\"safe_color\":\"-\",\"proposed_safe_color\":\"-\",\"necessity\":\"-\",\"access_channel\":\"-\",\"equip_name\":\"\\u6c2e\\u6c14\\u56de\\u8def\",\"equip_research_apartment\":\"\\u56fd\\u79d1\\u73af\\u5b87\",\"equip_use_number\":\"1\",\"equip_number\":\"1\",\"remark\":\"-\",\"status\":\"-\",\"is_national\":\"-\",\"equip_research_subsystem\":\"\\u6c2e\\u6c14\\u56de\\u8def\",\"cpn_standard\":\"CAST\",\"hash_code\":\"827478a84156725fcbc5e89fb29999d3\",\"opinion\":\"-\",\"source\":\"\\u56fd\\u4ea7\"},{\"id\":1005,\"list_id\":5,\"list_no\":4,\"cpn_category_code\":\"591501\",\"cpn_category_second_name\":\"\\u6291\\u5236\\u5e72\\u6270\\u6ee4\\u6ce2\\u5668\",\"amount\":\"4\",\"unique_code\":\"-\",\"cpn_ref_price\":\"50\",\"cpn_name\":\"\\u94bd\\u7535\\u5bb9\",\"cpn_specification_model\":\"CAK45-E-35V-10UF-K\",\"cpn_quality\":\"CAST C\",\"cpn_package\":\"E\\u58f3\",\"cpn_control_level\":\"A\",\"cpn_country\":\"-\",\"cpn_manufacturer\":\"4326\\u5382\",\"cpn_is_core_important\":\"\\u5426\",\"cpn_period\":\"16\",\"cpn_detect_apartment\":\"\\u4e2d\\u56fd\\u79d1\\u5b66\\u9662\\u7a7a\\u95f4\\u5e94\\u7528\\u5de5\\u7a0b\\u4e0e\\u6280\\u672f\\u4e2d\\u5fc3\",\"history\":\"\\u65e0\",\"dependence\":\"-\",\"safe_color\":\"-\",\"proposed_safe_color\":\"-\",\"necessity\":\"-\",\"access_channel\":\"-\",\"equip_name\":\"\\u6c2e\\u6c14\\u56de\\u8def\",\"equip_research_apartment\":\"\\u56fd\\u79d1\\u73af\\u5b87\",\"equip_use_number\":\"4\",\"equip_number\":\"1\",\"remark\":\"-\",\"status\":\"-\",\"is_national\":\"-\",\"equip_research_subsystem\":\"\\u6c2e\\u6c14\\u56de\\u8def\",\"cpn_standard\":\"CAST\",\"hash_code\":\"134b83f88562a7fa56219a5ccbf08769\",\"opinion\":\"-\",\"source\":\"\\u56fd\\u4ea7\"},{\"id\":1006,\"list_id\":5,\"list_no\":5,\"cpn_category_code\":\"592002\",\"cpn_category_second_name\":\"\\u907f\\u96f7\\u5668\",\"amount\":\"5\",\"unique_code\":\"-\",\"cpn_ref_price\":\"50\",\"cpn_name\":\"\\u94bd\\u7535\\u5bb9\",\"cpn_specification_model\":\"CAK45-E-20V-22UF-K\",\"cpn_quality\":\"CAST C\",\"cpn_package\":\"E\\u58f3\",\"cpn_control_level\":\"A\",\"cpn_country\":\"-\",\"cpn_manufacturer\":\"4326\\u5382\",\"cpn_is_core_important\":\"\\u5426\",\"cpn_period\":\"16\",\"cpn_detect_apartment\":\"\\u4e2d\\u56fd\\u79d1\\u5b66\\u9662\\u7a7a\\u95f4\\u5e94\\u7528\\u5de5\\u7a0b\\u4e0e\\u6280\\u672f\\u4e2d\\u5fc3\",\"history\":\"\\u65e0\",\"dependence\":\"-\",\"safe_color\":\"-\",\"proposed_safe_color\":\"-\",\"necessity\":\"-\",\"access_channel\":\"-\",\"equip_name\":\"\\u6c2e\\u6c14\\u56de\\u8def\",\"equip_research_apartment\":\"\\u56fd\\u79d1\\u73af\\u5b87\",\"equip_use_number\":\"5\",\"equip_number\":\"1\",\"remark\":\"-\",\"status\":\"-\",\"is_national\":\"-\",\"equip_research_subsystem\":\"\\u6c2e\\u6c14\\u56de\\u8def\",\"cpn_standard\":\"CAST\",\"hash_code\":\"7bb696b8ab2293283a082d6398363942\",\"opinion\":\"-\",\"source\":\"\\u56fd\\u4ea7\"},{\"id\":1007,\"list_id\":5,\"list_no\":6,\"cpn_category_code\":\"592501\",\"cpn_category_second_name\":\"\\u7535\\u78c1\\u65ad\\u8def\\u5668\",\"amount\":\"6\",\"unique_code\":\"-\",\"cpn_ref_price\":\"150\",\"cpn_name\":\"\\u4e8c\\u6781\\u7ba1\",\"cpn_specification_model\":\"2CK84A\",\"cpn_quality\":\"CAST C\",\"cpn_package\":\"DO-35\",\"cpn_control_level\":\"A\",\"cpn_country\":\"-\",\"cpn_manufacturer\":\"\\u6d4e\\u5357\\u534a\\u5bfc\\u4f53\",\"cpn_is_core_important\":\"\\u5426\",\"cpn_period\":\"18\",\"cpn_detect_apartment\":\"\\u4e2d\\u56fd\\u79d1\\u5b66\\u9662\\u7a7a\\u95f4\\u5e94\\u7528\\u5de5\\u7a0b\\u4e0e\\u6280\\u672f\\u4e2d\\u5fc3\",\"history\":\"\\u65e0\",\"dependence\":\"-\",\"safe_color\":\"-\",\"proposed_safe_color\":\"-\",\"necessity\":\"-\",\"access_channel\":\"-\",\"equip_name\":\"\\u6c2e\\u6c14\\u56de\\u8def\",\"equip_research_apartment\":\"\\u56fd\\u79d1\\u73af\\u5b87\",\"equip_use_number\":\"6\",\"equip_number\":\"1\",\"remark\":\"-\",\"status\":\"-\",\"is_national\":\"-\",\"equip_research_subsystem\":\"\\u6c2e\\u6c14\\u56de\\u8def\",\"cpn_standard\":\"CAST\",\"hash_code\":\"f5b5058f319ed824cce2d6c2e7e442d8\",\"opinion\":\"-\",\"source\":\"\\u56fd\\u4ea7\"},{\"id\":1008,\"list_id\":5,\"list_no\":7,\"cpn_category_code\":\"593001\",\"cpn_category_second_name\":\"\\u65cb\\u8f6c\\u5f00\\u5173\",\"amount\":\"7\",\"unique_code\":\"-\",\"cpn_ref_price\":\"200\",\"cpn_name\":\"\\u4e09\\u6781\\u7ba1\",\"cpn_specification_model\":\"3DK103C(\\u7eff\\u70b9)\",\"cpn_quality\":\"CAST C\",\"cpn_package\":\"A3-01BF\",\"cpn_control_level\":\"A\",\"cpn_country\":\"-\",\"cpn_manufacturer\":\"\\u77f3\\u65e0\\u4e8c\",\"cpn_is_core_important\":\"\\u5426\",\"cpn_period\":\"18\",\"cpn_detect_apartment\":\"\\u4e2d\\u56fd\\u79d1\\u5b66\\u9662\\u7a7a\\u95f4\\u5e94\\u7528\\u5de5\\u7a0b\\u4e0e\\u6280\\u672f\\u4e2d\\u5fc3\",\"history\":\"\\u65e0\",\"dependence\":\"-\",\"safe_color\":\"-\",\"proposed_safe_color\":\"-\",\"necessity\":\"-\",\"access_channel\":\"-\",\"equip_name\":\"\\u6c2e\\u6c14\\u56de\\u8def\",\"equip_research_apartment\":\"\\u56fd\\u79d1\\u73af\\u5b87\",\"equip_use_number\":\"7\",\"equip_number\":\"1\",\"remark\":\"-\",\"status\":\"-\",\"is_national\":\"-\",\"equip_research_subsystem\":\"\\u6c2e\\u6c14\\u56de\\u8def\",\"cpn_standard\":\"CAST\",\"hash_code\":\"4f7b4bfedd55ac4218c23f76dfd48015\",\"opinion\":\"-\",\"source\":\"\\u56fd\\u4ea7\"},{\"id\":1009,\"list_id\":5,\"list_no\":8,\"cpn_category_code\":\"593501\",\"cpn_category_second_name\":\"\\u4f4e\\u9891\\u8fde\\u63a5\\u5668\",\"amount\":\"8\",\"unique_code\":\"-\",\"cpn_ref_price\":\"200\",\"cpn_name\":\"\\u70ed\\u654f\\u7535\\u963b\",\"cpn_specification_model\":\"MF501-4100-5K\\u03a9\\u00b10.5%\",\"cpn_quality\":\"CAST C\",\"cpn_package\":\"\\u5f84\\u5411\\u5f15\\u51fa\",\"cpn_control_level\":\"A\",\"cpn_country\":\"-\",\"cpn_manufacturer\":\"715\\u5382\",\"cpn_is_core_important\":\"\\u5426\",\"cpn_period\":\"16\",\"cpn_detect_apartment\":\"\\u4e2d\\u56fd\\u79d1\\u5b66\\u9662\\u7a7a\\u95f4\\u5e94\\u7528\\u5de5\\u7a0b\\u4e0e\\u6280\\u672f\\u4e2d\\u5fc3\",\"history\":\"\\u65e0\",\"dependence\":\"-\",\"safe_color\":\"-\",\"proposed_safe_color\":\"-\",\"necessity\":\"-\",\"access_channel\":\"-\",\"equip_name\":\"\\u6c2e\\u6c14\\u56de\\u8def\",\"equip_research_apartment\":\"\\u56fd\\u79d1\\u73af\\u5b87\",\"equip_use_number\":\"8\",\"equip_number\":\"1\",\"remark\":\"-\",\"status\":\"-\",\"is_national\":\"-\",\"equip_research_subsystem\":\"\\u6c2e\\u6c14\\u56de\\u8def\",\"cpn_standard\":\"CAST\",\"hash_code\":\"55106b5b3e880fe594569465d9a528d3\",\"opinion\":\"-\",\"source\":\"\\u56fd\\u4ea7\"},{\"id\":1010,\"list_id\":5,\"list_no\":9,\"cpn_category_code\":\"594501\",\"cpn_category_second_name\":\"\\u7535\\u78c1\\u7ee7\\u7535\\u5668\",\"amount\":\"9\",\"unique_code\":\"-\",\"cpn_ref_price\":\"70\",\"cpn_name\":\"\\u8f74\\u7ebf\\u529f\\u7387\\u7535\\u963b\",\"cpn_specification_model\":\"RX21-3W-0R51-J\",\"cpn_quality\":\"CAST C\",\"cpn_package\":\"RX21\",\"cpn_control_level\":\"A\",\"cpn_country\":\"-\",\"cpn_manufacturer\":\"718\\u5382\",\"cpn_is_core_important\":\"\\u5426\",\"cpn_period\":\"16\",\"cpn_detect_apartment\":\"\\u4e2d\\u56fd\\u79d1\\u5b66\\u9662\\u7a7a\\u95f4\\u5e94\\u7528\\u5de5\\u7a0b\\u4e0e\\u6280\\u672f\\u4e2d\\u5fc3\",\"history\":\"\\u65e0\",\"dependence\":\"-\",\"safe_color\":\"-\",\"proposed_safe_color\":\"-\",\"necessity\":\"-\",\"access_channel\":\"-\",\"equip_name\":\"\\u6c2e\\u6c14\\u56de\\u8def\",\"equip_research_apartment\":\"\\u56fd\\u79d1\\u73af\\u5b87\",\"equip_use_number\":\"9\",\"equip_number\":\"1\",\"remark\":\"-\",\"status\":\"-\",\"is_national\":\"-\",\"equip_research_subsystem\":\"\\u6c2e\\u6c14\\u56de\\u8def\",\"cpn_standard\":\"CAST\",\"hash_code\":\"eb7199402fc2666a4ca8ff61e46edba9\",\"opinion\":\"-\",\"source\":\"\\u56fd\\u4ea7\"},{\"id\":1011,\"list_id\":5,\"list_no\":10,\"cpn_category_code\":\"595001\",\"cpn_category_second_name\":\"\\u7535\\u611f\\u5668\",\"amount\":\"10\",\"unique_code\":\"-\",\"cpn_ref_price\":\"600\",\"cpn_name\":\"\\u6beb\\u6b27\\u7cbe\\u5bc6\\u7535\\u963b\",\"cpn_specification_model\":\"RM7142-3W-R020-F\",\"cpn_quality\":\"CAST C\",\"cpn_package\":\"R2817\",\"cpn_control_level\":\"A\",\"cpn_country\":\"-\",\"cpn_manufacturer\":\"718\\u5382\",\"cpn_is_core_important\":\"\\u5426\",\"cpn_period\":\"16\",\"cpn_detect_apartment\":\"\\u4e2d\\u56fd\\u79d1\\u5b66\\u9662\\u7a7a\\u95f4\\u5e94\\u7528\\u5de5\\u7a0b\\u4e0e\\u6280\\u672f\\u4e2d\\u5fc3\",\"history\":\"\\u65e0\",\"dependence\":\"-\",\"safe_color\":\"-\",\"proposed_safe_color\":\"-\",\"necessity\":\"-\",\"access_channel\":\"-\",\"equip_name\":\"\\u6c2e\\u6c14\\u56de\\u8def\",\"equip_research_apartment\":\"\\u56fd\\u79d1\\u73af\\u5b87\",\"equip_use_number\":\"10\",\"equip_number\":\"1\",\"remark\":\"-\",\"status\":\"-\",\"is_national\":\"-\",\"equip_research_subsystem\":\"\\u6c2e\\u6c14\\u56de\\u8def\",\"cpn_standard\":\"CAST\",\"hash_code\":\"f97187dd364c314933ee47655cab5d1c\",\"opinion\":\"-\",\"source\":\"\\u56fd\\u4ea7\"},{\"id\":1012,\"list_id\":5,\"list_no\":11,\"cpn_category_code\":\"590501\",\"cpn_category_second_name\":\"\\u56fa\\u5b9a\\u7535\\u963b\\u5668\",\"amount\":\"11\",\"unique_code\":\"-\",\"cpn_ref_price\":\"5\",\"cpn_name\":\"\\u8d34\\u7247\\u7535\\u963b\",\"cpn_specification_model\":\"RMK2012-M-B-513-F\",\"cpn_quality\":\"CAST B\",\"cpn_package\":\"R0603\",\"cpn_control_level\":\"A\",\"cpn_country\":\"-\",\"cpn_manufacturer\":\"718\\u5382\",\"cpn_is_core_important\":\"\\u5426\",\"cpn_period\":\"16\",\"cpn_detect_apartment\":\"\\u4e2d\\u56fd\\u79d1\\u5b66\\u9662\\u7a7a\\u95f4\\u5e94\\u7528\\u5de5\\u7a0b\\u4e0e\\u6280\\u672f\\u4e2d\\u5fc3\",\"history\":\"\\u65e0\",\"dependence\":\"-\",\"safe_color\":\"-\",\"proposed_safe_color\":\"-\",\"necessity\":\"-\",\"access_channel\":\"-\",\"equip_name\":\"\\u6c2e\\u6c14\\u56de\\u8def\",\"equip_research_apartment\":\"\\u56fd\\u79d1\\u73af\\u5b87\",\"equip_use_number\":\"11\",\"equip_number\":\"1\",\"remark\":\"-\",\"status\":\"-\",\"is_national\":\"-\",\"equip_research_subsystem\":\"\\u6c2e\\u6c14\\u56de\\u8def\",\"cpn_standard\":\"CAST\",\"hash_code\":\"60467320aed24d1bd8af4434b06cee20\",\"opinion\":\"-\",\"source\":\"\\u56fd\\u4ea7\"},{\"id\":1013,\"list_id\":5,\"list_no\":12,\"cpn_category_code\":\"591001\",\"cpn_category_second_name\":\"\\u56fa\\u5b9a\\u7535\\u5bb9\\u5668\",\"amount\":\"12\",\"unique_code\":\"-\",\"cpn_ref_price\":\"5\",\"cpn_name\":\"\\u8d34\\u7247\\u7535\\u963b\",\"cpn_specification_model\":\"RMK2012-M-B-6191-F\",\"cpn_quality\":\"CAST B\",\"cpn_package\":\"R0603\",\"cpn_control_level\":\"A\",\"cpn_country\":\"-\",\"cpn_manufacturer\":\"718\\u5382\",\"cpn_is_core_important\":\"\\u5426\",\"cpn_period\":\"16\",\"cpn_detect_apartment\":\"\\u4e2d\\u56fd\\u79d1\\u5b66\\u9662\\u7a7a\\u95f4\\u5e94\\u7528\\u5de5\\u7a0b\\u4e0e\\u6280\\u672f\\u4e2d\\u5fc3\",\"history\":\"\\u65e0\",\"dependence\":\"-\",\"safe_color\":\"-\",\"proposed_safe_color\":\"-\",\"necessity\":\"-\",\"access_channel\":\"-\",\"equip_name\":\"\\u6c2e\\u6c14\\u56de\\u8def\",\"equip_research_apartment\":\"\\u56fd\\u79d1\\u73af\\u5b87\",\"equip_use_number\":\"12\",\"equip_number\":\"1\",\"remark\":\"-\",\"status\":\"-\",\"is_national\":\"-\",\"equip_research_subsystem\":\"\\u6c2e\\u6c14\\u56de\\u8def\",\"cpn_standard\":\"CAST\",\"hash_code\":\"1217635582b485547d3f4694babb9837\",\"opinion\":\"-\",\"source\":\"\\u56fd\\u4ea7\"},{\"id\":1014,\"list_id\":5,\"list_no\":13,\"cpn_category_code\":\"591101\",\"cpn_category_second_name\":\"\\u654f\\u611f\\u5143\\u4ef6\",\"amount\":\"13\",\"unique_code\":\"-\",\"cpn_ref_price\":\"5\",\"cpn_name\":\"\\u8d34\\u7247\\u7535\\u963b\",\"cpn_specification_model\":\"RMK2012-M-B-49R9-F\",\"cpn_quality\":\"CAST B\",\"cpn_package\":\"R0603\",\"cpn_control_level\":\"A\",\"cpn_country\":\"-\",\"cpn_manufacturer\":\"718\\u5382\",\"cpn_is_core_important\":\"\\u5426\",\"cpn_period\":\"16\",\"cpn_detect_apartment\":\"\\u4e2d\\u56fd\\u79d1\\u5b66\\u9662\\u7a7a\\u95f4\\u5e94\\u7528\\u5de5\\u7a0b\\u4e0e\\u6280\\u672f\\u4e2d\\u5fc3\",\"history\":\"\\u65e0\",\"dependence\":\"-\",\"safe_color\":\"-\",\"proposed_safe_color\":\"-\",\"necessity\":\"-\",\"access_channel\":\"-\",\"equip_name\":\"\\u6c2e\\u6c14\\u56de\\u8def\",\"equip_research_apartment\":\"\\u56fd\\u79d1\\u73af\\u5b87\",\"equip_use_number\":\"13\",\"equip_number\":\"1\",\"remark\":\"-\",\"status\":\"-\",\"is_national\":\"-\",\"equip_research_subsystem\":\"\\u6c2e\\u6c14\\u56de\\u8def\",\"cpn_standard\":\"CAST\",\"hash_code\":\"f68b3ccfe88cc64a7125313129307718\",\"opinion\":\"-\",\"source\":\"\\u56fd\\u4ea7\"},{\"id\":1015,\"list_id\":5,\"list_no\":14,\"cpn_category_code\":\"591501\",\"cpn_category_second_name\":\"\\u6291\\u5236\\u5e72\\u6270\\u6ee4\\u6ce2\\u5668\",\"amount\":\"14\",\"unique_code\":\"-\",\"cpn_ref_price\":\"5\",\"cpn_name\":\"\\u8d34\\u7247\\u7535\\u963b\",\"cpn_specification_model\":\"RMK2012-M-B-512-F\",\"cpn_quality\":\"CAST B\",\"cpn_package\":\"R0603\",\"cpn_control_level\":\"A\",\"cpn_country\":\"-\",\"cpn_manufacturer\":\"718\\u5382\",\"cpn_is_core_important\":\"\\u5426\",\"cpn_period\":\"16\",\"cpn_detect_apartment\":\"\\u4e2d\\u56fd\\u79d1\\u5b66\\u9662\\u7a7a\\u95f4\\u5e94\\u7528\\u5de5\\u7a0b\\u4e0e\\u6280\\u672f\\u4e2d\\u5fc3\",\"history\":\"\\u65e0\",\"dependence\":\"-\",\"safe_color\":\"-\",\"proposed_safe_color\":\"-\",\"necessity\":\"-\",\"access_channel\":\"-\",\"equip_name\":\"\\u6c2e\\u6c14\\u56de\\u8def\",\"equip_research_apartment\":\"\\u56fd\\u79d1\\u73af\\u5b87\",\"equip_use_number\":\"14\",\"equip_number\":\"1\",\"remark\":\"-\",\"status\":\"-\",\"is_national\":\"-\",\"equip_research_subsystem\":\"\\u6c2e\\u6c14\\u56de\\u8def\",\"cpn_standard\":\"CAST\",\"hash_code\":\"1610610b6bcad18058ff6f1dd6065297\",\"opinion\":\"-\",\"source\":\"\\u56fd\\u4ea7\"},{\"id\":1016,\"list_id\":5,\"list_no\":15,\"cpn_category_code\":\"592002\",\"cpn_category_second_name\":\"\\u907f\\u96f7\\u5668\",\"amount\":\"15\",\"unique_code\":\"-\",\"cpn_ref_price\":\"5\",\"cpn_name\":\"\\u8d34\\u7247\\u7535\\u963b\",\"cpn_specification_model\":\"RMK2012-M-B-2551-F\",\"cpn_quality\":\"CAST B\",\"cpn_package\":\"R0603\",\"cpn_control_level\":\"A\",\"cpn_country\":\"-\",\"cpn_manufacturer\":\"718\\u5382\",\"cpn_is_core_important\":\"\\u5426\",\"cpn_period\":\"16\",\"cpn_detect_apartment\":\"\\u4e2d\\u56fd\\u79d1\\u5b66\\u9662\\u7a7a\\u95f4\\u5e94\\u7528\\u5de5\\u7a0b\\u4e0e\\u6280\\u672f\\u4e2d\\u5fc3\",\"history\":\"\\u65e0\",\"dependence\":\"-\",\"safe_color\":\"-\",\"proposed_safe_color\":\"-\",\"necessity\":\"-\",\"access_channel\":\"-\",\"equip_name\":\"\\u6c2e\\u6c14\\u56de\\u8def\",\"equip_research_apartment\":\"\\u56fd\\u79d1\\u73af\\u5b87\",\"equip_use_number\":\"15\",\"equip_number\":\"1\",\"remark\":\"-\",\"status\":\"-\",\"is_national\":\"-\",\"equip_research_subsystem\":\"\\u6c2e\\u6c14\\u56de\\u8def\",\"cpn_standard\":\"CAST\",\"hash_code\":\"0aeb1175b2cdf3dc450aa5f23d2a3800\",\"opinion\":\"-\",\"source\":\"\\u56fd\\u4ea7\"}],\"first_page_url\":\"http:\\/\\/921.com\\/api\\/management\\/getCpnData?page=1\",\"from\":1,\"last_page\":34,\"last_page_url\":\"http:\\/\\/921.com\\/api\\/management\\/getCpnData?page=34\",\"next_page_url\":\"http:\\/\\/921.com\\/api\\/management\\/getCpnData?page=2\",\"path\":\"http:\\/\\/921.com\\/api\\/management\\/getCpnData\",\"per_page\":15,\"prev_page_url\":null,\"to\":15,\"total\":500}}}"
-						},
-						{
-							"name": "获取元器件列表数据",
-							"originalRequest": {
-								"method": "POST",
-								"header": [],
-								"body": {
-									"mode": "formdata",
-									"formdata": [
-										{
-											"key": "is_init",
-											"value": "",
-											"description": "是否初始化（不填：否 ,  1：是）（非必填）",
-											"type": "text"
-										},
-										{
-											"key": "structure_id",
-											"value": "8",
-											"description": "挂载节点id（非必填）",
-											"type": "text"
-										},
-										{
-											"key": "type",
-											"value": "1",
-											"description": "清单类型（1：国产,  2：进口）（非必填）",
-											"type": "text"
-										},
-										{
-											"key": "cpn_category",
-											"value": "590501",
-											"description": "元器件分类（非必填）",
-											"type": "text"
-										},
-										{
-											"key": "is_opinion",
-											"value": "1",
-											"description": "是否有意见（不填：否 ,  1：是）（非必填）",
-											"type": "text"
-										},
-										{
-											"key": "cpn_specification_model",
-											"value": "",
-											"description": "型号规格（非必填）",
-											"type": "text"
-										},
-										{
-											"key": "page_size",
-											"value": "10",
-											"description": "每页显示数（非必填）",
-											"type": "text"
-										},
-										{
-											"key": "page",
-											"value": "",
-											"description": "页码（非必填）",
-											"type": "text"
-										}
-									]
-								},
-								"url": {
-									"raw": "http://921.com/api/management/getCpnData",
-									"protocol": "http",
-									"host": [
-										"921",
-										"com"
-									],
-									"path": [
-										"api",
-										"management",
-										"getCpnData"
-									]
-								}
-							},
-							"status": "OK",
-							"code": 200,
-							"_postman_previewlanguage": "json",
-							"header": [
-								{
-									"key": "Cache-Control",
-									"value": "no-cache, private",
-									"name": "Cache-Control",
-									"description": "Tells all caching mechanisms from server to client whether they may cache this object. It is measured in seconds"
-								},
-								{
-									"key": "Connection",
-									"value": "Keep-Alive",
-									"name": "Connection",
-									"description": "Options that are desired for the connection"
-								},
-								{
-									"key": "Content-Type",
-									"value": "application/json",
-									"name": "Content-Type",
-									"description": "The mime type of this content"
-								},
-								{
-									"key": "Date",
-									"value": "Thu, 30 May 2019 07:48:00 GMT",
-									"name": "Date",
-									"description": "The date and time that the message was sent"
-								},
-								{
-									"key": "Keep-Alive",
-									"value": "timeout=5, max=100",
-									"name": "Keep-Alive",
-									"description": "Custom header"
-								},
-								{
-									"key": "Server",
-									"value": "Apache/2.4.37 (Win32) OpenSSL/1.1.1a PHP/7.3.1",
-									"name": "Server",
-									"description": "A name for the server"
-								},
-								{
-									"key": "Transfer-Encoding",
-									"value": "chunked",
-									"name": "Transfer-Encoding",
-									"description": "The form of encoding used to safely transfer the entity to the user. Currently defined methods are: chunked, compress, deflate, gzip, identity."
-								},
-								{
-									"key": "X-Powered-By",
-									"value": "PHP/7.3.1",
-									"name": "X-Powered-By",
-									"description": "Specifies the technology (ASP.NET, PHP, JBoss, e.g.) supporting the web application (version details are often in X-Runtime, X-Version, or X-AspNet-Version)"
-								}
-							],
-							"cookie": [],
-							"body": "{\"error_code\":0,\"msg\":\"ok\",\"data\":{\"statics\":{\"cpn_total\":94,\"cpn_specification_model_total\":93},\"cpnData\":{\"current_page\":1,\"data\":[{\"id\":1992,\"list_id\":21,\"list_no\":1,\"cpn_category_code\":\"5905010101\",\"cpn_category_second_name\":\"\\u56fa\\u5b9a\\u7535\\u963b\\u5668\",\"amount\":40,\"unique_code\":null,\"cpn_ref_price\":\"5.48\",\"cpn_name\":\"\\u91d1\\u5c5e\\u819c\\u7535\\u963b\",\"cpn_specification_model\":\"RJ25-0.5W-2-1%\",\"cpn_quality\":\"CAST C\",\"cpn_package\":\"\\u76f4\\u63d2\",\"cpn_control_level\":\"A\",\"cpn_country\":null,\"cpn_manufacturer\":\"718\\u5382\",\"cpn_is_core_important\":0,\"cpn_period\":24,\"cpn_detect_apartment\":\"\\u4e2d\\u56fd\\u79d1\\u5b66\\u9662\\u7a7a\\u95f4\\u5e94\\u7528\\u5de5\\u7a0b\\u4e0e\\u6280\\u672f\\u4e2d\\u5fc3\",\"history\":\"\\u5929\\u5bab\\u4e00\\u53f7,\\u5929\\u5bab\\u4e8c\\u53f7,\\u98ce\\u4e91\\u7cfb\\u5217\",\"dependence\":null,\"safe_color\":null,\"proposed_safe_color\":null,\"necessity\":null,\"access_channel\":null,\"equip_name\":\"\\u7c92\\u5b50\\u901a\\u91cf\\u4e0e\\u592a\\u9633\\u6d3b\\u52a8\\u63a2\\u6d4b\\u5668,\\u5927\\u6c14\\u5bc6\\u5ea6\\u591a\\u5411\\u63a2\\u6d4b\\u5668\",\"equip_research_apartment\":\"\\u56fd\\u5bb6\\u7a7a\\u95f4\\u79d1\\u5b66\\u4e2d\\u5fc3\",\"equip_use_number\":20,\"equip_number\":2,\"remark\":\"\",\"status\":0,\"is_national\":null,\"equip_research_subsystem\":\"\\u7a7a\\u95f4\\u73af\\u5883\\u76d1\\u6d4b\\u8f7d\\u8377\",\"cpn_standard\":\"CAST\",\"hash_code\":\"965c9da29ed81f41d0d8fbdd6fa570dd\",\"opinion\":\"\\u70e6\\u70e6\\u70e6\",\"source\":\"\\u56fd\\u4ea7\"},{\"id\":1993,\"list_id\":21,\"list_no\":2,\"cpn_category_code\":\"5905010101\",\"cpn_category_second_name\":\"\\u56fa\\u5b9a\\u7535\\u963b\\u5668\",\"amount\":8,\"unique_code\":null,\"cpn_ref_price\":\"4.88\",\"cpn_name\":\"\\u91d1\\u5c5e\\u819c\\u7535\\u963b\",\"cpn_specification_model\":\"RJ24-0.25W-5-1%\",\"cpn_quality\":\"CAST C\",\"cpn_package\":\"\\u76f4\\u63d2\",\"cpn_control_level\":\"A\",\"cpn_country\":null,\"cpn_manufacturer\":\"718\\u5382\",\"cpn_is_core_important\":0,\"cpn_period\":24,\"cpn_detect_apartment\":\"\\u4e2d\\u56fd\\u79d1\\u5b66\\u9662\\u7a7a\\u95f4\\u5e94\\u7528\\u5de5\\u7a0b\\u4e0e\\u6280\\u672f\\u4e2d\\u5fc3\",\"history\":\"\\u5929\\u5bab\\u4e00\\u53f7,\\u5929\\u5bab\\u4e8c\\u53f7,\\u98ce\\u4e91\\u7cfb\\u5217\",\"dependence\":null,\"safe_color\":null,\"proposed_safe_color\":null,\"necessity\":null,\"access_channel\":null,\"equip_name\":\"\\u540c\\u4e0a\",\"equip_research_apartment\":\"\\u540c\\u4e0a\",\"equip_use_number\":4,\"equip_number\":2,\"remark\":\"\",\"status\":0,\"is_national\":null,\"equip_research_subsystem\":\"\\u540c\\u4e0a\",\"cpn_standard\":\"CAST\",\"hash_code\":\"f76f24a493c0782a2b86c6f541c5e5c5\",\"opinion\":\"\\u70e6\\u70e6\\u70e6\",\"source\":\"\\u56fd\\u4ea7\"},{\"id\":1994,\"list_id\":21,\"list_no\":3,\"cpn_category_code\":\"5905010101\",\"cpn_category_second_name\":\"\\u56fa\\u5b9a\\u7535\\u963b\\u5668\",\"amount\":232,\"unique_code\":null,\"cpn_ref_price\":\"3.75\",\"cpn_name\":\"\\u91d1\\u5c5e\\u819c\\u7535\\u963b\",\"cpn_specification_model\":\"RJ24-0.25W-10-1%\",\"cpn_quality\":\"CAST C\",\"cpn_package\":\"\\u76f4\\u63d2\",\"cpn_control_level\":\"A\",\"cpn_country\":null,\"cpn_manufacturer\":\"718\\u5382\",\"cpn_is_core_important\":0,\"cpn_period\":24,\"cpn_detect_apartment\":\"\\u4e2d\\u56fd\\u79d1\\u5b66\\u9662\\u7a7a\\u95f4\\u5e94\\u7528\\u5de5\\u7a0b\\u4e0e\\u6280\\u672f\\u4e2d\\u5fc3\",\"history\":\"\\u5929\\u5bab\\u4e00\\u53f7,\\u5929\\u5bab\\u4e8c\\u53f7,\\u98ce\\u4e91\\u7cfb\\u5217\",\"dependence\":null,\"safe_color\":null,\"proposed_safe_color\":null,\"necessity\":null,\"access_channel\":null,\"equip_name\":\"\\u540c\\u4e0a\",\"equip_research_apartment\":\"\\u540c\\u4e0a\",\"equip_use_number\":116,\"equip_number\":2,\"remark\":\"\",\"status\":0,\"is_national\":null,\"equip_research_subsystem\":\"\\u540c\\u4e0a\",\"cpn_standard\":\"CAST\",\"hash_code\":\"b6b2e86def8ad9351f41a6d2db0dcb1d\",\"opinion\":\"\\u70e6\\u70e6\\u70e6\",\"source\":\"\\u56fd\\u4ea7\"},{\"id\":1995,\"list_id\":21,\"list_no\":4,\"cpn_category_code\":\"5905010101\",\"cpn_category_second_name\":\"\\u56fa\\u5b9a\\u7535\\u963b\\u5668\",\"amount\":188,\"unique_code\":null,\"cpn_ref_price\":\"3.75\",\"cpn_name\":\"\\u91d1\\u5c5e\\u819c\\u7535\\u963b\",\"cpn_specification_model\":\"RJ24-0.25W-20-1%\",\"cpn_quality\":\"CAST C\",\"cpn_package\":\"\\u76f4\\u63d2\",\"cpn_control_level\":\"A\",\"cpn_country\":null,\"cpn_manufacturer\":\"718\\u5382\",\"cpn_is_core_important\":0,\"cpn_period\":24,\"cpn_detect_apartment\":\"\\u4e2d\\u56fd\\u79d1\\u5b66\\u9662\\u7a7a\\u95f4\\u5e94\\u7528\\u5de5\\u7a0b\\u4e0e\\u6280\\u672f\\u4e2d\\u5fc3\",\"history\":\"\\u5929\\u5bab\\u4e00\\u53f7,\\u5929\\u5bab\\u4e8c\\u53f7,\\u98ce\\u4e91\\u7cfb\\u5217\",\"dependence\":null,\"safe_color\":null,\"proposed_safe_color\":null,\"necessity\":null,\"access_channel\":null,\"equip_name\":\"\\u540c\\u4e0a\",\"equip_research_apartment\":\"\\u540c\\u4e0a\",\"equip_use_number\":94,\"equip_number\":2,\"remark\":\"\",\"status\":0,\"is_national\":null,\"equip_research_subsystem\":\"\\u540c\\u4e0a\",\"cpn_standard\":\"CAST\",\"hash_code\":\"05ea636f96916438953118dfd56e11e2\",\"opinion\":\"\\u70e6\\u70e6\\u70e6\",\"source\":\"\\u56fd\\u4ea7\"},{\"id\":1996,\"list_id\":21,\"list_no\":5,\"cpn_category_code\":\"5905010101\",\"cpn_category_second_name\":\"\\u56fa\\u5b9a\\u7535\\u963b\\u5668\",\"amount\":24,\"unique_code\":null,\"cpn_ref_price\":\"3.75\",\"cpn_name\":\"\\u91d1\\u5c5e\\u819c\\u7535\\u963b\",\"cpn_specification_model\":\"RJ24-0.25W-100-1%\",\"cpn_quality\":\"CAST C\",\"cpn_package\":\"\\u76f4\\u63d2\",\"cpn_control_level\":\"A\",\"cpn_country\":null,\"cpn_manufacturer\":\"718\\u5382\",\"cpn_is_core_important\":0,\"cpn_period\":24,\"cpn_detect_apartment\":\"\\u4e2d\\u56fd\\u79d1\\u5b66\\u9662\\u7a7a\\u95f4\\u5e94\\u7528\\u5de5\\u7a0b\\u4e0e\\u6280\\u672f\\u4e2d\\u5fc3\",\"history\":\"\\u5929\\u5bab\\u4e00\\u53f7,\\u5929\\u5bab\\u4e8c\\u53f7,\\u98ce\\u4e91\\u7cfb\\u5217\",\"dependence\":null,\"safe_color\":null,\"proposed_safe_color\":null,\"necessity\":null,\"access_channel\":null,\"equip_name\":\"\\u540c\\u4e0a\",\"equip_research_apartment\":\"\\u540c\\u4e0a\",\"equip_use_number\":12,\"equip_number\":2,\"remark\":\"\",\"status\":0,\"is_national\":null,\"equip_research_subsystem\":\"\\u540c\\u4e0a\",\"cpn_standard\":\"CAST\",\"hash_code\":\"54e7504a82e9399ebb2cc7a8563d747b\",\"opinion\":\"\\u70e6\\u70e6\\u70e6\",\"source\":\"\\u56fd\\u4ea7\"},{\"id\":1997,\"list_id\":21,\"list_no\":6,\"cpn_category_code\":\"5905010101\",\"cpn_category_second_name\":\"\\u56fa\\u5b9a\\u7535\\u963b\\u5668\",\"amount\":88,\"unique_code\":null,\"cpn_ref_price\":\"3.75\",\"cpn_name\":\"\\u91d1\\u5c5e\\u819c\\u7535\\u963b\",\"cpn_specification_model\":\"RJ24-0.25W-200-1%\",\"cpn_quality\":\"CAST C\",\"cpn_package\":\"\\u76f4\\u63d2\",\"cpn_control_level\":\"A\",\"cpn_country\":null,\"cpn_manufacturer\":\"718\\u5382\",\"cpn_is_core_important\":0,\"cpn_period\":24,\"cpn_detect_apartment\":\"\\u4e2d\\u56fd\\u79d1\\u5b66\\u9662\\u7a7a\\u95f4\\u5e94\\u7528\\u5de5\\u7a0b\\u4e0e\\u6280\\u672f\\u4e2d\\u5fc3\",\"history\":\"\\u5929\\u5bab\\u4e00\\u53f7,\\u5929\\u5bab\\u4e8c\\u53f7,\\u98ce\\u4e91\\u7cfb\\u5217\",\"dependence\":null,\"safe_color\":null,\"proposed_safe_color\":null,\"necessity\":null,\"access_channel\":null,\"equip_name\":\"\\u540c\\u4e0a\",\"equip_research_apartment\":\"\\u540c\\u4e0a\",\"equip_use_number\":44,\"equip_number\":2,\"remark\":\"\",\"status\":0,\"is_national\":null,\"equip_research_subsystem\":\"\\u540c\\u4e0a\",\"cpn_standard\":\"CAST\",\"hash_code\":\"454e6c0603a54e669bca91cc68bf8b98\",\"opinion\":\"\\u70e6\\u70e6\\u70e6\",\"source\":\"\\u56fd\\u4ea7\"},{\"id\":1998,\"list_id\":21,\"list_no\":7,\"cpn_category_code\":\"5905010101\",\"cpn_category_second_name\":\"\\u56fa\\u5b9a\\u7535\\u963b\\u5668\",\"amount\":72,\"unique_code\":null,\"cpn_ref_price\":\"3.75\",\"cpn_name\":\"\\u91d1\\u5c5e\\u819c\\u7535\\u963b\",\"cpn_specification_model\":\"RJ24-0.25W-300-1%\",\"cpn_quality\":\"CAST C\",\"cpn_package\":\"\\u76f4\\u63d2\",\"cpn_control_level\":\"A\",\"cpn_country\":null,\"cpn_manufacturer\":\"718\\u5382\",\"cpn_is_core_important\":0,\"cpn_period\":24,\"cpn_detect_apartment\":\"\\u4e2d\\u56fd\\u79d1\\u5b66\\u9662\\u7a7a\\u95f4\\u5e94\\u7528\\u5de5\\u7a0b\\u4e0e\\u6280\\u672f\\u4e2d\\u5fc3\",\"history\":\"\\u5929\\u5bab\\u4e00\\u53f7,\\u5929\\u5bab\\u4e8c\\u53f7,\\u98ce\\u4e91\\u7cfb\\u5217\",\"dependence\":null,\"safe_color\":null,\"proposed_safe_color\":null,\"necessity\":null,\"access_channel\":null,\"equip_name\":\"\\u540c\\u4e0a\",\"equip_research_apartment\":\"\\u540c\\u4e0a\",\"equip_use_number\":36,\"equip_number\":2,\"remark\":\"\",\"status\":0,\"is_national\":null,\"equip_research_subsystem\":\"\\u540c\\u4e0a\",\"cpn_standard\":\"CAST\",\"hash_code\":\"e067c7c7d9edc9630983df945e1bbff9\",\"opinion\":\"\\u70e6\\u70e6\\u70e6\",\"source\":\"\\u56fd\\u4ea7\"},{\"id\":1999,\"list_id\":21,\"list_no\":8,\"cpn_category_code\":\"5905010101\",\"cpn_category_second_name\":\"\\u56fa\\u5b9a\\u7535\\u963b\\u5668\",\"amount\":40,\"unique_code\":null,\"cpn_ref_price\":\"3.75\",\"cpn_name\":\"\\u91d1\\u5c5e\\u819c\\u7535\\u963b\",\"cpn_specification_model\":\"RJ24-0.25W-390-1%\",\"cpn_quality\":\"CAST C\",\"cpn_package\":\"\\u76f4\\u63d2\",\"cpn_control_level\":\"A\",\"cpn_country\":null,\"cpn_manufacturer\":\"718\\u5382\",\"cpn_is_core_important\":0,\"cpn_period\":24,\"cpn_detect_apartment\":\"\\u4e2d\\u56fd\\u79d1\\u5b66\\u9662\\u7a7a\\u95f4\\u5e94\\u7528\\u5de5\\u7a0b\\u4e0e\\u6280\\u672f\\u4e2d\\u5fc3\",\"history\":\"\\u5929\\u5bab\\u4e00\\u53f7,\\u5929\\u5bab\\u4e8c\\u53f7,\\u98ce\\u4e91\\u7cfb\\u5217\",\"dependence\":null,\"safe_color\":null,\"proposed_safe_color\":null,\"necessity\":null,\"access_channel\":null,\"equip_name\":\"\\u540c\\u4e0a\",\"equip_research_apartment\":\"\\u540c\\u4e0a\",\"equip_use_number\":20,\"equip_number\":2,\"remark\":\"\",\"status\":0,\"is_national\":null,\"equip_research_subsystem\":\"\\u540c\\u4e0a\",\"cpn_standard\":\"CAST\",\"hash_code\":\"63acf4b50c77d9069e47988ccd473503\",\"opinion\":\"\\u70e6\\u70e6\\u70e6\",\"source\":\"\\u56fd\\u4ea7\"},{\"id\":2000,\"list_id\":21,\"list_no\":9,\"cpn_category_code\":\"5905010101\",\"cpn_category_second_name\":\"\\u56fa\\u5b9a\\u7535\\u963b\\u5668\",\"amount\":32,\"unique_code\":null,\"cpn_ref_price\":\"3.75\",\"cpn_name\":\"\\u91d1\\u5c5e\\u819c\\u7535\\u963b\",\"cpn_specification_model\":\"RJ24-0.25W-470-1%\",\"cpn_quality\":\"CAST C\",\"cpn_package\":\"\\u76f4\\u63d2\",\"cpn_control_level\":\"A\",\"cpn_country\":null,\"cpn_manufacturer\":\"718\\u5382\",\"cpn_is_core_important\":0,\"cpn_period\":24,\"cpn_detect_apartment\":\"\\u4e2d\\u56fd\\u79d1\\u5b66\\u9662\\u7a7a\\u95f4\\u5e94\\u7528\\u5de5\\u7a0b\\u4e0e\\u6280\\u672f\\u4e2d\\u5fc3\",\"history\":\"\\u5929\\u5bab\\u4e00\\u53f7,\\u5929\\u5bab\\u4e8c\\u53f7,\\u98ce\\u4e91\\u7cfb\\u5217\",\"dependence\":null,\"safe_color\":null,\"proposed_safe_color\":null,\"necessity\":null,\"access_channel\":null,\"equip_name\":\"\\u540c\\u4e0a\",\"equip_research_apartment\":\"\\u540c\\u4e0a\",\"equip_use_number\":16,\"equip_number\":2,\"remark\":\"\",\"status\":0,\"is_national\":null,\"equip_research_subsystem\":\"\\u540c\\u4e0a\",\"cpn_standard\":\"CAST\",\"hash_code\":\"ddd5da21a0a9a9e817d6812f64669f21\",\"opinion\":\"\\u70e6\\u70e6\\u70e6\",\"source\":\"\\u56fd\\u4ea7\"},{\"id\":2001,\"list_id\":21,\"list_no\":10,\"cpn_category_code\":\"5905010101\",\"cpn_category_second_name\":\"\\u56fa\\u5b9a\\u7535\\u963b\\u5668\",\"amount\":40,\"unique_code\":null,\"cpn_ref_price\":\"3.75\",\"cpn_name\":\"\\u91d1\\u5c5e\\u819c\\u7535\\u963b\",\"cpn_specification_model\":\"RJ24-0.25W-500-1%\",\"cpn_quality\":\"CAST C\",\"cpn_package\":\"\\u76f4\\u63d2\",\"cpn_control_level\":\"A\",\"cpn_country\":null,\"cpn_manufacturer\":\"718\\u5382\",\"cpn_is_core_important\":0,\"cpn_period\":24,\"cpn_detect_apartment\":\"\\u4e2d\\u56fd\\u79d1\\u5b66\\u9662\\u7a7a\\u95f4\\u5e94\\u7528\\u5de5\\u7a0b\\u4e0e\\u6280\\u672f\\u4e2d\\u5fc3\",\"history\":\"\\u5929\\u5bab\\u4e00\\u53f7,\\u5929\\u5bab\\u4e8c\\u53f7,\\u98ce\\u4e91\\u7cfb\\u5217\",\"dependence\":null,\"safe_color\":null,\"proposed_safe_color\":null,\"necessity\":null,\"access_channel\":null,\"equip_name\":\"\\u540c\\u4e0a\",\"equip_research_apartment\":\"\\u540c\\u4e0a\",\"equip_use_number\":20,\"equip_number\":2,\"remark\":\"\",\"status\":0,\"is_national\":null,\"equip_research_subsystem\":\"\\u540c\\u4e0a\",\"cpn_standard\":\"CAST\",\"hash_code\":\"9d0584f3999858a881ce9fd71b5144bf\",\"opinion\":\"\\u70e6\\u70e6\\u70e6\",\"source\":\"\\u56fd\\u4ea7\"}],\"first_page_url\":\"http:\\/\\/921.com\\/api\\/management\\/getCpnData?page=1\",\"from\":1,\"last_page\":10,\"last_page_url\":\"http:\\/\\/921.com\\/api\\/management\\/getCpnData?page=10\",\"next_page_url\":\"http:\\/\\/921.com\\/api\\/management\\/getCpnData?page=2\",\"path\":\"http:\\/\\/921.com\\/api\\/management\\/getCpnData\",\"per_page\":\"10\",\"prev_page_url\":null,\"to\":10,\"total\":94}}}"
-						},
-						{
-							"name": "获取元器件列表数据",
-							"originalRequest": {
-								"method": "POST",
-								"header": [],
-								"body": {
-									"mode": "formdata",
-									"formdata": [
-										{
-											"key": "is_init",
-											"value": "",
-											"description": "是否初始化（不填：否 ,  1：是）（非必填）",
-											"type": "text"
-										},
-										{
-											"key": "structure_id",
-											"value": "2",
-											"description": "挂载节点id（非必填）",
-											"type": "text"
-										},
-										{
-											"key": "type",
-											"value": "2",
-											"description": "清单类型（1：国产,  2：进口）（非必填）",
-											"type": "text"
-										},
-										{
-											"key": "cpn_category",
-											"value": "",
-											"description": "元器件分类（非必填）",
-											"type": "text"
-										},
-										{
-											"key": "is_opinion",
-											"value": "",
-											"description": "是否有意见（不填：否 ,  1：是）（非必填）",
-											"type": "text"
-										},
-										{
-											"key": "cpn_specification_model",
-											"value": "",
-											"description": "型号规格（非必填）",
-											"type": "text"
-										},
-										{
-											"key": "page_size",
-											"value": "",
-											"description": "每页显示数（非必填）",
-											"type": "text"
-										},
-										{
-											"key": "page",
-											"value": "",
-											"description": "页码（非必填）",
-											"type": "text"
-										}
-									]
-								},
-								"url": {
-									"raw": "http://921.com/api/management/getCpnData",
-									"protocol": "http",
-									"host": [
-										"921",
-										"com"
-									],
-									"path": [
-										"api",
-										"management",
-										"getCpnData"
-									]
-								}
-							},
-							"status": "OK",
-							"code": 200,
-							"_postman_previewlanguage": "json",
-							"header": [
-								{
-									"key": "Cache-Control",
-									"value": "no-cache, private",
-									"name": "Cache-Control",
-									"description": "Tells all caching mechanisms from server to client whether they may cache this object. It is measured in seconds"
-								},
-								{
-									"key": "Connection",
-									"value": "Keep-Alive",
-									"name": "Connection",
-									"description": "Options that are desired for the connection"
-								},
-								{
-									"key": "Content-Type",
-									"value": "application/json",
-									"name": "Content-Type",
-									"description": "The mime type of this content"
-								},
-								{
-									"key": "Date",
-									"value": "Wed, 12 Jun 2019 02:24:32 GMT",
-									"name": "Date",
-									"description": "The date and time that the message was sent"
-								},
-								{
-									"key": "Keep-Alive",
-									"value": "timeout=5, max=100",
-									"name": "Keep-Alive",
-									"description": "Custom header"
-								},
-								{
-									"key": "Server",
-									"value": "Apache/2.4.37 (Win32) OpenSSL/1.1.1a PHP/7.3.1",
-									"name": "Server",
-									"description": "A name for the server"
-								},
-								{
-									"key": "Transfer-Encoding",
-									"value": "chunked",
-									"name": "Transfer-Encoding",
-									"description": "The form of encoding used to safely transfer the entity to the user. Currently defined methods are: chunked, compress, deflate, gzip, identity."
-								},
-								{
-									"key": "X-Powered-By",
-									"value": "PHP/7.3.1",
-									"name": "X-Powered-By",
-									"description": "Specifies the technology (ASP.NET, PHP, JBoss, e.g.) supporting the web application (version details are often in X-Runtime, X-Version, or X-AspNet-Version)"
-								}
-							],
-							"cookie": [],
-							"body": "{\"error_code\":0,\"msg\":\"ok\",\"data\":{\"is_has_opinion\":false,\"statics\":{\"cpn_total\":3937,\"cpn_specification_model_total\":998},\"selectFields\":{\"safe_color\":[\"\\u6a59\\u8272\",\"\\u7d2b\\u8272\",\"\\u7ea2\\u8272\",\"\\u7eff\\u8272\",\"\\u9ec4\\u8272\"],\"proposed_safe_color\":[\"\\u6a59\\u8272\",\"\\u7d2b\\u8272\",\"\\u7ea2\\u8272\",\"\\u7eff\\u8272\",\"\\u9ec4\\u8272\"],\"necessity\":[\"1\",\"2.1\",\"2.2\",\"2.3\",\"3\",\"4\"],\"access_channel\":[\"\\u76f4\\u63a5\",\"\\u79d8\\u5bc6\",\"\\u7b2c\\u4e09\\u65b9\"],\"equip_research_apartment\":[\"\\u73af\\u5b87\"],\"equip_research_subsystem\":[\"\\u6c2e\\u6c14\\u56de\\u8def\"]},\"cpnData\":{\"current_page\":1,\"data\":[{\"id\":1,\"list_id\":11,\"list_no\":1,\"cpn_category_code\":\"59550102\",\"cpn_category_second_name\":\"\\u538b\\u7535\\u5143\\u4ef6\",\"amount\":\"3\",\"unique_code\":\"-\",\"cpn_ref_price\":\"1900\",\"cpn_name\":\"\\u6709\\u6e90\\u6676\\u632f\",\"cpn_specification_model\":\"QT92LD9M-40.000MHZ\",\"cpn_quality\":\"55310-B\",\"cpn_package\":\"QT92\",\"cpn_control_level\":\"-\",\"cpn_country\":\"\\u7f8e\\u56fd\",\"cpn_manufacturer\":\"Q-tech\",\"cpn_is_core_important\":\"\\u5426\",\"cpn_period\":\"12\",\"cpn_detect_apartment\":\"-\",\"history\":\"-\",\"dependence\":\"-\",\"safe_color\":\"\\u9ec4\\u8272\",\"proposed_safe_color\":\"\\u9ec4\\u8272\",\"necessity\":\"2.1\",\"access_channel\":\"\\u7b2c\\u4e09\\u65b9\",\"equip_name\":\"\\u6c2e\\u6c14\\u56de\\u8def\",\"equip_research_apartment\":\"\\u73af\\u5b87\",\"equip_use_number\":\"1\",\"equip_number\":\"3\",\"remark\":\"-\",\"status\":\"-\",\"is_national\":\"-\",\"equip_research_subsystem\":\"-\",\"cpn_standard\":\"-\",\"hash_code\":\"571410e30ea2200806d997d88fa6d01e\",\"opinion\":\"-\",\"source\":\"\\u8fdb\\u53e3\"},{\"id\":2,\"list_id\":11,\"list_no\":2,\"cpn_category_code\":\"59550102\",\"cpn_category_second_name\":\"\\u538b\\u7535\\u5143\\u4ef6\",\"amount\":\"3\",\"unique_code\":\"-\",\"cpn_ref_price\":\"1900\",\"cpn_name\":\"\\u6709\\u6e90\\u6676\\u632f\",\"cpn_specification_model\":\"QT92LD9M-8.000MHZ\",\"cpn_quality\":\"55310-B\",\"cpn_package\":\"QT92\",\"cpn_control_level\":\"-\",\"cpn_country\":\"\\u7f8e\\u56fd\",\"cpn_manufacturer\":\"Q-tech\",\"cpn_is_core_important\":\"\\u5426\",\"cpn_period\":\"12\",\"cpn_detect_apartment\":\"-\",\"history\":\"-\",\"dependence\":\"-\",\"safe_color\":\"\\u9ec4\\u8272\",\"proposed_safe_color\":\"\\u9ec4\\u8272\",\"necessity\":\"2.1\",\"access_channel\":\"\\u7b2c\\u4e09\\u65b9\",\"equip_name\":\"\\u6c2e\\u6c14\\u56de\\u8def\",\"equip_research_apartment\":\"-\",\"equip_use_number\":\"1\",\"equip_number\":\"3\",\"remark\":\"-\",\"status\":\"-\",\"is_national\":\"-\",\"equip_research_subsystem\":\"\\u6c2e\\u6c14\\u56de\\u8def\",\"cpn_standard\":\"-\",\"hash_code\":\"66fb8b0eafaf107a93b333983a331423\",\"opinion\":\"-\",\"source\":\"\\u8fdb\\u53e3\"},{\"id\":3,\"list_id\":11,\"list_no\":3,\"cpn_category_code\":\"596201010302\",\"cpn_category_second_name\":\"\\u534a\\u5bfc\\u4f53\\u96c6\\u6210\\u7535\\u8def\",\"amount\":\"3\",\"unique_code\":\"-\",\"cpn_ref_price\":\"25\",\"cpn_name\":\"\\u57fa\\u51c6\\u6e90\",\"cpn_specification_model\":\"REF5025IDR\",\"cpn_quality\":\"\\u5de5\\u4e1a\\u7ea7\",\"cpn_package\":\"SOIC8\",\"cpn_control_level\":\"-\",\"cpn_country\":\"\\u7f8e\\u56fd\",\"cpn_manufacturer\":\"TI\",\"cpn_is_core_important\":\"\\u5426\",\"cpn_period\":\"4\",\"cpn_detect_apartment\":\"-\",\"history\":\"-\",\"dependence\":\"-\",\"safe_color\":\"\\u9ec4\\u8272\",\"proposed_safe_color\":\"\\u9ec4\\u8272\",\"necessity\":\"2.1\",\"access_channel\":\"\\u7b2c\\u4e09\\u65b9\",\"equip_name\":\"-\",\"equip_research_apartment\":\"\\u73af\\u5b87\",\"equip_use_number\":\"1\",\"equip_number\":\"3\",\"remark\":\"-\",\"status\":\"-\",\"is_national\":\"-\",\"equip_research_subsystem\":\"\\u6c2e\\u6c14\\u56de\\u8def\",\"cpn_standard\":\"-\",\"hash_code\":\"c9be0f552be7810c6412df14b4bdf988\",\"opinion\":\"-\",\"source\":\"\\u8fdb\\u53e3\"},{\"id\":4,\"list_id\":11,\"list_no\":4,\"cpn_category_code\":\"5962020101\",\"cpn_category_second_name\":\"\\u6df7\\u5408\\u96c6\\u6210\\u7535\\u8def\",\"amount\":\"6\",\"unique_code\":\"-\",\"cpn_ref_price\":\"50\",\"cpn_name\":\"LDO\",\"cpn_specification_model\":\"TPS74401MRGWREP\",\"cpn_quality\":\"\\u519b\\u6e29\\u5de5\\u4e1a\\u7ea7\",\"cpn_package\":\"PQFP-20\",\"cpn_control_level\":\"-\",\"cpn_country\":\"\\u7f8e\\u56fd\",\"cpn_manufacturer\":\"TI\",\"cpn_is_core_important\":\"\\u5426\",\"cpn_period\":\"8\",\"cpn_detect_apartment\":\"-\",\"history\":\"-\",\"dependence\":\"-\",\"safe_color\":\"\\u9ec4\\u8272\",\"proposed_safe_color\":\"\\u9ec4\\u8272\",\"necessity\":\"2.1\",\"access_channel\":\"\\u7b2c\\u4e09\\u65b9\",\"equip_name\":\"\\u6c2e\\u6c14\\u56de\\u8def\",\"equip_research_apartment\":\"\\u73af\\u5b87\",\"equip_use_number\":\"2\",\"equip_number\":\"3\",\"remark\":\"-\",\"status\":\"-\",\"is_national\":\"-\",\"equip_research_subsystem\":\"\\u6c2e\\u6c14\\u56de\\u8def\",\"cpn_standard\":\"-\",\"hash_code\":\"05b00c7fabe710d7b0f4087fb9cb2fd8\",\"opinion\":\"-\",\"source\":\"\\u8fdb\\u53e3\"},{\"id\":5,\"list_id\":11,\"list_no\":5,\"cpn_category_code\":\"5962010313\",\"cpn_category_second_name\":\"\\u534a\\u5bfc\\u4f53\\u96c6\\u6210\\u7535\\u8def\",\"amount\":\"6\",\"unique_code\":\"-\",\"cpn_ref_price\":\"600\",\"cpn_name\":\"\\u603b\\u7ebf\\u6536\\u53d1\\u5668\",\"cpn_specification_model\":\"SNJ54LVTH16245AWD\",\"cpn_quality\":\"38535-Q\",\"cpn_package\":\"R-GDFP-F48\",\"cpn_control_level\":\"-\",\"cpn_country\":\"\\u7f8e\\u56fd\",\"cpn_manufacturer\":\"TI\",\"cpn_is_core_important\":\"\\u5426\",\"cpn_period\":\"28\",\"cpn_detect_apartment\":\"-\",\"history\":\"-\",\"dependence\":\"-\",\"safe_color\":\"\\u9ec4\\u8272\",\"proposed_safe_color\":\"\\u9ec4\\u8272\",\"necessity\":\"2.1\",\"access_channel\":\"\\u7b2c\\u4e09\\u65b9\",\"equip_name\":\"\\u6c2e\\u6c14\\u56de\\u8def\",\"equip_research_apartment\":\"\\u73af\\u5b87\",\"equip_use_number\":\"2\",\"equip_number\":\"3\",\"remark\":\"-\",\"status\":\"-\",\"is_national\":\"-\",\"equip_research_subsystem\":\"\\u6c2e\\u6c14\\u56de\\u8def\",\"cpn_standard\":\"-\",\"hash_code\":\"9f4d52fc8ecc802265a0066db68c9bb1\",\"opinion\":\"-\",\"source\":\"\\u8fdb\\u53e3\"},{\"id\":6,\"list_id\":11,\"list_no\":6,\"cpn_category_code\":\"5962010313\",\"cpn_category_second_name\":\"\\u534a\\u5bfc\\u4f53\\u96c6\\u6210\\u7535\\u8def\",\"amount\":\"12\",\"unique_code\":\"-\",\"cpn_ref_price\":\"600\",\"cpn_name\":\"\\u603b\\u7ebf\\u6536\\u53d1\\u5668\",\"cpn_specification_model\":\"SNJ54ABTH16245WD\",\"cpn_quality\":\"38535-Q\",\"cpn_package\":\"R-GDFP-F48\",\"cpn_control_level\":\"-\",\"cpn_country\":\"\\u7f8e\\u56fd\",\"cpn_manufacturer\":\"TI\",\"cpn_is_core_important\":\"\\u5426\",\"cpn_period\":\"28\",\"cpn_detect_apartment\":\"-\",\"history\":\"-\",\"dependence\":\"-\",\"safe_color\":\"\\u9ec4\\u8272\",\"proposed_safe_color\":\"\\u9ec4\\u8272\",\"necessity\":\"2.1\",\"access_channel\":\"\\u7b2c\\u4e09\\u65b9\",\"equip_name\":\"\\u6c2e\\u6c14\\u56de\\u8def\",\"equip_research_apartment\":\"\\u73af\\u5b87\",\"equip_use_number\":\"4\",\"equip_number\":\"3\",\"remark\":\"-\",\"status\":\"-\",\"is_national\":\"-\",\"equip_research_subsystem\":\"\\u6c2e\\u6c14\\u56de\\u8def\",\"cpn_standard\":\"-\",\"hash_code\":\"789b8db759dbaa278494df30501abdf7\",\"opinion\":\"-\",\"source\":\"\\u8fdb\\u53e3\"},{\"id\":7,\"list_id\":11,\"list_no\":7,\"cpn_category_code\":\"5962010399\",\"cpn_category_second_name\":\"\\u534a\\u5bfc\\u4f53\\u96c6\\u6210\\u7535\\u8def\",\"amount\":\"3\",\"unique_code\":\"-\",\"cpn_ref_price\":\"150\",\"cpn_name\":\"BUFFER\",\"cpn_specification_model\":\"SNJ54HC126J\",\"cpn_quality\":\"M\\u7ea7\\n(5962-8684801CA)\",\"cpn_package\":\"DIP14\",\"cpn_control_level\":\"-\",\"cpn_country\":\"\\u7f8e\\u56fd\",\"cpn_manufacturer\":\"TI\",\"cpn_is_core_important\":\"\\u5426\",\"cpn_period\":\"16\",\"cpn_detect_apartment\":\"-\",\"history\":\"-\",\"dependence\":\"-\",\"safe_color\":\"\\u9ec4\\u8272\",\"proposed_safe_color\":\"\\u9ec4\\u8272\",\"necessity\":\"2.1\",\"access_channel\":\"\\u7b2c\\u4e09\\u65b9\",\"equip_name\":\"\\u6c2e\\u6c14\\u56de\\u8def\",\"equip_research_apartment\":\"\\u73af\\u5b87\",\"equip_use_number\":\"1\",\"equip_number\":\"3\",\"remark\":\"-\",\"status\":\"-\",\"is_national\":\"-\",\"equip_research_subsystem\":\"\\u6c2e\\u6c14\\u56de\\u8def\",\"cpn_standard\":\"-\",\"hash_code\":\"e5940ba34c942691c6963d75b8ec3b32\",\"opinion\":\"-\",\"source\":\"\\u8fdb\\u53e3\"},{\"id\":8,\"list_id\":11,\"list_no\":8,\"cpn_category_code\":\"5962010302\",\"cpn_category_second_name\":\"\\u534a\\u5bfc\\u4f53\\u96c6\\u6210\\u7535\\u8def\",\"amount\":\"3\",\"unique_code\":\"-\",\"cpn_ref_price\":\"300\",\"cpn_name\":\"ADC\\u82af\\u7247\",\"cpn_specification_model\":\"AD976ASD\\/883B\",\"cpn_quality\":\"883\",\"cpn_package\":\"DIP28\",\"cpn_control_level\":\"-\",\"cpn_country\":\"\\u7f8e\\u56fd\",\"cpn_manufacturer\":\"ADI\",\"cpn_is_core_important\":\"\\u5426\",\"cpn_period\":\"16\",\"cpn_detect_apartment\":\"-\",\"history\":\"-\",\"dependence\":\"-\",\"safe_color\":\"\\u9ec4\\u8272\",\"proposed_safe_color\":\"\\u9ec4\\u8272\",\"necessity\":\"2.1\",\"access_channel\":\"16\\u5468\",\"equip_name\":\"\\u6c2e\\u6c14\\u56de\\u8def\",\"equip_research_apartment\":\"\\u73af\\u5b87\",\"equip_use_number\":\"1\",\"equip_number\":\"3\",\"remark\":\"-\",\"status\":\"-\",\"is_national\":\"-\",\"equip_research_subsystem\":\"\\u6c2e\\u6c14\\u56de\\u8def\",\"cpn_standard\":\"-\",\"hash_code\":\"1cbe8b78df38564b264623ef6261ccad\",\"opinion\":\"-\",\"source\":\"\\u8fdb\\u53e3\"},{\"id\":9,\"list_id\":11,\"list_no\":9,\"cpn_category_code\":\"5962020299\",\"cpn_category_second_name\":\"\\u6df7\\u5408\\u96c6\\u6210\\u7535\\u8def\",\"amount\":\"3\",\"unique_code\":\"-\",\"cpn_ref_price\":\"300\",\"cpn_name\":\"\\u4eea\\u7528\\u8fd0\\u653e\",\"cpn_specification_model\":\"AD620S(Q)\\/883B\",\"cpn_quality\":\"883\",\"cpn_package\":\"CERDIP8\",\"cpn_control_level\":\"-\",\"cpn_country\":\"\\u7f8e\\u56fd\",\"cpn_manufacturer\":\"ADI\",\"cpn_is_core_important\":\"\\u5426\",\"cpn_period\":\"16\",\"cpn_detect_apartment\":\"-\",\"history\":\"-\",\"dependence\":\"-\",\"safe_color\":\"\\u9ec4\\u8272\",\"proposed_safe_color\":\"\\u9ec4\\u8272\",\"necessity\":\"2.1\",\"access_channel\":\"\\u79d8\\u5bc6\",\"equip_name\":\"\\u6c2e\\u6c14\\u56de\\u8def\",\"equip_research_apartment\":\"\\u73af\\u5b87\",\"equip_use_number\":\"1\",\"equip_number\":\"3\",\"remark\":\"-\",\"status\":\"-\",\"is_national\":\"-\",\"equip_research_subsystem\":\"\\u6c2e\\u6c14\\u56de\\u8def\",\"cpn_standard\":\"-\",\"hash_code\":\"992a9f0943b085bd99bc5b1830748260\",\"opinion\":\"-\",\"source\":\"\\u8fdb\\u53e3\"},{\"id\":10,\"list_id\":11,\"list_no\":10,\"cpn_category_code\":\"5962020401\",\"cpn_category_second_name\":\"\\u6df7\\u5408\\u96c6\\u6210\\u7535\\u8def\",\"amount\":\"3\",\"unique_code\":\"-\",\"cpn_ref_price\":\"1000\",\"cpn_name\":\"1553\\u63a5\\u53e3\\u82af\\u7247\",\"cpn_specification_model\":\"HI-1573CDM\",\"cpn_quality\":\"M\\u7ea7\",\"cpn_package\":\"DIP20\",\"cpn_control_level\":\"-\",\"cpn_country\":\"\\u7f8e\\u56fd\",\"cpn_manufacturer\":\"HOLT\",\"cpn_is_core_important\":\"\\u5426\",\"cpn_period\":\"16\",\"cpn_detect_apartment\":\"-\",\"history\":\"-\",\"dependence\":\"-\",\"safe_color\":\"\\u9ec4\\u8272\",\"proposed_safe_color\":\"\\u9ec4\\u8272\",\"necessity\":\"2.1\",\"access_channel\":\"\\u76f4\\u63a5\",\"equip_name\":\"\\u6c2e\\u6c14\\u56de\\u8def\",\"equip_research_apartment\":\"\\u73af\\u5b87\",\"equip_use_number\":\"1\",\"equip_number\":\"3\",\"remark\":\"-\",\"status\":\"-\",\"is_national\":\"-\",\"equip_research_subsystem\":\"\\u6c2e\\u6c14\\u56de\\u8def\",\"cpn_standard\":\"-\",\"hash_code\":\"27c84fb6671addc32db30376f55dc0de\",\"opinion\":\"-\",\"source\":\"\\u8fdb\\u53e3\"},{\"id\":11,\"list_id\":11,\"list_no\":11,\"cpn_category_code\":\"59500299\",\"cpn_category_second_name\":\"\\u53d8\\u538b\\u5668\",\"amount\":\"6\",\"unique_code\":\"-\",\"cpn_ref_price\":\"900\",\"cpn_name\":\"\\u8026\\u5408\\u53d8\\u538b\\u5668\",\"cpn_specification_model\":\"B-3226-T\",\"cpn_quality\":\"T\\u7ea7\",\"cpn_package\":\"\\u63d2\\u63a5\",\"cpn_control_level\":\"-\",\"cpn_country\":\"\\u7f8e\\u56fd\",\"cpn_manufacturer\":\"DDC\",\"cpn_is_core_important\":\"\\u5426\",\"cpn_period\":\"16\",\"cpn_detect_apartment\":\"-\",\"history\":\"-\",\"dependence\":\"-\",\"safe_color\":\"\\u9ec4\\u8272\",\"proposed_safe_color\":\"\\u9ec4\\u8272\",\"necessity\":\"2.1\",\"access_channel\":\"\\u7b2c\\u4e09\\u65b9\",\"equip_name\":\"\\u6c2e\\u6c14\\u56de\\u8def\",\"equip_research_apartment\":\"\\u73af\\u5b87\",\"equip_use_number\":\"2\",\"equip_number\":\"3\",\"remark\":\"-\",\"status\":\"-\",\"is_national\":\"-\",\"equip_research_subsystem\":\"\\u6c2e\\u6c14\\u56de\\u8def\",\"cpn_standard\":\"-\",\"hash_code\":\"19ff5e0fc1ebdb3c6773b8fb4b5f488f\",\"opinion\":\"-\",\"source\":\"\\u8fdb\\u53e3\"},{\"id\":12,\"list_id\":11,\"list_no\":12,\"cpn_category_code\":\"596201020199\",\"cpn_category_second_name\":\"\\u534a\\u5bfc\\u4f53\\u96c6\\u6210\\u7535\\u8def\",\"amount\":\"3\",\"unique_code\":\"-\",\"cpn_ref_price\":\"90\",\"cpn_name\":\"\\u770b\\u95e8\\u72d7\",\"cpn_specification_model\":\"MAX706MJA\\/883B\",\"cpn_quality\":\"883\",\"cpn_package\":\"DIP8\",\"cpn_control_level\":\"-\",\"cpn_country\":\"\\u7f8e\\u56fd\",\"cpn_manufacturer\":\"MAXIM\",\"cpn_is_core_important\":\"\\u5426\",\"cpn_period\":\"16\",\"cpn_detect_apartment\":\"-\",\"history\":\"-\",\"dependence\":\"-\",\"safe_color\":\"\\u9ec4\\u8272\",\"proposed_safe_color\":\"\\u9ec4\\u8272\",\"necessity\":\"2.1\",\"access_channel\":\"\\u7b2c\\u4e09\\u65b9\",\"equip_name\":\"\\u6c2e\\u6c14\\u56de\\u8def\",\"equip_research_apartment\":\"\\u73af\\u5b87\",\"equip_use_number\":\"1\",\"equip_number\":\"3\",\"remark\":\"-\",\"status\":\"-\",\"is_national\":\"-\",\"equip_research_subsystem\":\"\\u6c2e\\u6c14\\u56de\\u8def\",\"cpn_standard\":\"-\",\"hash_code\":\"d9f4f02a1de284cb951153041a7d93a8\",\"opinion\":\"-\",\"source\":\"\\u8fdb\\u53e3\"},{\"id\":13,\"list_id\":11,\"list_no\":13,\"cpn_category_code\":\"59200102\",\"cpn_category_second_name\":\"\\u4fdd\\u9669\\u4e1d\\uff08\\u7194\\u65ad\\u5668\\uff09\",\"amount\":\"12\",\"unique_code\":\"-\",\"cpn_ref_price\":\"1500\",\"cpn_name\":\"\\u7194\\u65ad\\u5668\",\"cpn_specification_model\":\"MGA-S-125VDC-2.1A\",\"cpn_quality\":\"\\u5b87\\u822a\\u7ea7\",\"cpn_package\":\"F3216\",\"cpn_control_level\":\"-\",\"cpn_country\":\"\\u745e\\u58eb\",\"cpn_manufacturer\":\"Schurter\",\"cpn_is_core_important\":\"\\u5426\",\"cpn_period\":\"20\",\"cpn_detect_apartment\":\"-\",\"history\":\"-\",\"dependence\":\"-\",\"safe_color\":\"\\u9ec4\\u8272\",\"proposed_safe_color\":\"\\u9ec4\\u8272\",\"necessity\":\"2.1\",\"access_channel\":\"\\u76f4\\u63a5\",\"equip_name\":\"\\u6c2e\\u6c14\\u56de\\u8def\",\"equip_research_apartment\":\"\\u73af\\u5b87\",\"equip_use_number\":\"4\",\"equip_number\":\"3\",\"remark\":\"-\",\"status\":\"-\",\"is_national\":\"-\",\"equip_research_subsystem\":\"\\u6c2e\\u6c14\\u56de\\u8def\",\"cpn_standard\":\"-\",\"hash_code\":\"6fac64733e3dcb7c4ae974a74bf668d0\",\"opinion\":\"-\",\"source\":\"\\u8fdb\\u53e3\"},{\"id\":14,\"list_id\":11,\"list_no\":14,\"cpn_category_code\":\"5962020101\",\"cpn_category_second_name\":\"\\u6df7\\u5408\\u96c6\\u6210\\u7535\\u8def\",\"amount\":\"3\",\"unique_code\":\"-\",\"cpn_ref_price\":\"20000.11\\u5143\",\"cpn_name\":\"DC\\/DC\",\"cpn_specification_model\":\"AFL12012DX\\/CH\",\"cpn_quality\":\"MIL-PRF-38534\\nCLASS H\",\"cpn_package\":\"CASE X\",\"cpn_control_level\":\"-\",\"cpn_country\":\"\\u7f8e\\u56fd\",\"cpn_manufacturer\":\"IR\",\"cpn_is_core_important\":\"\\u662f\",\"cpn_period\":\"28\",\"cpn_detect_apartment\":\"-\",\"history\":\"-\",\"dependence\":\"-\",\"safe_color\":\"\\u9ec4\\u8272\",\"proposed_safe_color\":\"\\u9ec4\\u8272\",\"necessity\":\"2.1\",\"access_channel\":\"\\u76f4\\u63a5\",\"equip_name\":\"\\u6c2e\\u6c14\\u56de\\u8def\",\"equip_research_apartment\":\"\\u73af\\u5b87\",\"equip_use_number\":\"1\",\"equip_number\":\"3\",\"remark\":\"-\",\"status\":\"-\",\"is_national\":\"-\",\"equip_research_subsystem\":\"\\u6c2e\\u6c14\\u56de\\u8def\",\"cpn_standard\":\"-\",\"hash_code\":\"26e242242079f4dde3ce864bb1e22132\",\"opinion\":\"-\",\"source\":\"\\u8fdb\\u53e3\"},{\"id\":15,\"list_id\":11,\"list_no\":15,\"cpn_category_code\":\"5962020101\",\"cpn_category_second_name\":\"\\u6df7\\u5408\\u96c6\\u6210\\u7535\\u8def\",\"amount\":\"3\",\"unique_code\":\"-\",\"cpn_ref_price\":\"20000\",\"cpn_name\":\"DC\\/DC\",\"cpn_specification_model\":\"AFL12028SX\\/CH\",\"cpn_quality\":\"MIL-PRF-38534\\nCLASS H\",\"cpn_package\":\"CASE X\",\"cpn_control_level\":\"-\",\"cpn_country\":\"\\u7f8e\\u56fd\",\"cpn_manufacturer\":\"IR\",\"cpn_is_core_important\":\"\\u662f\",\"cpn_period\":\"28\",\"cpn_detect_apartment\":\"-\",\"history\":\"-\",\"dependence\":\"-\",\"safe_color\":\"\\u9ec4\\u8272\",\"proposed_safe_color\":\"\\u9ec4\\u8272\",\"necessity\":\"20000\",\"access_channel\":\"\\u76f4\\u63a5\",\"equip_name\":\"\\u6c2e\\u6c14\\u56de\\u8def\",\"equip_research_apartment\":\"\\u73af\\u5b87\",\"equip_use_number\":\"1\",\"equip_number\":\"3\",\"remark\":\"-\",\"status\":\"-\",\"is_national\":\"-\",\"equip_research_subsystem\":\"\\u6c2e\\u6c14\\u56de\\u8def\",\"cpn_standard\":\"-\",\"hash_code\":\"a57da385eca192b06e07f79fcf1b92e8\",\"opinion\":\"-\",\"source\":\"\\u8fdb\\u53e3\"}],\"first_page_url\":\"http:\\/\\/921.com\\/api\\/management\\/getCpnData?page=1\",\"from\":1,\"last_page\":67,\"last_page_url\":\"http:\\/\\/921.com\\/api\\/management\\/getCpnData?page=67\",\"next_page_url\":\"http:\\/\\/921.com\\/api\\/management\\/getCpnData?page=2\",\"path\":\"http:\\/\\/921.com\\/api\\/management\\/getCpnData\",\"per_page\":15,\"prev_page_url\":null,\"to\":15,\"total\":1000}}}"
-						}
-					]
-				},
-				{
-					"name": "导出数据",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "formdata",
-							"formdata": [
-								{
-									"key": "structure_id",
-									"value": "60",
-									"description": "挂载节点id（必填）",
-									"type": "text"
-								},
-								{
-									"key": "domestic_status",
-									"value": "1",
-									"description": "是否选择国产（0：否 , 1：是）（必填）",
-									"type": "text"
-								},
-								{
-									"key": "domestic_desensitization[]",
-									"value": "",
-									"description": "脱敏字段（非必填）",
-									"type": "text"
-								},
-								{
-									"key": "import_status",
-									"value": "1",
-									"description": "是否选择进口（0：否 , 1：是）（必填）",
-									"type": "text"
-								},
-								{
-									"key": "import_desensitization[]",
-									"value": "",
-									"description": "脱敏字段（非必填）",
-									"type": "text"
-								}
-							]
-						},
-						"url": {
-							"raw": "http://921.com/api/management/exportData",
-							"protocol": "http",
-							"host": [
-								"921",
-								"com"
-							],
-							"path": [
-								"api",
-								"management",
-								"exportData"
-							]
-						}
-					},
-					"response": [
-						{
-							"name": "导出数据",
-							"originalRequest": {
-								"method": "POST",
-								"header": [],
-								"body": {
-									"mode": "formdata",
-									"formdata": [
-										{
-											"key": "structure_id",
-											"value": "20",
-											"description": "挂载节点id（必填）",
-											"type": "text"
-										},
-										{
-											"key": "domestic_status",
-											"value": "1",
-											"description": "是否选择国产（0：否 , 1：是）（必填）",
-											"type": "text"
-										},
-										{
-											"key": "domestic_desensitization[]",
-											"value": "cpn_name",
-											"description": "脱敏字段（非必填）",
-											"type": "text"
-										},
-										{
-											"key": "import_status",
-											"value": "1",
-											"description": "是否选择进口（0：否 , 1：是）（必填）",
-											"type": "text"
-										},
-										{
-											"key": "import_desensitization[]",
-											"value": "amount",
-											"description": "脱敏字段（非必填）",
-											"type": "text"
-										}
-									]
-								},
-								"url": {
-									"raw": "http://921.com/api/management/exportData",
-									"protocol": "http",
-									"host": [
-										"921",
-										"com"
-									],
-									"path": [
-										"api",
-										"management",
-										"exportData"
-									]
-								}
-							},
-							"status": "OK",
-							"code": 200,
-							"_postman_previewlanguage": "json",
-							"header": [
-								{
-									"key": "Cache-Control",
-									"value": "no-cache, private",
-									"name": "Cache-Control",
-									"description": "Tells all caching mechanisms from server to client whether they may cache this object. It is measured in seconds"
-								},
-								{
-									"key": "Connection",
-									"value": "Keep-Alive",
-									"name": "Connection",
-									"description": "Options that are desired for the connection"
-								},
-								{
-									"key": "Content-Length",
-									"value": "50",
-									"name": "Content-Length",
-									"description": "The length of the response body in octets (8-bit bytes)"
-								},
-								{
-									"key": "Content-Type",
-									"value": "application/json",
-									"name": "Content-Type",
-									"description": "The mime type of this content"
-								},
-								{
-									"key": "Date",
-									"value": "Tue, 28 May 2019 09:53:51 GMT",
-									"name": "Date",
-									"description": "The date and time that the message was sent"
-								},
-								{
-									"key": "Keep-Alive",
-									"value": "timeout=5, max=100",
-									"name": "Keep-Alive",
-									"description": "Custom header"
-								},
-								{
-									"key": "Server",
-									"value": "Apache/2.4.37 (Win32) OpenSSL/1.1.1a PHP/7.3.1",
-									"name": "Server",
-									"description": "A name for the server"
-								},
-								{
-									"key": "X-Powered-By",
-									"value": "PHP/7.3.1",
-									"name": "X-Powered-By",
-									"description": "Specifies the technology (ASP.NET, PHP, JBoss, e.g.) supporting the web application (version details are often in X-Runtime, X-Version, or X-AspNet-Version)"
-								}
-							],
-							"cookie": [],
-							"body": "{\"error_code\":0,\"msg\":\"ok\",\"data\":{\"download\":[]}}"
-						},
-						{
-							"name": "导出数据",
-							"originalRequest": {
-								"method": "POST",
-								"header": [],
-								"body": {
-									"mode": "formdata",
-									"formdata": [
-										{
-											"key": "structure_id",
-											"value": "20",
-											"description": "挂载节点id（必填）",
-											"type": "text"
-										},
-										{
-											"key": "type",
-											"value": "1",
-											"description": "清单类型（1：国产,  2：进口）（必填）",
-											"type": "text"
-										},
-										{
-											"key": "desensitization[]",
-											"value": "1",
-											"description": "脱敏字段（必填）",
-											"type": "text"
-										},
-										{
-											"key": "desensitization[]",
-											"value": "2",
-											"description": "脱敏字段（必填）",
-											"type": "text"
-										}
-									]
-								},
-								"url": {
-									"raw": "http://921.com/api/management/exportData",
-									"protocol": "http",
-									"host": [
-										"921",
-										"com"
-									],
-									"path": [
-										"api",
-										"management",
-										"exportData"
-									]
-								}
-							},
-							"status": "OK",
-							"code": 200,
-							"_postman_previewlanguage": "json",
-							"header": [
-								{
-									"key": "Cache-Control",
-									"value": "no-cache, private",
-									"name": "Cache-Control",
-									"description": "Tells all caching mechanisms from server to client whether they may cache this object. It is measured in seconds"
-								},
-								{
-									"key": "Connection",
-									"value": "Keep-Alive",
-									"name": "Connection",
-									"description": "Options that are desired for the connection"
-								},
-								{
-									"key": "Content-Length",
-									"value": "37",
-									"name": "Content-Length",
-									"description": "The length of the response body in octets (8-bit bytes)"
-								},
-								{
-									"key": "Content-Type",
-									"value": "application/json",
-									"name": "Content-Type",
-									"description": "The mime type of this content"
-								},
-								{
-									"key": "Date",
-									"value": "Tue, 28 May 2019 02:04:40 GMT",
-									"name": "Date",
-									"description": "The date and time that the message was sent"
-								},
-								{
-									"key": "Keep-Alive",
-									"value": "timeout=5, max=99",
-									"name": "Keep-Alive",
-									"description": "Custom header"
-								},
-								{
-									"key": "Server",
-									"value": "Apache/2.4.37 (Win32) OpenSSL/1.1.1a PHP/7.3.1",
-									"name": "Server",
-									"description": "A name for the server"
-								},
-								{
-									"key": "X-Powered-By",
-									"value": "PHP/7.3.1",
-									"name": "X-Powered-By",
-									"description": "Specifies the technology (ASP.NET, PHP, JBoss, e.g.) supporting the web application (version details are often in X-Runtime, X-Version, or X-AspNet-Version)"
-								}
-							],
-							"cookie": [],
-							"body": "{\"error_code\":0,\"msg\":\"ok\",\"data\":\"\"}"
-						}
-					]
-				},
-				{
-					"name": "获取元器件分类",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"body": {},
-						"url": {
-							"raw": "http://921.com/api/management/getCategories?structure_id=8&type=1",
-							"protocol": "http",
-							"host": [
-								"921",
-								"com"
-							],
-							"path": [
-								"api",
-								"management",
-								"getCategories"
-							],
-							"query": [
-								{
-									"key": "structure_id",
-									"value": "8",
-									"description": "挂载节点id（必填）"
-								},
-								{
-									"key": "type",
-									"value": "1",
-									"description": "清单类型（1：国产,  2：进口）（必填）"
-								}
-							]
-						}
-					},
-					"response": [
-						{
-							"name": "获取元器件分类",
-							"originalRequest": {
-								"method": "GET",
-								"header": [],
-								"body": {},
-								"url": {
-									"raw": "http://921.com/api/management/getCategories?structure_id=8&type=1",
-									"protocol": "http",
-									"host": [
-										"921",
-										"com"
-									],
-									"path": [
-										"api",
-										"management",
-										"getCategories"
-									],
-									"query": [
-										{
-											"key": "structure_id",
-											"value": "8",
-											"description": "挂载节点id（必填）"
-										},
-										{
-											"key": "type",
-											"value": "1",
-											"description": "清单类型（1：国产,  2：进口）（必填）"
-										}
-									]
-								}
-							},
-							"status": "OK",
-							"code": 200,
-							"_postman_previewlanguage": "json",
-							"header": [
-								{
-									"key": "Cache-Control",
-									"value": "no-cache, private",
-									"name": "Cache-Control",
-									"description": "Tells all caching mechanisms from server to client whether they may cache this object. It is measured in seconds"
-								},
-								{
-									"key": "Connection",
-									"value": "Keep-Alive",
-									"name": "Connection",
-									"description": "Options that are desired for the connection"
-								},
-								{
-									"key": "Content-Length",
-									"value": "1011",
-									"name": "Content-Length",
-									"description": "The length of the response body in octets (8-bit bytes)"
-								},
-								{
-									"key": "Content-Type",
-									"value": "application/json",
-									"name": "Content-Type",
-									"description": "The mime type of this content"
-								},
-								{
-									"key": "Date",
-									"value": "Thu, 30 May 2019 07:02:07 GMT",
-									"name": "Date",
-									"description": "The date and time that the message was sent"
-								},
-								{
-									"key": "Keep-Alive",
-									"value": "timeout=5, max=100",
-									"name": "Keep-Alive",
-									"description": "Custom header"
-								},
-								{
-									"key": "Server",
-									"value": "Apache/2.4.37 (Win32) OpenSSL/1.1.1a PHP/7.3.1",
-									"name": "Server",
-									"description": "A name for the server"
-								},
-								{
-									"key": "X-Powered-By",
-									"value": "PHP/7.3.1",
-									"name": "X-Powered-By",
-									"description": "Specifies the technology (ASP.NET, PHP, JBoss, e.g.) supporting the web application (version details are often in X-Runtime, X-Version, or X-AspNet-Version)"
-								}
-							],
-							"cookie": [],
-							"body": "{\"error_code\":0,\"msg\":\"ok\",\"data\":{\"categories\":[{\"name\":\"\\u56fa\\u5b9a\\u7535\\u963b\\u5668\",\"id\":590501},{\"name\":\"\\u56fa\\u5b9a\\u7535\\u5bb9\\u5668\",\"id\":591001},{\"name\":\"\\u654f\\u611f\\u5143\\u4ef6\",\"id\":591101},{\"name\":\"\\u4f4e\\u9891\\u8fde\\u63a5\\u5668\",\"id\":593501},{\"name\":\"\\u7535\\u78c1\\u7ee7\\u7535\\u5668\",\"id\":594501},{\"name\":\"\\u7535\\u611f\\u5668\",\"id\":595001},{\"name\":\"\\u53d8\\u538b\\u5668\",\"id\":595002},{\"name\":\"\\u4e8c\\u6781\\u7ba1\",\"id\":596101},{\"name\":\"\\u6676\\u4f53\\u7ba1\",\"id\":596102},{\"name\":\"\\u534a\\u5bfc\\u4f53\\u96c6\\u6210\\u7535\\u8def\",\"id\":596201},{\"name\":\"\\u6df7\\u5408\\u96c6\\u6210\\u7535\\u8def\",\"id\":596202},{\"name\":\"\\u4f4e\\u9891\\u8fde\\u63a5\\u5668\",\"id\":593501},{\"name\":\"\\u7535\\u78c1\\u7ee7\\u7535\\u5668\",\"id\":594501},{\"name\":\"\\u7535\\u611f\\u5668\",\"id\":595001},{\"name\":\"\\u53d8\\u538b\\u5668\",\"id\":595002},{\"name\":\"\\u4e8c\\u6781\\u7ba1\",\"id\":596101},{\"name\":\"\\u6676\\u4f53\\u7ba1\",\"id\":596102},{\"name\":\"\\u534a\\u5bfc\\u4f53\\u96c6\\u6210\\u7535\\u8def\",\"id\":596201},{\"name\":\"\\u6df7\\u5408\\u96c6\\u6210\\u7535\\u8def\",\"id\":596202}]}}"
-						}
-					]
-				},
-				{
-					"name": "获取历史清单元器件数据",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"body": {},
-						"url": {
-							"raw": "http://921.com/api/management/getHistoryDetail?list_id=76&type=1&page=",
-							"protocol": "http",
-							"host": [
-								"921",
-								"com"
-							],
-							"path": [
-								"api",
-								"management",
-								"getHistoryDetail"
-							],
-							"query": [
-								{
-									"key": "list_id",
-									"value": "76",
-									"description": "清单列表（必填）"
-								},
-								{
-									"key": "type",
-									"value": "1",
-									"description": "清单类型（1：国产,  2：进口）（必填）"
-								},
-								{
-									"key": "page",
-									"value": "",
-									"description": "页码（非必填）"
-								}
-							]
-						}
-					},
-					"response": [
-						{
-							"name": "获取历史清单元器件数据",
-							"originalRequest": {
-								"method": "GET",
-								"header": [],
-								"body": {},
-								"url": {
-									"raw": "http://921.com/api/management/getHistoryDetail?list_id=76&type=1&page=",
-									"protocol": "http",
-									"host": [
-										"921",
-										"com"
-									],
-									"path": [
-										"api",
-										"management",
-										"getHistoryDetail"
-									],
-									"query": [
-										{
-											"key": "list_id",
-											"value": "76",
-											"description": "清单列表（必填）"
-										},
-										{
-											"key": "type",
-											"value": "1",
-											"description": "清单类型（1：国产,  2：进口）（必填）"
-										},
-										{
-											"key": "page",
-											"value": "",
-											"description": "页码（非必填）"
-										}
-									]
-								}
-							},
-							"status": "OK",
-							"code": 200,
-							"_postman_previewlanguage": "json",
-							"header": [
-								{
-									"key": "Cache-Control",
-									"value": "no-cache, private",
-									"name": "Cache-Control",
-									"description": "Tells all caching mechanisms from server to client whether they may cache this object. It is measured in seconds"
-								},
-								{
-									"key": "Connection",
-									"value": "Keep-Alive",
-									"name": "Connection",
-									"description": "Options that are desired for the connection"
-								},
-								{
-									"key": "Content-Type",
-									"value": "application/json",
-									"name": "Content-Type",
-									"description": "The mime type of this content"
-								},
-								{
-									"key": "Date",
-									"value": "Fri, 31 May 2019 11:19:32 GMT",
-									"name": "Date",
-									"description": "The date and time that the message was sent"
-								},
-								{
-									"key": "Keep-Alive",
-									"value": "timeout=5, max=100",
-									"name": "Keep-Alive",
-									"description": "Custom header"
-								},
-								{
-									"key": "Server",
-									"value": "Apache/2.4.37 (Win32) OpenSSL/1.1.1a PHP/7.3.1",
-									"name": "Server",
-									"description": "A name for the server"
-								},
-								{
-									"key": "Transfer-Encoding",
-									"value": "chunked",
-									"name": "Transfer-Encoding",
-									"description": "The form of encoding used to safely transfer the entity to the user. Currently defined methods are: chunked, compress, deflate, gzip, identity."
-								},
-								{
-									"key": "X-Powered-By",
-									"value": "PHP/7.3.1",
-									"name": "X-Powered-By",
-									"description": "Specifies the technology (ASP.NET, PHP, JBoss, e.g.) supporting the web application (version details are often in X-Runtime, X-Version, or X-AspNet-Version)"
-								}
-							],
-							"cookie": [],
-							"body": "{\"error_code\":0,\"msg\":\"ok\",\"data\":{\"cpnData\":{\"current_page\":1,\"data\":[{\"id\":6862,\"list_id\":76,\"list_no\":1,\"cpn_category_code\":\"590501\",\"cpn_category_second_name\":\"\\u56fa\\u5b9a\\u7535\\u963b\\u5668\",\"amount\":1,\"unique_code\":null,\"cpn_ref_price\":\"10\",\"cpn_name\":\"\\u8d34\\u7247\\u7535\\u5bb9\",\"cpn_specification_model\":\"CT41L-0805-BY-50V-104K\",\"cpn_quality\":\"CAST B\",\"cpn_package\":\"C0805\",\"cpn_control_level\":\"A\",\"cpn_country\":null,\"cpn_manufacturer\":\"715\\u5382\",\"cpn_is_core_important\":0,\"cpn_period\":16,\"cpn_detect_apartment\":\"\\u4e2d\\u56fd\\u79d1\\u5b66\\u9662\\u7a7a\\u95f4\\u5e94\\u7528\\u5de5\\u7a0b\\u4e0e\\u6280\\u672f\\u4e2d\\u5fc3\",\"history\":\"\\u65e0\",\"dependence\":null,\"safe_color\":null,\"proposed_safe_color\":null,\"necessity\":null,\"access_channel\":null,\"equip_name\":\"\\u6c2e\\u6c14\\u56de\\u8def\",\"equip_research_apartment\":\"\\u56fd\\u79d1\\u73af\\u5b87\",\"equip_use_number\":1,\"equip_number\":1,\"remark\":\"\",\"status\":0,\"is_national\":null,\"equip_research_subsystem\":\"\\u6c2e\\u6c14\\u56de\\u8def\",\"cpn_standard\":\"CAST\",\"hash_code\":\"e5be665d907887c6f42c0b1dbd4452d2\",\"opinion\":null,\"source\":\"\\u56fd\\u4ea7\"},{\"id\":6863,\"list_id\":76,\"list_no\":2,\"cpn_category_code\":\"591001\",\"cpn_category_second_name\":\"\\u56fa\\u5b9a\\u7535\\u5bb9\\u5668\",\"amount\":2,\"unique_code\":null,\"cpn_ref_price\":\"10\",\"cpn_name\":\"\\u8d34\\u7247\\u7535\\u5bb9\",\"cpn_specification_model\":\"CT41L-0805-2C1-100V-103K\",\"cpn_quality\":\"CAST C\",\"cpn_package\":\"C0805\",\"cpn_control_level\":\"A\",\"cpn_country\":null,\"cpn_manufacturer\":\"715\\u5382\",\"cpn_is_core_important\":0,\"cpn_period\":16,\"cpn_detect_apartment\":\"\\u4e2d\\u56fd\\u79d1\\u5b66\\u9662\\u7a7a\\u95f4\\u5e94\\u7528\\u5de5\\u7a0b\\u4e0e\\u6280\\u672f\\u4e2d\\u5fc3\",\"history\":\"\\u65e0\",\"dependence\":null,\"safe_color\":null,\"proposed_safe_color\":null,\"necessity\":null,\"access_channel\":null,\"equip_name\":\"\\u6c2e\\u6c14\\u56de\\u8def\",\"equip_research_apartment\":\"\\u56fd\\u79d1\\u73af\\u5b87\",\"equip_use_number\":2,\"equip_number\":1,\"remark\":\"\",\"status\":0,\"is_national\":null,\"equip_research_subsystem\":\"\\u6c2e\\u6c14\\u56de\\u8def\",\"cpn_standard\":\"CAST\",\"hash_code\":\"bc27319b69c2a16f3dd6a9bb8a81fb66\",\"opinion\":null,\"source\":\"\\u56fd\\u4ea7\"},{\"id\":6864,\"list_id\":76,\"list_no\":3,\"cpn_category_code\":\"591101\",\"cpn_category_second_name\":\"\\u654f\\u611f\\u5143\\u4ef6\",\"amount\":3,\"unique_code\":null,\"cpn_ref_price\":\"50\",\"cpn_name\":\"\\u94bd\\u7535\\u5bb9\",\"cpn_specification_model\":\"CAK45-B-16V-4.7UF-K\",\"cpn_quality\":\"CAST C\",\"cpn_package\":\"B\\u58f3\",\"cpn_control_level\":\"A\",\"cpn_country\":null,\"cpn_manufacturer\":\"4326\\u5382\",\"cpn_is_core_important\":0,\"cpn_period\":16,\"cpn_detect_apartment\":\"\\u4e2d\\u56fd\\u79d1\\u5b66\\u9662\\u7a7a\\u95f4\\u5e94\\u7528\\u5de5\\u7a0b\\u4e0e\\u6280\\u672f\\u4e2d\\u5fc3\",\"history\":\"\\u65e0\",\"dependence\":null,\"safe_color\":null,\"proposed_safe_color\":null,\"necessity\":null,\"access_channel\":null,\"equip_name\":\"\\u6c2e\\u6c14\\u56de\\u8def\",\"equip_research_apartment\":\"\\u56fd\\u79d1\\u73af\\u5b87\",\"equip_use_number\":3,\"equip_number\":1,\"remark\":\"\",\"status\":0,\"is_national\":null,\"equip_research_subsystem\":\"\\u6c2e\\u6c14\\u56de\\u8def\",\"cpn_standard\":\"CAST\",\"hash_code\":\"18991b69eacfc52e8be6630ce56c8bb1\",\"opinion\":null,\"source\":\"\\u56fd\\u4ea7\"},{\"id\":6865,\"list_id\":76,\"list_no\":4,\"cpn_category_code\":\"591501\",\"cpn_category_second_name\":\"\\u6291\\u5236\\u5e72\\u6270\\u6ee4\\u6ce2\\u5668\",\"amount\":4,\"unique_code\":null,\"cpn_ref_price\":\"50\",\"cpn_name\":\"\\u94bd\\u7535\\u5bb9\",\"cpn_specification_model\":\"CAK45-E-35V-10UF-K\",\"cpn_quality\":\"CAST C\",\"cpn_package\":\"E\\u58f3\",\"cpn_control_level\":\"A\",\"cpn_country\":null,\"cpn_manufacturer\":\"4326\\u5382\",\"cpn_is_core_important\":0,\"cpn_period\":16,\"cpn_detect_apartment\":\"\\u4e2d\\u56fd\\u79d1\\u5b66\\u9662\\u7a7a\\u95f4\\u5e94\\u7528\\u5de5\\u7a0b\\u4e0e\\u6280\\u672f\\u4e2d\\u5fc3\",\"history\":\"\\u65e0\",\"dependence\":null,\"safe_color\":null,\"proposed_safe_color\":null,\"necessity\":null,\"access_channel\":null,\"equip_name\":\"\\u6c2e\\u6c14\\u56de\\u8def\",\"equip_research_apartment\":\"\\u56fd\\u79d1\\u73af\\u5b87\",\"equip_use_number\":4,\"equip_number\":1,\"remark\":\"\",\"status\":0,\"is_national\":null,\"equip_research_subsystem\":\"\\u6c2e\\u6c14\\u56de\\u8def\",\"cpn_standard\":\"CAST\",\"hash_code\":\"f54225de7ff7246f5a7e808e805d70b8\",\"opinion\":null,\"source\":\"\\u56fd\\u4ea7\"},{\"id\":6866,\"list_id\":76,\"list_no\":5,\"cpn_category_code\":\"592002\",\"cpn_category_second_name\":\"\\u907f\\u96f7\\u5668\",\"amount\":5,\"unique_code\":null,\"cpn_ref_price\":\"50\",\"cpn_name\":\"\\u94bd\\u7535\\u5bb9\",\"cpn_specification_model\":\"CAK45-E-20V-22UF-K\",\"cpn_quality\":\"CAST C\",\"cpn_package\":\"E\\u58f3\",\"cpn_control_level\":\"A\",\"cpn_country\":null,\"cpn_manufacturer\":\"4326\\u5382\",\"cpn_is_core_important\":0,\"cpn_period\":16,\"cpn_detect_apartment\":\"\\u4e2d\\u56fd\\u79d1\\u5b66\\u9662\\u7a7a\\u95f4\\u5e94\\u7528\\u5de5\\u7a0b\\u4e0e\\u6280\\u672f\\u4e2d\\u5fc3\",\"history\":\"\\u65e0\",\"dependence\":null,\"safe_color\":null,\"proposed_safe_color\":null,\"necessity\":null,\"access_channel\":null,\"equip_name\":\"\\u6c2e\\u6c14\\u56de\\u8def\",\"equip_research_apartment\":\"\\u56fd\\u79d1\\u73af\\u5b87\",\"equip_use_number\":5,\"equip_number\":1,\"remark\":\"\",\"status\":0,\"is_national\":null,\"equip_research_subsystem\":\"\\u6c2e\\u6c14\\u56de\\u8def\",\"cpn_standard\":\"CAST\",\"hash_code\":\"d1aabe9a46dc6141a872699a605aeaf8\",\"opinion\":null,\"source\":\"\\u56fd\\u4ea7\"},{\"id\":6867,\"list_id\":76,\"list_no\":6,\"cpn_category_code\":\"592501\",\"cpn_category_second_name\":\"\\u7535\\u78c1\\u65ad\\u8def\\u5668\",\"amount\":6,\"unique_code\":null,\"cpn_ref_price\":\"150\",\"cpn_name\":\"\\u4e8c\\u6781\\u7ba1\",\"cpn_specification_model\":\"2CK84A\",\"cpn_quality\":\"CAST C\",\"cpn_package\":\"DO-35\",\"cpn_control_level\":\"A\",\"cpn_country\":null,\"cpn_manufacturer\":\"\\u6d4e\\u5357\\u534a\\u5bfc\\u4f53\",\"cpn_is_core_important\":0,\"cpn_period\":18,\"cpn_detect_apartment\":\"\\u4e2d\\u56fd\\u79d1\\u5b66\\u9662\\u7a7a\\u95f4\\u5e94\\u7528\\u5de5\\u7a0b\\u4e0e\\u6280\\u672f\\u4e2d\\u5fc3\",\"history\":\"\\u65e0\",\"dependence\":null,\"safe_color\":null,\"proposed_safe_color\":null,\"necessity\":null,\"access_channel\":null,\"equip_name\":\"\\u6c2e\\u6c14\\u56de\\u8def\",\"equip_research_apartment\":\"\\u56fd\\u79d1\\u73af\\u5b87\",\"equip_use_number\":6,\"equip_number\":1,\"remark\":\"\",\"status\":0,\"is_national\":null,\"equip_research_subsystem\":\"\\u6c2e\\u6c14\\u56de\\u8def\",\"cpn_standard\":\"CAST\",\"hash_code\":\"e3265ab0df3a7a49f501722c87058bb0\",\"opinion\":null,\"source\":\"\\u56fd\\u4ea7\"},{\"id\":6868,\"list_id\":76,\"list_no\":7,\"cpn_category_code\":\"593001\",\"cpn_category_second_name\":\"\\u65cb\\u8f6c\\u5f00\\u5173\",\"amount\":7,\"unique_code\":null,\"cpn_ref_price\":\"200\",\"cpn_name\":\"\\u4e09\\u6781\\u7ba1\",\"cpn_specification_model\":\"3DK103C(\\u7eff\\u70b9)\",\"cpn_quality\":\"CAST C\",\"cpn_package\":\"A3-01BF\",\"cpn_control_level\":\"A\",\"cpn_country\":null,\"cpn_manufacturer\":\"\\u77f3\\u65e0\\u4e8c\",\"cpn_is_core_important\":0,\"cpn_period\":18,\"cpn_detect_apartment\":\"\\u4e2d\\u56fd\\u79d1\\u5b66\\u9662\\u7a7a\\u95f4\\u5e94\\u7528\\u5de5\\u7a0b\\u4e0e\\u6280\\u672f\\u4e2d\\u5fc3\",\"history\":\"\\u65e0\",\"dependence\":null,\"safe_color\":null,\"proposed_safe_color\":null,\"necessity\":null,\"access_channel\":null,\"equip_name\":\"\\u6c2e\\u6c14\\u56de\\u8def\",\"equip_research_apartment\":\"\\u56fd\\u79d1\\u73af\\u5b87\",\"equip_use_number\":7,\"equip_number\":1,\"remark\":\"\",\"status\":0,\"is_national\":null,\"equip_research_subsystem\":\"\\u6c2e\\u6c14\\u56de\\u8def\",\"cpn_standard\":\"CAST\",\"hash_code\":\"fea26424720c39c39f18853a8676101a\",\"opinion\":null,\"source\":\"\\u56fd\\u4ea7\"},{\"id\":6869,\"list_id\":76,\"list_no\":8,\"cpn_category_code\":\"593501\",\"cpn_category_second_name\":\"\\u4f4e\\u9891\\u8fde\\u63a5\\u5668\",\"amount\":8,\"unique_code\":null,\"cpn_ref_price\":\"200\",\"cpn_name\":\"\\u70ed\\u654f\\u7535\\u963b\",\"cpn_specification_model\":\"MF501-4100-5K\\u03a9\\u00b10.5%\",\"cpn_quality\":\"CAST C\",\"cpn_package\":\"\\u5f84\\u5411\\u5f15\\u51fa\",\"cpn_control_level\":\"A\",\"cpn_country\":null,\"cpn_manufacturer\":\"715\\u5382\",\"cpn_is_core_important\":0,\"cpn_period\":16,\"cpn_detect_apartment\":\"\\u4e2d\\u56fd\\u79d1\\u5b66\\u9662\\u7a7a\\u95f4\\u5e94\\u7528\\u5de5\\u7a0b\\u4e0e\\u6280\\u672f\\u4e2d\\u5fc3\",\"history\":\"\\u65e0\",\"dependence\":null,\"safe_color\":null,\"proposed_safe_color\":null,\"necessity\":null,\"access_channel\":null,\"equip_name\":\"\\u6c2e\\u6c14\\u56de\\u8def\",\"equip_research_apartment\":\"\\u56fd\\u79d1\\u73af\\u5b87\",\"equip_use_number\":8,\"equip_number\":1,\"remark\":\"\",\"status\":0,\"is_national\":null,\"equip_research_subsystem\":\"\\u6c2e\\u6c14\\u56de\\u8def\",\"cpn_standard\":\"CAST\",\"hash_code\":\"f522f6f8d87de90cfc2b82807e3116fe\",\"opinion\":null,\"source\":\"\\u56fd\\u4ea7\"},{\"id\":6870,\"list_id\":76,\"list_no\":9,\"cpn_category_code\":\"594501\",\"cpn_category_second_name\":\"\\u7535\\u78c1\\u7ee7\\u7535\\u5668\",\"amount\":9,\"unique_code\":null,\"cpn_ref_price\":\"70\",\"cpn_name\":\"\\u8f74\\u7ebf\\u529f\\u7387\\u7535\\u963b\",\"cpn_specification_model\":\"RX21-3W-0R51-J\",\"cpn_quality\":\"CAST C\",\"cpn_package\":\"RX21\",\"cpn_control_level\":\"A\",\"cpn_country\":null,\"cpn_manufacturer\":\"718\\u5382\",\"cpn_is_core_important\":0,\"cpn_period\":16,\"cpn_detect_apartment\":\"\\u4e2d\\u56fd\\u79d1\\u5b66\\u9662\\u7a7a\\u95f4\\u5e94\\u7528\\u5de5\\u7a0b\\u4e0e\\u6280\\u672f\\u4e2d\\u5fc3\",\"history\":\"\\u65e0\",\"dependence\":null,\"safe_color\":null,\"proposed_safe_color\":null,\"necessity\":null,\"access_channel\":null,\"equip_name\":\"\\u6c2e\\u6c14\\u56de\\u8def\",\"equip_research_apartment\":\"\\u56fd\\u79d1\\u73af\\u5b87\",\"equip_use_number\":9,\"equip_number\":1,\"remark\":\"\",\"status\":0,\"is_national\":null,\"equip_research_subsystem\":\"\\u6c2e\\u6c14\\u56de\\u8def\",\"cpn_standard\":\"CAST\",\"hash_code\":\"fd8a81d9d48d00983d41b8652116bc41\",\"opinion\":null,\"source\":\"\\u56fd\\u4ea7\"},{\"id\":6871,\"list_id\":76,\"list_no\":10,\"cpn_category_code\":\"595001\",\"cpn_category_second_name\":\"\\u7535\\u611f\\u5668\",\"amount\":10,\"unique_code\":null,\"cpn_ref_price\":\"600\",\"cpn_name\":\"\\u6beb\\u6b27\\u7cbe\\u5bc6\\u7535\\u963b\",\"cpn_specification_model\":\"RM7142-3W-R020-F\",\"cpn_quality\":\"CAST C\",\"cpn_package\":\"R2817\",\"cpn_control_level\":\"A\",\"cpn_country\":null,\"cpn_manufacturer\":\"718\\u5382\",\"cpn_is_core_important\":0,\"cpn_period\":16,\"cpn_detect_apartment\":\"\\u4e2d\\u56fd\\u79d1\\u5b66\\u9662\\u7a7a\\u95f4\\u5e94\\u7528\\u5de5\\u7a0b\\u4e0e\\u6280\\u672f\\u4e2d\\u5fc3\",\"history\":\"\\u65e0\",\"dependence\":null,\"safe_color\":null,\"proposed_safe_color\":null,\"necessity\":null,\"access_channel\":null,\"equip_name\":\"\\u6c2e\\u6c14\\u56de\\u8def\",\"equip_research_apartment\":\"\\u56fd\\u79d1\\u73af\\u5b87\",\"equip_use_number\":10,\"equip_number\":1,\"remark\":\"\",\"status\":0,\"is_national\":null,\"equip_research_subsystem\":\"\\u6c2e\\u6c14\\u56de\\u8def\",\"cpn_standard\":\"CAST\",\"hash_code\":\"f486a2976a18ab00c1563851e4a34f29\",\"opinion\":null,\"source\":\"\\u56fd\\u4ea7\"}],\"first_page_url\":\"http:\\/\\/921.com\\/api\\/management\\/getHistoryDetail?page=1\",\"from\":1,\"last_page\":10,\"last_page_url\":\"http:\\/\\/921.com\\/api\\/management\\/getHistoryDetail?page=10\",\"next_page_url\":\"http:\\/\\/921.com\\/api\\/management\\/getHistoryDetail?page=2\",\"path\":\"http:\\/\\/921.com\\/api\\/management\\/getHistoryDetail\",\"per_page\":10,\"prev_page_url\":null,\"to\":10,\"total\":100}}}"
-						}
-					]
-				},
-				{
-					"name": "获取历史清单列表",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"body": {},
-						"url": {
-							"raw": "http://921.com/api/management/getListHistory?structure_id=76&page_size",
-							"protocol": "http",
-							"host": [
-								"921",
-								"com"
-							],
-							"path": [
-								"api",
-								"management",
-								"getListHistory"
-							],
-							"query": [
-								{
-									"key": "structure_id",
-									"value": "76"
-								},
-								{
-									"key": "page_size",
-									"value": null
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "获取筛选字段数据",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"body": {},
-						"url": {
-							"raw": "http://921.com/api/management/getSelectFields?structure_id=1&type=2",
-							"protocol": "http",
-							"host": [
-								"921",
-								"com"
-							],
-							"path": [
-								"api",
-								"management",
-								"getSelectFields"
-							],
-							"query": [
-								{
-									"key": "structure_id",
-									"value": "1",
-									"description": "挂载节点id（必填）"
-								},
-								{
-									"key": "type",
-									"value": "2",
-									"description": "清单类型（1：国产,  2：进口）（必填）"
-								}
-							]
-						}
-					},
-					"response": [
-						{
-							"name": "获取筛选字段数据",
-							"originalRequest": {
-								"method": "GET",
-								"header": [],
-								"body": {},
-								"url": {
-									"raw": "http://921.com/api/management/getSelectFields?structure_id=1&type=1",
-									"protocol": "http",
-									"host": [
-										"921",
-										"com"
-									],
-									"path": [
-										"api",
-										"management",
-										"getSelectFields"
-									],
-									"query": [
-										{
-											"key": "structure_id",
-											"value": "1"
-										},
-										{
-											"key": "type",
-											"value": "1"
-										}
-									]
-								}
-							},
-							"status": "OK",
-							"code": 200,
-							"_postman_previewlanguage": "json",
-							"header": [
-								{
-									"key": "Cache-Control",
-									"value": "no-cache, private",
-									"name": "Cache-Control",
-									"description": "Tells all caching mechanisms from server to client whether they may cache this object. It is measured in seconds"
-								},
-								{
-									"key": "Connection",
-									"value": "Keep-Alive",
-									"name": "Connection",
-									"description": "Options that are desired for the connection"
-								},
-								{
-									"key": "Content-Length",
-									"value": "1088",
-									"name": "Content-Length",
-									"description": "The length of the response body in octets (8-bit bytes)"
-								},
-								{
-									"key": "Content-Type",
-									"value": "application/json",
-									"name": "Content-Type",
-									"description": "The mime type of this content"
-								},
-								{
-									"key": "Date",
-									"value": "Fri, 14 Jun 2019 06:18:11 GMT",
-									"name": "Date",
-									"description": "The date and time that the message was sent"
-								},
-								{
-									"key": "Keep-Alive",
-									"value": "timeout=5, max=100",
-									"name": "Keep-Alive",
-									"description": "Custom header"
-								},
-								{
-									"key": "Server",
-									"value": "Apache/2.4.37 (Win32) OpenSSL/1.1.1a PHP/7.3.1",
-									"name": "Server",
-									"description": "A name for the server"
-								},
-								{
-									"key": "X-Powered-By",
-									"value": "PHP/7.3.1",
-									"name": "X-Powered-By",
-									"description": "Specifies the technology (ASP.NET, PHP, JBoss, e.g.) supporting the web application (version details are often in X-Runtime, X-Version, or X-AspNet-Version)"
-								}
-							],
-							"cookie": [],
-							"body": "{\"error_code\":0,\"msg\":\"ok\",\"data\":{\"cpn_control_level\":[\"A\",\"B\",\"C\",\"D\",\"E\"],\"cpn_standard\":[\"CAST\",\"QJA\",\"SAST\",\"SJ\",\"\\u4f01\\u519b\\u6807\",\"\\u5176\\u5b83\",\"\\u534f\\u8bae\"],\"cpn_detect_apartment\":[\"\\u4e2d\\u56fd\\u79d1\\u5b66\\u9662\\u7a7a\\u95f4\\u5e94\\u7528\\u5de5\\u7a0b\\u4e0e\\u6280\\u672f\\u4e2d\\u5fc3\",\"\\u4e2d\\u56fd\\u7a7a\\u95f4\\u6280\\u672f\\u7814\\u7a76\\u9662\\u5b87\\u822a\\u7269\\u8d44\\u4fdd\\u969c\\u4e8b\\u4e1a\\u90e8\",\"\\u4e2d\\u56fd\\u8fd0\\u8f7d\\u706b\\u7bad\\u7814\\u7a76\\u9662\\u7269\\u6d41\\u4e2d\\u5fc3\",\"\\u519b\\u7528\\u7535\\u5b50\\u5143\\u5668\\u4ef6\\u68c0\\u6d4b\\u6280\\u672f\\u7814\\u7a76\\u4e2d\\u5fc3\",\"\\u519b\\u7528\\u7535\\u5b50\\u5143\\u5668\\u4ef6\\u7b2c\\u4e09\\u68c0\\u6d4b\\u4e2d\\u5fc3\",\"\\u519b\\u7528\\u7535\\u5b50\\u5143\\u5668\\u4ef6\\u7b2c\\u4e8c\\u68c0\\u6d4b\\u4e2d\\u5fc3\",\"\\u5e7f\\u5dde\\u68c0\\u6d4b\\u4e2d\\u5fc3\"],\"cpn_is_core_important\":[\"\\u5426\",\"\\u662f\"],\"equip_research_apartment\":[\"\\u56fd\\u79d1\\u73af\\u5b87\",\"\\u56fd\\u79d1\\u73af\\u5b871\",\"\\u56fd\\u79d1\\u73af\\u5b872\",\"\\u96c6\\u6210\\u6280\\u672f\\u4e2d\\u5fc3\"],\"equip_research_subsystem\":[\"\\u6c2e\\u6c14\\u56de\\u8def\",\"\\u6c2e\\u6c14\\u56de\\u8def3\",\"\\u6c2e\\u6c14\\u56de\\u8def4\"]}}"
-						},
-						{
-							"name": "获取筛选字段数据",
-							"originalRequest": {
-								"method": "GET",
-								"header": [],
-								"body": {},
-								"url": {
-									"raw": "http://921.com/api/management/getSelectFields?structure_id=1&type=2",
-									"protocol": "http",
-									"host": [
-										"921",
-										"com"
-									],
-									"path": [
-										"api",
-										"management",
-										"getSelectFields"
-									],
-									"query": [
-										{
-											"key": "structure_id",
-											"value": "1"
-										},
-										{
-											"key": "type",
-											"value": "2"
-										}
-									]
-								}
-							},
-							"status": "OK",
-							"code": 200,
-							"_postman_previewlanguage": "json",
-							"header": [
-								{
-									"key": "Cache-Control",
-									"value": "no-cache, private",
-									"name": "Cache-Control",
-									"description": "Tells all caching mechanisms from server to client whether they may cache this object. It is measured in seconds"
-								},
-								{
-									"key": "Connection",
-									"value": "Keep-Alive",
-									"name": "Connection",
-									"description": "Options that are desired for the connection"
-								},
-								{
-									"key": "Content-Length",
-									"value": "1044",
-									"name": "Content-Length",
-									"description": "The length of the response body in octets (8-bit bytes)"
-								},
-								{
-									"key": "Content-Type",
-									"value": "application/json",
-									"name": "Content-Type",
-									"description": "The mime type of this content"
-								},
-								{
-									"key": "Date",
-									"value": "Fri, 14 Jun 2019 06:18:22 GMT",
-									"name": "Date",
-									"description": "The date and time that the message was sent"
-								},
-								{
-									"key": "Keep-Alive",
-									"value": "timeout=5, max=100",
-									"name": "Keep-Alive",
-									"description": "Custom header"
-								},
-								{
-									"key": "Server",
-									"value": "Apache/2.4.37 (Win32) OpenSSL/1.1.1a PHP/7.3.1",
-									"name": "Server",
-									"description": "A name for the server"
-								},
-								{
-									"key": "X-Powered-By",
-									"value": "PHP/7.3.1",
-									"name": "X-Powered-By",
-									"description": "Specifies the technology (ASP.NET, PHP, JBoss, e.g.) supporting the web application (version details are often in X-Runtime, X-Version, or X-AspNet-Version)"
-								}
-							],
-							"cookie": [],
-							"body": "{\"error_code\":0,\"msg\":\"ok\",\"data\":{\"safe_color\":[\"\\u6a59\\u8272\",\"\\u7d2b\\u8272\",\"\\u7ea2\\u8272\",\"\\u7eff\\u8272\",\"\\u9ec4\\u8272\"],\"proposed_safe_color\":[\"\\u6a59\\u8272\",\"\\u7d2b\\u8272\",\"\\u7ea2\\u8272\",\"\\u7eff\\u8272\",\"\\u9ec4\\u8272\"],\"necessity\":[\"1\",\"2.1\",\"2.2\",\"2.3\",\"2.4\",\"3\",\"4\"],\"access_channel\":[\"\\u76f4\\u63a5\",\"\\u79d8\\u5bc6\",\"\\u7b2c\\u4e09\\u65b9\"],\"cpn_country\":[\"\\u5fb7\\u56fd\",\"\\u65e5\\u672c\",\"\\u745e\\u58eb\",\"\\u7f8e\\u56fd\",\"\\u8377\\u5170\"],\"cpn_is_core_important\":[\"\\u5426\",\"\\u662f\"],\"equip_research_apartment\":[\"\\u73af\\u5b871\",\"\\u73af\\u5b872\",\"\\u73af\\u5b873\",\"\\u73af\\u5b874\",\"\\u73af\\u5b875\"],\"equip_research_subsystem\":[\"\\u6c2e\\u6c14\\u56de\\u8def1\",\"\\u6c2e\\u6c14\\u56de\\u8def10\",\"\\u6c2e\\u6c14\\u56de\\u8def11\",\"\\u6c2e\\u6c14\\u56de\\u8def12\",\"\\u6c2e\\u6c14\\u56de\\u8def13\",\"\\u6c2e\\u6c14\\u56de\\u8def14\",\"\\u6c2e\\u6c14\\u56de\\u8def15\",\"\\u6c2e\\u6c14\\u56de\\u8def2\",\"\\u6c2e\\u6c14\\u56de\\u8def3\",\"\\u6c2e\\u6c14\\u56de\\u8def4\",\"\\u6c2e\\u6c14\\u56de\\u8def5\",\"\\u6c2e\\u6c14\\u56de\\u8def6\",\"\\u6c2e\\u6c14\\u56de\\u8def7\",\"\\u6c2e\\u6c14\\u56de\\u8def8\",\"\\u6c2e\\u6c14\\u56de\\u8def9\"]}}"
-						}
-					]
-				},
-				{
-					"name": "新增结构树节点",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "formdata",
-							"formdata": [
-								{
-									"key": "name",
-									"value": "测试节点1",
-									"description": "节点名称（必填）",
-									"type": "text"
-								},
-								{
-									"key": "structure_id",
-									"value": "1",
-									"description": "节点id（必填）",
-									"type": "text"
-								}
-							]
-						},
-						"url": {
-							"raw": "http://921.com/api/management/addStructure",
-							"protocol": "http",
-							"host": [
-								"921",
-								"com"
-							],
-							"path": [
-								"api",
-								"management",
-								"addStructure"
-							]
-						}
-					},
-					"response": [
-						{
-							"name": "新增结构树节点",
-							"originalRequest": {
-								"method": "POST",
-								"header": [],
-								"body": {
-									"mode": "formdata",
-									"formdata": [
-										{
-											"key": "name",
-											"value": "测试节点",
-											"description": "节点名称（必填）",
-											"type": "text"
-										},
-										{
-											"key": "structure_id",
-											"value": "1",
-											"description": "节点id（必填）",
-											"type": "text"
-										}
-									]
-								},
-								"url": {
-									"raw": "http://921.com/api/management/addStructure",
-									"protocol": "http",
-									"host": [
-										"921",
-										"com"
-									],
-									"path": [
-										"api",
-										"management",
-										"addStructure"
-									]
-								}
-							},
-							"status": "OK",
-							"code": 200,
-							"_postman_previewlanguage": "json",
-							"header": [
-								{
-									"key": "Cache-Control",
-									"value": "no-cache, private",
-									"name": "Cache-Control",
-									"description": "Tells all caching mechanisms from server to client whether they may cache this object. It is measured in seconds"
-								},
-								{
-									"key": "Connection",
-									"value": "Keep-Alive",
-									"name": "Connection",
-									"description": "Options that are desired for the connection"
-								},
-								{
-									"key": "Content-Length",
-									"value": "37",
-									"name": "Content-Length",
-									"description": "The length of the response body in octets (8-bit bytes)"
-								},
-								{
-									"key": "Content-Type",
-									"value": "application/json",
-									"name": "Content-Type",
-									"description": "The mime type of this content"
-								},
-								{
-									"key": "Date",
-									"value": "Thu, 20 Jun 2019 08:56:23 GMT",
-									"name": "Date",
-									"description": "The date and time that the message was sent"
-								},
-								{
-									"key": "Keep-Alive",
-									"value": "timeout=5, max=100",
-									"name": "Keep-Alive",
-									"description": "Custom header"
-								},
-								{
-									"key": "Server",
-									"value": "Apache/2.4.37 (Win32) OpenSSL/1.1.1a PHP/7.3.1",
-									"name": "Server",
-									"description": "A name for the server"
-								},
-								{
-									"key": "X-Powered-By",
-									"value": "PHP/7.3.1",
-									"name": "X-Powered-By",
-									"description": "Specifies the technology (ASP.NET, PHP, JBoss, e.g.) supporting the web application (version details are often in X-Runtime, X-Version, or X-AspNet-Version)"
-								}
-							],
-							"cookie": [],
-							"body": "{\"error_code\":0,\"msg\":\"ok\",\"data\":\"\"}"
-						}
-					]
-				},
-				{
-					"name": "编辑结构树节点",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "formdata",
-							"formdata": [
-								{
-									"key": "name",
-									"value": "测试节点1",
-									"description": "节点名称（必填）",
-									"type": "text"
-								},
-								{
-									"key": "structure_id",
-									"value": "170",
-									"description": "节点id（必填）",
-									"type": "text"
-								}
-							]
-						},
-						"url": {
-							"raw": "http://921.com/api/management/editStructure",
-							"protocol": "http",
-							"host": [
-								"921",
-								"com"
-							],
-							"path": [
-								"api",
-								"management",
-								"editStructure"
-							]
-						}
-					},
-					"response": [
-						{
-							"name": "编辑结构树节点",
-							"originalRequest": {
-								"method": "POST",
-								"header": [],
-								"body": {
-									"mode": "formdata",
-									"formdata": [
-										{
-											"key": "name",
-											"value": "测试节点1",
-											"description": "节点名称（必填）",
-											"type": "text"
-										},
-										{
-											"key": "structure_id",
-											"value": "170",
-											"description": "节点id（必填）",
-											"type": "text"
-										}
-									]
-								},
-								"url": {
-									"raw": "http://921.com/api/management/editStructure",
-									"protocol": "http",
-									"host": [
-										"921",
-										"com"
-									],
-									"path": [
-										"api",
-										"management",
-										"editStructure"
-									]
-								}
-							},
-							"status": "OK",
-							"code": 200,
-							"_postman_previewlanguage": "json",
-							"header": [
-								{
-									"key": "Cache-Control",
-									"value": "no-cache, private",
-									"name": "Cache-Control",
-									"description": "Tells all caching mechanisms from server to client whether they may cache this object. It is measured in seconds"
-								},
-								{
-									"key": "Connection",
-									"value": "Keep-Alive",
-									"name": "Connection",
-									"description": "Options that are desired for the connection"
-								},
-								{
-									"key": "Content-Length",
-									"value": "37",
-									"name": "Content-Length",
-									"description": "The length of the response body in octets (8-bit bytes)"
-								},
-								{
-									"key": "Content-Type",
-									"value": "application/json",
-									"name": "Content-Type",
-									"description": "The mime type of this content"
-								},
-								{
-									"key": "Date",
-									"value": "Thu, 20 Jun 2019 08:58:18 GMT",
-									"name": "Date",
-									"description": "The date and time that the message was sent"
-								},
-								{
-									"key": "Keep-Alive",
-									"value": "timeout=5, max=100",
-									"name": "Keep-Alive",
-									"description": "Custom header"
-								},
-								{
-									"key": "Server",
-									"value": "Apache/2.4.37 (Win32) OpenSSL/1.1.1a PHP/7.3.1",
-									"name": "Server",
-									"description": "A name for the server"
-								},
-								{
-									"key": "X-Powered-By",
-									"value": "PHP/7.3.1",
-									"name": "X-Powered-By",
-									"description": "Specifies the technology (ASP.NET, PHP, JBoss, e.g.) supporting the web application (version details are often in X-Runtime, X-Version, or X-AspNet-Version)"
-								}
-							],
-							"cookie": [],
-							"body": "{\"error_code\":0,\"msg\":\"ok\",\"data\":\"\"}"
-						}
-					]
-				},
-				{
-					"name": "删除结构树节点",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "formdata",
-							"formdata": [
-								{
-									"key": "structure_id",
-									"value": "186",
-									"description": "节点id（必填）",
-									"type": "text"
-								}
-							]
-						},
-						"url": {
-							"raw": "http://921.com/api/management/delStructure",
-							"protocol": "http",
-							"host": [
-								"921",
-								"com"
-							],
-							"path": [
-								"api",
-								"management",
-								"delStructure"
-							]
-						}
-					},
-					"response": [
-						{
-							"name": "删除结构树节点",
-							"originalRequest": {
-								"method": "POST",
-								"header": [],
-								"body": {
-									"mode": "formdata",
-									"formdata": [
-										{
-											"key": "structure_id",
-											"value": "171",
-											"description": "节点id（必填）",
-											"type": "text"
-										}
-									]
-								},
-								"url": {
-									"raw": "http://921.com/api/management/delStructure",
-									"protocol": "http",
-									"host": [
-										"921",
-										"com"
-									],
-									"path": [
-										"api",
-										"management",
-										"delStructure"
-									]
-								}
-							},
-							"status": "OK",
-							"code": 200,
-							"_postman_previewlanguage": "json",
-							"header": [
-								{
-									"key": "Cache-Control",
-									"value": "no-cache, private",
-									"name": "Cache-Control",
-									"description": "Tells all caching mechanisms from server to client whether they may cache this object. It is measured in seconds"
-								},
-								{
-									"key": "Connection",
-									"value": "Keep-Alive",
-									"name": "Connection",
-									"description": "Options that are desired for the connection"
-								},
-								{
-									"key": "Content-Length",
-									"value": "37",
-									"name": "Content-Length",
-									"description": "The length of the response body in octets (8-bit bytes)"
-								},
-								{
-									"key": "Content-Type",
-									"value": "application/json",
-									"name": "Content-Type",
-									"description": "The mime type of this content"
-								},
-								{
-									"key": "Date",
-									"value": "Thu, 20 Jun 2019 09:02:44 GMT",
-									"name": "Date",
-									"description": "The date and time that the message was sent"
-								},
-								{
-									"key": "Keep-Alive",
-									"value": "timeout=5, max=100",
-									"name": "Keep-Alive",
-									"description": "Custom header"
-								},
-								{
-									"key": "Server",
-									"value": "Apache/2.4.37 (Win32) OpenSSL/1.1.1a PHP/7.3.1",
-									"name": "Server",
-									"description": "A name for the server"
-								},
-								{
-									"key": "X-Powered-By",
-									"value": "PHP/7.3.1",
-									"name": "X-Powered-By",
-									"description": "Specifies the technology (ASP.NET, PHP, JBoss, e.g.) supporting the web application (version details are often in X-Runtime, X-Version, or X-AspNet-Version)"
-								}
-							],
-							"cookie": [],
-							"body": "{\"error_code\":0,\"msg\":\"ok\",\"data\":\"\"}"
-						}
-					]
-				}
-			]
-		},
-		{
-			"name": "数据分析",
-			"item": []
-		}
-	]
+  "info": {
+    "_postman_id": "8fc63a9f-4918-43d6-a467-897aa281d48d",
+    "name": "采购",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "委托单",
+      "item": [
+        {
+          "name": "委托单状态列表",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9sYXJhdmVsX2NwYXBwLnRlc3RcL2FwaVwvYWNjb3VudFwvbG9naW4iLCJpYXQiOjE1ODA3OTQ2ODQsImV4cCI6MTU4MDc5ODI4NCwibmJmIjoxNTgwNzk0Njg0LCJqdGkiOiJSYTJRd0hJQ0FFNmtWWUptIiwic3ViIjoxLCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJkYjdhNTk3NmY3In0.wwVysjvYkFtjgOErm83I0FD3hyITFOtitmuWI1T_phE",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{local}}/api/entrust?status=20&pageSize=10&order=created_at,asc&entrust_number=6831&entrust_company=ciss&time[0]=2020-02-01&time[1]=2020-02-03",
+              "host": [
+                "{{local}}"
+              ],
+              "path": [
+                "api",
+                "entrust"
+              ],
+              "query": [
+                {
+                  "key": "status",
+                  "value": "20",
+                  "description": "【必填】委托单状态"
+                },
+                {
+                  "key": "pageSize",
+                  "value": "10",
+                  "description": "【选填】每页显示的条数"
+                },
+                {
+                  "key": "order",
+                  "value": "created_at,asc",
+                  "description": "【选填】排序"
+                },
+                {
+                  "key": "entrust_number",
+                  "value": "6831",
+                  "description": "【选填】委托单号筛选"
+                },
+                {
+                  "key": "entrust_company",
+                  "value": "ciss",
+                  "description": "【选填】委托单位筛选"
+                },
+                {
+                  "key": "time[0]",
+                  "value": "2020-02-01",
+                  "description": "【选填】下单时间(开始)"
+                },
+                {
+                  "key": "time[1]",
+                  "value": "2020-02-03",
+                  "description": "【选填】下单时间(结束)"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "委托单状态列表",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{local}}/api/entrust?status=20&pageSize=10&order=created_at,asc&entrust_number=6831&entrust_company=ciss&time[0]=2020-02-01&time[1]=2020-02-03",
+                  "host": [
+                    "{{local}}"
+                  ],
+                  "path": [
+                    "api",
+                    "entrust"
+                  ],
+                  "query": [
+                    {
+                      "key": "status",
+                      "value": "20",
+                      "description": "【必填】委托单状态"
+                    },
+                    {
+                      "key": "pageSize",
+                      "value": "10",
+                      "description": "【选填】每页显示的条数"
+                    },
+                    {
+                      "key": "order",
+                      "value": "created_at,asc",
+                      "description": "【选填】排序"
+                    },
+                    {
+                      "key": "entrust_number",
+                      "value": "6831",
+                      "description": "【选填】委托单号筛选"
+                    },
+                    {
+                      "key": "entrust_company",
+                      "value": "ciss",
+                      "description": "【选填】委托单位筛选"
+                    },
+                    {
+                      "key": "time[0]",
+                      "value": "2020-02-01",
+                      "description": "【选填】下单时间(开始)"
+                    },
+                    {
+                      "key": "time[1]",
+                      "value": "2020-02-03",
+                      "description": "【选填】下单时间(结束)"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Server",
+                  "value": "nginx/1.15.8"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                },
+                {
+                  "key": "Transfer-Encoding",
+                  "value": "chunked"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Cache-Control",
+                  "value": "no-cache, private"
+                },
+                {
+                  "key": "Date",
+                  "value": "Tue, 04 Feb 2020 06:26:57 GMT"
+                },
+                {
+                  "key": "X-RateLimit-Limit",
+                  "value": "60"
+                },
+                {
+                  "key": "X-RateLimit-Remaining",
+                  "value": "59"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"error_code\": 0,\n    \"msg\": \"ok\",\n    \"data\": {\n        \"list\": [\n            {\n                \"id\": 3,\n                \"demander_user_id\": 1,\n                \"entrust_number\": \"20200203926831\",\n                \"entrust_status\": 20,\n                \"is_quality_assurance\": 1,\n                \"is_purchase\": 0,\n                \"expect_over_time\": \"2020-02-06 16:54:45\",\n                \"demand_desc\": \"Quis rerum veniam velit delectus.\",\n                \"is_urgent\": 0,\n                \"is_storage\": 1,\n                \"entrust_group\": null,\n                \"created_at\": \"2020-02-02 16:54:45\",\n                \"updated_at\": \"2020-02-03 16:54:45\",\n                \"deleted_at\": null,\n                \"entrust_company\": \"ciss\",\n                \"remaining_time\": \"已超时21小时32分钟12秒\",\n                \"demander_user\": {\n                    \"id\": 1,\n                    \"user_name\": \"test\",\n                    \"user_pwd\": \"123456\",\n                    \"contacts_name\": null,\n                    \"contacts_phone\": null,\n                    \"contacts_gu_phone\": null,\n                    \"contacts_fax\": null,\n                    \"contacts_qq\": null,\n                    \"contacts_eamil\": null,\n                    \"contacts_role\": null,\n                    \"contacts_backup_name\": null,\n                    \"contacts_backup_phone\": null,\n                    \"conpany_empower_file\": null,\n                    \"express_id\": null,\n                    \"invoice_id\": null,\n                    \"company_id\": 1,\n                    \"created_at\": null,\n                    \"updated_at\": null,\n                    \"deleted_at\": null,\n                    \"register_status\": null\n                }\n            }\n        ],\n        \"pagination\": {\n            \"current\": 1,\n            \"pageSize\": 10,\n            \"total\": 1\n        }\n    }\n}"
+            }
+          ]
+        },
+        {
+          "name": "委托单位列表",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9sYXJhdmVsX2NwYXBwLnRlc3RcL2FwaVwvYWNjb3VudFwvbG9naW4iLCJpYXQiOjE1ODA3OTk5MjUsImV4cCI6MTY2NzE5OTkyNSwibmJmIjoxNTgwNzk5OTI1LCJqdGkiOiIwcG11NjhMak9EQ0NCYVdQIiwic3ViIjoxLCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJkYjdhNTk3NmY3In0.rWwtucKpa_EJBJyf2q2qeEXbylpGWuDzKnW60c0lfmM",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{local}}/api/entrustCompany",
+              "host": [
+                "{{local}}"
+              ],
+              "path": [
+                "api",
+                "entrustCompany"
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "委托单位列表",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{local}}/api/entrustCompany",
+                  "host": [
+                    "{{local}}"
+                  ],
+                  "path": [
+                    "api",
+                    "entrustCompany"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Server",
+                  "value": "nginx/1.15.8"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                },
+                {
+                  "key": "Transfer-Encoding",
+                  "value": "chunked"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Cache-Control",
+                  "value": "no-cache, private"
+                },
+                {
+                  "key": "Date",
+                  "value": "Tue, 04 Feb 2020 07:10:06 GMT"
+                },
+                {
+                  "key": "X-RateLimit-Limit",
+                  "value": "60"
+                },
+                {
+                  "key": "X-RateLimit-Remaining",
+                  "value": "59"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"error_code\": 0,\n    \"msg\": \"ok\",\n    \"data\": [\n        {\n            \"id\": 1,\n            \"company_name\": \"ciss\",\n            \"company_type\": \"法师公司\",\n            \"company_code\": null,\n            \"company_eamil\": null,\n            \"company_phone\": null,\n            \"company_fax\": null,\n            \"company_taxation_type\": null,\n            \"supplier_type\": null,\n            \"supplier_empower_file\": null,\n            \"company_subordinate\": null,\n            \"created_at\": null,\n            \"updated_at\": null,\n            \"deleted_at\": null\n        }\n    ]\n}"
+            }
+          ]
+        }
+      ],
+      "protocolProfileBehavior": {}
+    },
+    {
+      "name": "询价单",
+      "item": [
+        {
+          "name": "获取询价单列表",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{local}}/api/trading?inquiry_status=3",
+              "host": [
+                "{{local}}"
+              ],
+              "path": [
+                "api",
+                "trading"
+              ],
+              "query": [
+                {
+                  "key": "inquiry_status",
+                  "value": "3",
+                  "description": "【必填】0:待处理 ;1:已处理; 2:已取消; 3已超时"
+                },
+                {
+                  "key": "demand_time",
+                  "value": null,
+                  "description": "【选填】需求时间",
+                  "disabled": true
+                },
+                {
+                  "key": "inquiry_number",
+                  "value": null,
+                  "description": "【选填】询价单号",
+                  "disabled": true
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "询价单基础信息",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{local}}/api/trading/1",
+              "host": [
+                "{{local}}"
+              ],
+              "path": [
+                "api",
+                "trading",
+                "1"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "询价单详情-采购器件列表",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": ""
+            }
+          },
+          "response": []
+        }
+      ],
+      "protocolProfileBehavior": {}
+    },
+    {
+      "name": "用户",
+      "item": [
+        {
+          "name": "用户登录",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "name": "Content-Type",
+                "value": "application/x-www-form-urlencoded",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "key": "username",
+                  "value": "admin",
+                  "type": "text"
+                },
+                {
+                  "key": "password",
+                  "value": "123456",
+                  "type": "text"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{local}}/api/account/login",
+              "host": [
+                "{{local}}"
+              ],
+              "path": [
+                "api",
+                "account",
+                "login"
+              ]
+            }
+          },
+          "response": []
+        }
+      ],
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "id": "aa726a34-f886-4f66-a42a-cadce786584a",
+            "type": "text/javascript",
+            "exec": [
+              ""
+            ]
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "id": "c27a015a-8e7d-4858-96f8-061cf68435fb",
+            "type": "text/javascript",
+            "exec": [
+              ""
+            ]
+          }
+        }
+      ],
+      "protocolProfileBehavior": {}
+    }
+  ],
+  "protocolProfileBehavior": {}
 }

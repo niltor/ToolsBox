@@ -78,7 +78,7 @@ namespace PostmanToMD.Models
                             apiItem.RequestRaw = item.Request.Body.Raw;
                             break;
                         default:
-                            apiItem.Params = item.Request.Body.Urlencoded;
+                            apiItem.Params = item.Request.Body?.Urlencoded;
                             break;
                     }
 

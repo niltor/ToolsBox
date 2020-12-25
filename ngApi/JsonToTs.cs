@@ -30,8 +30,9 @@ namespace ngApi
                     };
 
                     var serviceContent = model.BuildServiceContent();
-                    
+
                     // 创建服务文件
+                    Console.WriteLine(serviceContent);
                 }
             }
             catch (Exception e)

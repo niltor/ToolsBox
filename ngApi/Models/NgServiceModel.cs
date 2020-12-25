@@ -62,6 +62,7 @@ namespace ngApi.Models
                     ResponseJson = item.Response?.FirstOrDefault()?.Body,
                     Path = item.Request.Url.Path
                 };
+                if (requestMethod.Path == null) continue;
                 //不同请求类型
                 switch (requestMethod.RequestBodyType)
                 {
@@ -72,7 +73,7 @@ namespace ngApi.Models
                         requestMethod.RequestRaw = item.Request.Body.Raw;
                         break;
                     default:
-                        requestMethod.Params = item.Request.Body.Urlencoded;
+                        requestMethod.Params = item.Request.Body?.Urlencoded;
                         break;
                 }
                 functionContent += requestMethod.ToString();
@@ -145,14 +146,16 @@ export class {GetServiceName()}Service extends BaseService {{
         {
             string modelContent = "";
             string name = Path.Last();
+            name = name.Replace("_", "");
             name = name.First().ToString().ToUpper() + name.Substring(1);
             // 返回的模型构建
-            if (ResponseJson != null)
+            if (!string.IsNullOrEmpty(ResponseJson))
             {
+                Console.WriteLine(ResponseJson);
                 var response = JObject.Parse(ResponseJson);
                 if (response["data"].HasValues)
                 {
-                    modelContent += ParseJson((JObject)response["data"], name + "VM");
+                    modelContent += ParseJson(response["data"], name + "VM");
                 }
             }
             // 请求的模型
@@ -190,11 +193,14 @@ export class {GetServiceName()}Service extends BaseService {{
         private string GetGetFunction()
         {
             var name = Path.Last();
+            name = name.Replace("_", "");
             name = name.First().ToString().ToUpper() + name.Substring(1);
-            var query = Query?.Select(s => s.Key + ": string").ToList();
+            var query = Query?.Select(s => s.Key.Replace("[", "").Replace("]", "") + ": string").ToList();
 
             var functionParams = query == null ? "" : string.Join(",", query);
-            query = Query?.Select(s => s.Key + $"=${{{s.Key.Trim()}}}").ToList();
+            query = Query?.Select(s => s.Key.Replace("[", "").Replace("]", "") +
+                $"=${{{s.Key.Replace("[", "").Replace("]", "").Trim()}}}")
+                .ToList();
             var queryString = query == null ? "" : string.Join("&", query);
             if (!string.IsNullOrEmpty(queryString))
             {
@@ -231,15 +237,18 @@ export class {GetServiceName()}Service extends BaseService {{
         private string GetPostFunction()
         {
             var name = Path.Last();
+            name = name.Replace("_", "");
             name = name.First().ToString().ToUpper() + name.Substring(1);
-            var query = Query?.Select(s => s.Key + ": string").ToList();
+            var query = Query?.Select(s => s.Key.Replace("[", "").Replace("]", "") + ": string").ToList();
             var functionParams = query == null ? "" : string.Join(",", query);
             if (!string.IsNullOrEmpty(functionParams))
             {
                 functionParams += ", ";
             }
 
-            query = Query?.Select(s => s.Key + $"={{{s.Key}}}").ToList();
+            query = Query?.Select(s => s.Key.Replace("[", "").Replace("]", "") +
+                $"=${{{s.Key.Replace("[", "").Replace("]", "").Trim()}}}")
+                .ToList();
             var queryString = query == null ? "" : string.Join("&", query);
             if (!string.IsNullOrEmpty(queryString))
             {
@@ -255,11 +264,14 @@ export class {GetServiceName()}Service extends BaseService {{
             var dataType = name + "Form";
             var typeName = name + "VM";
             // 判断是否有返回的示例
-            var response = JObject.Parse(ResponseJson);
-            var data = response["data"];
-            if (!data.HasValues)
+            if (ResponseJson != null)
             {
-                typeName = "string";
+                var response = JObject.Parse(ResponseJson);
+                var data = response["data"];
+                if (!data.HasValues)
+                {
+                    typeName = "string";
+                }
             }
             var function = @$"{name}({functionParams}data: {dataType}): Observable<{typeName}>{{
   const url='{routePath}?'{queryString};
@@ -279,6 +291,7 @@ export class {GetServiceName()}Service extends BaseService {{
             {
                 foreach (var item in Query)
                 {
+                    item.Description ??= "无说明";
                     commentsParams += $" * @param {item.Key} {item.Description}\r\n";
                 }
                 commentsParams = "\r\n" + commentsParams;
@@ -289,7 +302,8 @@ export class {GetServiceName()}Service extends BaseService {{
             if (RequestBodyType != null)
             {
                 var name = Path.Last();
-                data = $"\r\n * {name}Form 提交数据\r\n";
+                name = name.Replace("_", "");
+                data = $"\r\n * @param {name}Form 提交数据\r\n";
             }
             var comments = @$"
 /**
@@ -298,28 +312,36 @@ export class {GetServiceName()}Service extends BaseService {{
             return comments;
         }
 
-        public string ParseJson(JObject data, string name)
+        public string ParseJson(JToken data, string name)
         {
             string propertyString = "";
             string innerContent = "";
-
             if (data != null && data.HasValues)
             {
-                foreach (var prop in (data).Properties())
+                if (data.Type == JTokenType.Array)
+                {
+                    data = ((JArray)data).First;
+                    innerContent += ParseJson(data, name);
+                }
+                else if (data.Type != JTokenType.Object)
+                {
+                    return "";
+                }
+                foreach (var prop in ((JObject)data).Properties())
                 {
                     string valueType = "";
                     switch (prop.Value.Type)
                     {
                         case JTokenType.Object:
-                            valueType = $"{prop.Name}VM";
-                            innerContent += ParseJson((JObject)prop.Value, $"{prop.Name}VM");
+                            valueType = $"{ToTitle(prop.Name)}VM";
+                            innerContent += ParseJson((JObject)prop.Value, $"{ToTitle(prop.Name)}VM");
                             break;
                         case JTokenType.Array:
-                            valueType = $"{prop.Name}VM[]";
+                            valueType = $"{ToTitle(prop.Name)}VM[]";
                             var value = prop.Value?.First;
                             if (value != null && value.Type == JTokenType.Object)
                             {
-                                innerContent += ParseJson((JObject)value, $"{prop.Name}VM[]");
+                                innerContent += ParseJson((JObject)value, $"{ToTitle(prop.Name)}VM");
                             }
                             break;
                         case JTokenType.Integer:
@@ -343,7 +365,6 @@ export class {GetServiceName()}Service extends BaseService {{
                             valueType = "string";
                             break;
                     }
-
                     propertyString += $"{prop.Name}: {valueType};\r\n";
                 }
             }
@@ -368,7 +389,7 @@ export class {GetServiceName()}Service extends BaseService {{
             foreach (var item in Params)
             {
                 var comment = @$"/**
- * {item.Description}
+ * {item.Description ?? "无说明"}
  */
 ";
                 propertyString += comment + $"{item.Key}: string;\r\n";
@@ -380,6 +401,11 @@ export class {GetServiceName()}Service extends BaseService {{
 ";
 
             return interfaceString;
+        }
+
+        public string ToTitle(string str)
+        {
+            return str.First().ToString().ToUpper() + str.Substring(1);
         }
     }
 
